@@ -22,8 +22,12 @@ public class AutoDrive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.drive.resetEncoders();;
+    // for(int i = 0; i<3; i++){
+      Robot.drive.PIDdrive(4096);
+    // }
     SmartDashboard.putNumber("auto",1);
-    Robot.drive.PIDdrive(5120);
+    // Robot.drive.PIDdrive(5000);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
