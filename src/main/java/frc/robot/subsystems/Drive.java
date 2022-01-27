@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.*;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drive extends SubsystemBase {
   /**
@@ -50,9 +51,10 @@ public class Drive extends SubsystemBase {
     BackRight.set(ControlMode.PercentOutput, speed);
   }
 
-//auton: takes distance in encoder units and drives with PID
+//takes distance in encoder units and drives with PID
   public void PIDdrive(double distance)
   {
+    //SmartDashboard.putNumber(FrontRight.getSensorCollection().getQuadraturePosition());
     //FrontRight
     FrontRight.configNominalOutputForward(0,Constants.kTimeoutMs);    
     FrontRight.configNominalOutputReverse(0,Constants.kTimeoutMs);
@@ -129,6 +131,15 @@ public class Drive extends SubsystemBase {
     FrontLeft.set(ControlMode.Position, distance);
     BackRight.set(ControlMode.Position, distance);
     BackLeft.set(ControlMode.Position, distance);
+
+    resetEncoders();
+  }
+
+  public void resetEncoders(){
+    FrontRight.setSelectedSensorPosition(0);
+    FrontLeft.setSelectedSensorPosition(0);
+    BackRight.setSelectedSensorPosition(0);
+    BackLeft.setSelectedSensorPosition(0);
 
   }
   @Override
