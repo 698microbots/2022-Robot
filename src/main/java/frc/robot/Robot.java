@@ -25,13 +25,13 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  // private Command m_autonomousCommand;
+  private Command m_autonomousCommand;
 
   // private RobotContainer m_robotContainer;
   //robot container object used for accessing robot controls
   public static RobotContainer oi;
   public static Drive drive;
-  public static AutoDrive auton;
+  // public static AutoDrive auton;
   public static AHRS navx;
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -45,9 +45,8 @@ public class Robot extends TimedRobot {
     oi = new RobotContainer();
     drive = new Drive();
     navx = new AHRS(SPI.Port.kMXP);
-    auton = new AutoDrive();
+    // auton = new AutoDrive();
 
-    drive.resetEncoders();
     SmartDashboard.putNumber("number", 5);
     
   }
@@ -90,7 +89,7 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.schedule();
     // }
-    auton.initialize();
+    // auton.initialize();
   }
 
   /**
