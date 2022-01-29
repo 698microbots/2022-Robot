@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("angle", navx.getAngle());
+    drive.resetEncoders();
   }
 
   /**
@@ -89,7 +90,8 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.schedule();
     // }
-    auton.initialize();
+    // auton.initialize();
+    // drive.PIDturn(5);
   }
 
   /**
@@ -97,6 +99,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+
   }
 
 
