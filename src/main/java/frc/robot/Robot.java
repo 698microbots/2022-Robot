@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
   public static Drive drive;
   AutoDrive auton;
   public static AHRS navx;
+  int counter = 0;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -91,7 +92,7 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.schedule();
     // }
     // auton.initialize();
-    // drive.PIDturn(5);
+    Drive.PIDturnSetTarget(5);
   }
 
   /**
@@ -99,7 +100,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-
+    if(Math.abs(Drive.PIDturnGetError()) < 0.1) counter++;
+    else counter=0;
+    if(counter<5){
+      Drive.PIDturn(navx.getAngle());
+    }
   }
 
 
@@ -113,6 +118,8 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.cancel();
     // }
     drive.setDefaultCommand(new JoyStickDrive());
+    
+
   }
 
   /**
@@ -120,6 +127,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    
   }
 
   @Override
