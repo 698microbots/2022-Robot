@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
   AutoDrive auton;
   public static AHRS navx;
   int counter = 0;
+  Vision camera;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -48,7 +49,7 @@ public class Robot extends TimedRobot {
     auton = new AutoDrive();
     SmartDashboard.putNumber("number", 5);
     navx = new AHRS(SPI.Port.kMXP);
-    
+    camera = new Vision();
   }
 
   /**
@@ -67,6 +68,8 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("angle", navx.getAngle());
     drive.resetEncoders();
+    SmartDashboard.putNumber("Vertical Angle", camera.getV_angle());
+    SmartDashboard.putNumber("Horizontal Angle", camera.getH_angle());
   }
 
   /**
