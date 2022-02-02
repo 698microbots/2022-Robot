@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.schedule();
     // }
     // auton.initialize();
-    Drive.PIDturnSetTarget(5);
+    Drive.PIDturnSetTarget(15);
   }
 
   /**
