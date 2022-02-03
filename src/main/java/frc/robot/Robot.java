@@ -42,11 +42,9 @@ public class Robot extends TimedRobot {
   AutoDrive auton;
   public static AHRS navx;
   int counter = 0;
-<<<<<<< Updated upstream
-=======
-  Vision camera;
+  
   Timer timer;
->>>>>>> Stashed changes
+  Vision camera;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -62,24 +60,8 @@ public class Robot extends TimedRobot {
     auton = new AutoDrive();
     SmartDashboard.putNumber("number", 5);
     navx = new AHRS(SPI.Port.kMXP);
-<<<<<<< Updated upstream
-    
-=======
+  
     camera = new Vision();
-
-    
-    // try {
-    //   File file = new File("/home/lvuser/output.txt");
-    //   file.createNewFile();
-    //   FileOutputStream oFile = new FileOutputStream(file, false);
-    //   String content = "content";
-    //   oFile.write(content.getBytes());
-    //   oFile.flush();
-    //   oFile.close();
-    // } catch (IOException e) {
-    //   e.printStackTrace();
-    // }
->>>>>>> Stashed changes
   }
 
   /**
@@ -98,6 +80,8 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("angle", navx.getAngle());
     drive.resetEncoders();
+    SmartDashboard.putNumber("Vertical Angle", camera.getV_angle());
+    SmartDashboard.putNumber("Horizontal Angle", camera.getH_angle());
   }
 
   /**
@@ -123,13 +107,8 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.schedule();
     // }
     // auton.initialize();
-<<<<<<< Updated upstream
-    Drive.PIDturnSetTarget(5);
-=======
     // Drive.PIDturnSetTarget(15);
     timer.stop();
-
->>>>>>> Stashed changes
   }
 
   /**
