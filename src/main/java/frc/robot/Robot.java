@@ -16,6 +16,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import edu.wpi.first.wpilibj.Timer;
+
+
 import com.kauailabs.navx.frc.*;
 
 /**
@@ -34,6 +42,11 @@ public class Robot extends TimedRobot {
   AutoDrive auton;
   public static AHRS navx;
   int counter = 0;
+<<<<<<< Updated upstream
+=======
+  Vision camera;
+  Timer timer;
+>>>>>>> Stashed changes
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -44,11 +57,29 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboadrd.
     // m_robotContainer = new RobotContainer();
     oi = new RobotContainer();
+    timer = new Timer();
     drive = new Drive();
     auton = new AutoDrive();
     SmartDashboard.putNumber("number", 5);
     navx = new AHRS(SPI.Port.kMXP);
+<<<<<<< Updated upstream
     
+=======
+    camera = new Vision();
+
+    
+    // try {
+    //   File file = new File("/home/lvuser/output.txt");
+    //   file.createNewFile();
+    //   FileOutputStream oFile = new FileOutputStream(file, false);
+    //   String content = "content";
+    //   oFile.write(content.getBytes());
+    //   oFile.flush();
+    //   oFile.close();
+    // } catch (IOException e) {
+    //   e.printStackTrace();
+    // }
+>>>>>>> Stashed changes
   }
 
   /**
@@ -92,7 +123,13 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.schedule();
     // }
     // auton.initialize();
+<<<<<<< Updated upstream
     Drive.PIDturnSetTarget(5);
+=======
+    // Drive.PIDturnSetTarget(15);
+    timer.stop();
+
+>>>>>>> Stashed changes
   }
 
   /**
@@ -100,11 +137,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    if(Math.abs(Drive.PIDturnGetError()) < 0.1) counter++;
-    else counter=0;
-    if(counter<5){
-      Drive.PIDturn(navx.getAngle());
-    }
+    // if(Math.abs(Drive.PIDturnGetError()) < 0.1) counter++;
+    // else counter=0;
+    // if(counter<5){
+    //   Drive.PIDturn(navx.getAngle());
+    // }
   }
 
 
@@ -118,7 +155,8 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.cancel();
     // }
     drive.setDefaultCommand(new JoyStickDrive());
-    
+    timer.reset();
+    timer.start();
 
   }
 
@@ -127,7 +165,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
+    // drive.leftSpeed(1);
+    // drive.rightSpeed(1);
+    System.out.println(Double.toString(timer.get()) + " " + Float.toString(navx.getDisplacementX()) + " " + Float.toString(navx.getVelocityX()) + " " + Float.toString(navx.getWorldLinearAccelX()) + "\n");
+
   }
 
   @Override
