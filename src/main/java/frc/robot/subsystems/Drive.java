@@ -46,8 +46,6 @@ public class Drive extends SubsystemBase {
     // FrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     // BackRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     // BackLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-
-
   }
 //sets the speed for both left motors
   public void leftSpeed(double speed)
