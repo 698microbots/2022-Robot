@@ -41,4 +41,6 @@ public final class Constants
     public static final double turnkP = 0.037;
     public static final double turnkI = 0;
     public static final double turnkD = 0;
+
+    public static final double vertDist = 23;
 }
