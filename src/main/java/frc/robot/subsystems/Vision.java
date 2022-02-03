@@ -9,26 +9,26 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-
-
 public class Vision extends SubsystemBase {
   /** Creates a new Vision. */
-  private NetworkTable limelight;
-  private NetworkTableEntry vAngle;
-  private NetworkTableEntry hAngle;
-  
+  private NetworkTable limeLight;
+  private NetworkTableEntry V_angle;
+  private NetworkTableEntry H_angle;
+  private double distance;
+
   public Vision() {
-    limelight = NetworkTableInstance.getDefault().getTable("limelight");
-    vAngle = limelight.getEntry("ty");
-    hAngle = limelight.getEntry("tx");
+    limeLight = NetworkTableInstance.getDefault().getTable("limelight");
+    V_angle = limeLight.getEntry("ty");
+    H_angle = limeLight.getEntry("tx");
+
   }
 
-  public double getVAngle() {
-      return vAngle.getDouble(0.0);
+  public double getV_angle(){
+    return V_angle.getDouble(0.0);
   }
 
-  public double getHAngle(){
-    return hAngle.getDouble(0.0);
+  public double getH_angle(){
+    return H_angle.getDouble(0.00);
   }
 
   @Override

@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import com.kauailabs.navx.frc.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -30,6 +32,9 @@ public class Robot extends TimedRobot {
   public static RobotContainer oi;
   public static Drive drive;
   AutoDrive auton;
+  public static AHRS navx;
+  int counter = 0;
+  Vision camera;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -43,7 +48,8 @@ public class Robot extends TimedRobot {
     drive = new Drive();
     auton = new AutoDrive();
     SmartDashboard.putNumber("number", 5);
-    
+    navx = new AHRS(SPI.Port.kMXP);
+    camera = new Vision();
   }
 
   /**
@@ -60,6 +66,10 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("angle", navx.getAngle());
+    drive.resetEncoders();
+    SmartDashboard.putNumber("Vertical Angle", camera.getV_angle());
+    SmartDashboard.putNumber("Horizontal Angle", camera.getH_angle());
   }
 
   /**
@@ -84,7 +94,8 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.schedule();
     // }
-    auton.initialize();
+    // auton.initialize();
+    Drive.PIDturnSetTarget(15);
   }
 
   /**
@@ -92,6 +103,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    if(Math.abs(Drive.PIDturnGetError()) < 0.1) counter++;
+    else counter=0;
+    if(counter<5){
+      Drive.PIDturn(navx.getAngle());
+    }
   }
 
 
@@ -105,6 +121,8 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.cancel();
     // }
     drive.setDefaultCommand(new JoyStickDrive());
+    
+
   }
 
   /**
@@ -112,6 +130,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    
   }
 
   @Override
