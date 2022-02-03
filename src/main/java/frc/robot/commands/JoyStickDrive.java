@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class JoyStickDrive extends CommandBase {
   /**
@@ -39,10 +40,10 @@ public class JoyStickDrive extends CommandBase {
     rightStick = Math.pow(Robot.oi.Xbox.getRawAxis(Constants.XBOX_R_XAXIS),3.0);
 
     //deadband
-    if(Math.abs(leftStick) < 0.001){
+    if(Math.abs(leftStick) < 0.06){
       leftStick = 0;
     }
-    if(Math.abs(rightStick) < 0.001){
+    if(Math.abs(rightStick) < 0.06){
       rightStick = 0;
     }
     
@@ -51,6 +52,8 @@ public class JoyStickDrive extends CommandBase {
     Robot.drive.rightSpeed((leftStick +rightStick)/2);
 
 
+    SmartDashboard.putNumber("leftNumber", leftStick);
+    SmartDashboard.putNumber("rightNumber", rightStick);
   }
 
   // Called once the command ends or is interrupted.

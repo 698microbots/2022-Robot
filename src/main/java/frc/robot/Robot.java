@@ -18,6 +18,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import edu.wpi.first.wpilibj.Timer;
+
+
+import com.kauailabs.navx.frc.*;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -31,8 +40,12 @@ public class Robot extends TimedRobot {
   //robot container object used for accessing robot controls
   public static RobotContainer oi;
   public static Drive drive;
-  // public static AutoDrive auton;
+  AutoDrive auton;
   public static AHRS navx;
+  int counter = 0;
+  
+  Timer timer;
+  Vision camera;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -40,15 +53,18 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
+    // autonomous chooser on the dashboadrd.
     // m_robotContainer = new RobotContainer();
     oi = new RobotContainer();
+    timer = new Timer();
     drive = new Drive();
     navx = new AHRS(SPI.Port.kMXP);
     // auton = new AutoDrive();
 
     SmartDashboard.putNumber("number", 5);
-    
+    navx = new AHRS(SPI.Port.kMXP);
+  
+    camera = new Vision();
   }
 
   /**
@@ -65,6 +81,10 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("angle", navx.getAngle());
+    drive.resetEncoders();
+    SmartDashboard.putNumber("Vertical Angle", camera.getV_angle());
+    SmartDashboard.putNumber("Horizontal Angle", camera.getH_angle());
   }
 
   /**
@@ -90,6 +110,8 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.schedule();
     // }
     // auton.initialize();
+    // Drive.PIDturnSetTarget(15);
+    timer.stop();
   }
 
   /**
@@ -97,6 +119,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    // if(Math.abs(Drive.PIDturnGetError()) < 0.1) counter++;
+    // else counter=0;
+    // if(counter<5){
+    //   Drive.PIDturn(navx.getAngle());
+    // }
   }
 
 
@@ -110,6 +137,9 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.cancel();
     // }
     drive.setDefaultCommand(new JoyStickDrive());
+    timer.reset();
+    timer.start();
+
   }
 
   /**
@@ -117,6 +147,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    // drive.leftSpeed(1);
+    // drive.rightSpeed(1);
+    System.out.println(Double.toString(timer.get()) + " " + Float.toString(navx.getDisplacementX()) + " " + Float.toString(navx.getVelocityX()) + " " + Float.toString(navx.getWorldLinearAccelX()) + "\n");
+
   }
 
   @Override
