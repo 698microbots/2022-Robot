@@ -146,4 +146,10 @@ public class Drive extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  public void splineTrajectory(double v, double x, double y, double a)
+  {
+    
+  }
+
 }
