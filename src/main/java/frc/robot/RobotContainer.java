@@ -28,7 +28,7 @@ public class RobotContainer {
   
   //subsystems
   private final DriveTrain driveTrain = new DriveTrain();
-  private final Vision limeLight = new Vision();
+  private final VisionSystems limeLight = new VisionSystems();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -55,7 +55,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand(){
     //All commands that should be run in autonomous goes here
-    return new SequentialCommandGroup( 
+    return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       new AutoTurn(driveTrain, 45.0, () -> navX.getAngle())
       );
   }

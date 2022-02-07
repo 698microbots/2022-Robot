@@ -11,7 +11,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 import frc.robot.Constants;
 
-public class Vision extends SubsystemBase {
+public class VisionSystems extends SubsystemBase {
   /** Creates a new Vision. */
   private NetworkTable limeLight;
   private NetworkTableEntry V_angle;
@@ -19,7 +19,7 @@ public class Vision extends SubsystemBase {
   private double zDistance;
   private double xDistance;
 
-  public Vision() {
+  public VisionSystems() {
     limeLight = NetworkTableInstance.getDefault().getTable("limelight");
     V_angle = limeLight.getEntry("ts");
     H_angle = limeLight.getEntry("tx");
