@@ -28,6 +28,7 @@ public final class Constants
     public static final int XBOX_R_YAXIS = 5;
     public static final int XBOX_L_XAXIS = 0;
     public static final int XBOX_L_YAXIS = 1;
+    public static final int XBOX_pin = 0;
 
     // auton drive PID constants
     public static final int kTimeoutMs = 20;
@@ -38,7 +39,7 @@ public final class Constants
     public static final double kD = 0;
 
     // turn PID constants
-    public static final double turnkP = 0.037;
-    public static final double turnkI = 0;
+    public static final double turnkP = 0.037/2;
+    public static final double turnkI = 0.0017;
     public static final double turnkD = 0;
 }

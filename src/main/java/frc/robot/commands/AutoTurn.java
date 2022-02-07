@@ -6,61 +6,66 @@ package frc.robot.commands;
 
 import java.util.function.Supplier;
 
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
-public class JoyStickDrive extends CommandBase {
-  /** Creates a new JoyStickDrive. */
+public class AutoTurn extends CommandBase {
+  /** Creates a new AutoTurn. */
   private final DriveTrain driveTrain;
-  private final Supplier<Double> rightStickFunction, leftStickFunction;
-  public JoyStickDrive(DriveTrain driveTrain, Supplier<Double> rightStick, Supplier <Double> leftStick) {
+  private final double target;
+  private final Supplier<Double> navXInput;
+  private int counter;
+
+  public AutoTurn(DriveTrain driveTrain, double target, Supplier<Double> navXInput) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
-    rightStickFunction = rightStick;
-    leftStickFunction = leftStick;
+    this.target = target;
+    counter = 0;
+    this.navXInput = navXInput;
     addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("JoyStickDrive has started!");
+    System.out.println("Automatic turning has started!");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double rightStick = rightStickFunction.get();
-    double leftStick = leftStickFunction.get();
-    rightStick = Math.pow(rightStick, 3.0);
-    leftStick = Math.pow(leftStick, 3.0);
+    driveTrain.setTarget(target);
+    double sensorInput = navXInput.get();
+    driveTrain.PIDturn(sensorInput);
 
-    //deadband
-    if(Math.abs(rightStick) < 0.05){
-      rightStick = 0;
-    }
-    if(Math.abs(leftStick) < 0.05){
-      leftStick = 0;
+    //Increment the counter when error is small enough
+    if(driveTrain.getPIDTurnError() < 0.1){
+      counter++;
+    }else{
+      counter = 0;
     }
 
-    //set the motors using driveTrain subsystem to correct speeds
-    driveTrain.setRightSpeed((leftStick + rightStick/2));
-    driveTrain.setLeftSpeed((leftStick - rightStick/2));
-    
-    //reset encoders for 
+    //reset encoders
     driveTrain.resetEncoders();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.setRightSpeed(0);
-    driveTrain.setLeftSpeed(0);
+    System.out.println("Automatic turning has ended!");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    //if the counter is big enough, this method returns true causing the command to end.
+    if(counter > 10){
+      return true;
+    }else{
+      counter = 0;
     return false;
+    }
   }
 }
