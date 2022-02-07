@@ -25,9 +25,10 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController Xbox = new XboxController(Constants.XBOX_pin);
   private final AHRS navX = new AHRS(SPI.Port.kMXP);
-
+  
   //subsystems
   private final DriveTrain driveTrain = new DriveTrain();
+  private final Vision limeLight = new Vision();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

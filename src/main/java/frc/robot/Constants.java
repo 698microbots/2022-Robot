@@ -42,4 +42,7 @@ public final class Constants
     public static final double turnkP = 0.037/2;
     public static final double turnkI = 0.0017;
     public static final double turnkD = 0;
+
+    // Vision constants
+    public static final double goalHeight = 107;
 }
