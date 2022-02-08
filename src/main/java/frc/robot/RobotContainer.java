@@ -56,7 +56,8 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
-      new AutoTurn(driveTrain, 45.0, () -> navX.getAngle())
+      //new AutoTurn(driveTrain, 45.0, () -> navX.getAngle())
+      new AutoDrive(driveTrain, 1023)//
       );
   }
 }
