@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
+
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -33,6 +36,11 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
   }
+
+  public void robotInit() {
+
+  }
+  
 
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by

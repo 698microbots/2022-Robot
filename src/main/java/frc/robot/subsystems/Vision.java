@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -18,7 +19,7 @@ public class Vision extends SubsystemBase {
 
   public Vision() {
     limeLight = NetworkTableInstance.getDefault().getTable("limelight");
-    V_angle = limeLight.getEntry("ty");
+    V_angle = limeLight.getEntry("ts");
     H_angle = limeLight.getEntry("tx");
 
   }
@@ -30,6 +31,15 @@ public class Vision extends SubsystemBase {
   public double getH_angle(){
     return H_angle.getDouble(0.00);
   }
+
+  public double findH_distance(){
+    double angle = Math.toRadians(getV_angle());
+    return Constants.VertDist / (Math.abs(Math.tan(angle)));
+
+    // TODO: fix VertDist to be height - camera height
+  }
+
+
 
   @Override
   public void periodic() {

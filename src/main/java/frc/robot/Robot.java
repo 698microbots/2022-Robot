@@ -66,10 +66,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("angle", navx.getAngle());
-    drive.resetEncoders();
-    SmartDashboard.putNumber("Vertical Angle", camera.getV_angle());
-    SmartDashboard.putNumber("Horizontal Angle", camera.getH_angle());
+    
   }
 
   /**
@@ -130,7 +127,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
+    SmartDashboard.putNumber("angle", navx.getAngle());
+    drive.resetEncoders();
+    SmartDashboard.putNumber("Vertical Angle", camera.getV_angle());
+    SmartDashboard.putNumber("Horizontal Angle", camera.getH_angle());
+    SmartDashboard.putNumber("Horizontal Distance", camera.findH_distance());
   }
 
   @Override

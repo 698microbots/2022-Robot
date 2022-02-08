@@ -10,7 +10,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class JoyStickDrive extends CommandBase {
   /**
@@ -29,20 +28,25 @@ public class JoyStickDrive extends CommandBase {
 
   }
 //left and right stick inputs from controller
-  double leftStick;
-  double rightStick;
+
+public static double leftStick;
+public static double rightStick;
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
+  
+
+
   public void execute() 
   {
     leftStick = Math.pow(Robot.oi.Xbox.getRawAxis(Constants.XBOX_L_YAXIS),3.0);
     rightStick = Math.pow(Robot.oi.Xbox.getRawAxis(Constants.XBOX_R_XAXIS),3.0);
 
     //deadband
-    if(Math.abs(leftStick) < 0.06){
+    if(Math.abs(leftStick) < 0.001){
       leftStick = 0;
     }
-    if(Math.abs(rightStick) < 0.06){
+    if(Math.abs(rightStick) < 0.001){
       rightStick = 0;
     }
     
@@ -50,8 +54,6 @@ public class JoyStickDrive extends CommandBase {
     Robot.drive.leftSpeed(leftStick-rightStick/2);
     Robot.drive.rightSpeed(leftStick +rightStick/2);
 
-    SmartDashboard.putNumber("leftNumber", leftStick);
-    SmartDashboard.putNumber("rightNumber", rightStick);
   }
 
   // Called once the command ends or is interrupted.
