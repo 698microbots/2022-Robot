@@ -29,7 +29,7 @@ public class AutoTurn extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Automatic turning has started!");
-    driveTrain.setTarget(driveTrain.getTarget() + target);
+    driveTrain.setTurnTarget(driveTrain.getTurnTarget() + target);
     driveTrain.resetEncoders();
   }
 

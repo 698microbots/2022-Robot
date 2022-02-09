@@ -45,7 +45,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
   }
 
   /**
@@ -57,7 +56,7 @@ public class RobotContainer {
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       //new AutoTurn(driveTrain, 45.0, () -> navX.getAngle())
-      new AutoDrive(driveTrain, 1023)//
-      );
+      new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementX())
+            );
   }
 }

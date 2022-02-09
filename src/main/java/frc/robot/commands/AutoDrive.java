@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
@@ -11,11 +13,15 @@ public class AutoDrive extends CommandBase {
   /** Creates a new AutoDrive. */
   private final DriveTrain driveTrain;
   private final double distance;
+  private final Supplier <Float> navXInput;
+  private int counter;
 
-  public AutoDrive(DriveTrain driveTrain, double distance) {
+  public AutoDrive(DriveTrain driveTrain, double distance, Supplier <Float> navXInput) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.distance = distance;
+    this.navXInput = navXInput;
+    counter = 0;
     addRequirements(driveTrain);
   }
 
@@ -29,7 +35,13 @@ public class AutoDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.PIDdrive(-distance);
+    float sensorInput = navXInput.get();
+    driveTrain.PIDdrive(sensorInput);
+    if(driveTrain.getDriveError()<0.1){
+      counter++;
+    }else{
+      counter = 0;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -42,6 +54,11 @@ public class AutoDrive extends CommandBase {
   @Override
   public boolean isFinished() {
 
+    if(counter > 10){
+      return true;
+    }else{
+      counter = 0;
+    }
     return false;
   }
 }
