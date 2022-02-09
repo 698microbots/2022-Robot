@@ -23,12 +23,13 @@ public class AutoDrive extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Auto driving has started!");
+    // driveTrain.PIDdrive(-distance);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.PIDdrive(distance);
+    driveTrain.PIDdrive(-distance);
   }
 
   // Called once the command ends or is interrupted.

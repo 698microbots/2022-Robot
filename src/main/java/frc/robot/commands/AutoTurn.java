@@ -29,12 +29,13 @@ public class AutoTurn extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Automatic turning has started!");
+    driveTrain.setTarget(driveTrain.getTarget() + target);
+    driveTrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.setTarget(target);
     double sensorInput = navXInput.get();
     driveTrain.PIDturn(sensorInput);
 
@@ -44,9 +45,6 @@ public class AutoTurn extends CommandBase {
     }else{
       counter = 0;
     }
-
-    //reset encoders
-    driveTrain.resetEncoders();
   }
 
   // Called once the command ends or is interrupted.

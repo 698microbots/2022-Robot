@@ -34,14 +34,15 @@ public final class Constants
     public static final int kTimeoutMs = 20;
     public static final int kPIDLoopIdx = 0;//run primary loop
     public static final double kF = 0;
-    public static final double kP = .5;
+    public static final double kP = 0;
     public static final double kI = 0;
     public static final double kD = 0;
 
     // turn PID constants
-    public static final double turnkP = 0.037/2;
-    public static final double turnkI = 0.0017;
+    public static final double turnkP = 0.02;
+    public static final double turnkI = 0;
     public static final double turnkD = 0;
+
 
     // Vision constants
     public static final double goalHeight = 107;
