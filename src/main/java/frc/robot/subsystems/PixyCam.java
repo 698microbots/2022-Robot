@@ -5,9 +5,13 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import io.github.pseudoresonance.pixy2api.*;
+import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 
 public class PixyCam extends SubsystemBase {
   /** Creates a new PixyCam. */
+  
+  
   public PixyCam() {}
 
   @Override
