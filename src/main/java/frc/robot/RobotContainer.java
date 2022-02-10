@@ -27,7 +27,7 @@ public class RobotContainer {
   public final AHRS navX = new AHRS(SPI.Port.kMXP);
   
   //subsystems
-  private final DriveTrain driveTrain = new DriveTrain();
+  private final DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
   public final VisionSystems limeLight = new VisionSystems();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

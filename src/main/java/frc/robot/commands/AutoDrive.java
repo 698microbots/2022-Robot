@@ -7,16 +7,16 @@ package frc.robot.commands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class AutoDrive extends CommandBase {
   /** Creates a new AutoDrive. */
-  private final DriveTrain driveTrain;
+  private final DriveTrainSubsystem driveTrain;
   private final double distance;
   private final Supplier <Float> navXInput;
   private int counter;
 
-  public AutoDrive(DriveTrain driveTrain, double distance, Supplier <Float> navXInput) {
+  public AutoDrive(DriveTrainSubsystem driveTrain, double distance, Supplier <Float> navXInput) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.distance = distance;

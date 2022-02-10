@@ -7,16 +7,16 @@ package frc.robot.commands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class AutoTurn extends CommandBase {
   /** Creates a new AutoTurn. */
-  private final DriveTrain driveTrain;
+  private final DriveTrainSubsystem driveTrain;
   private final double target;
   private final Supplier<Double> navXInput;
   private int counter;
 
-  public AutoTurn(DriveTrain driveTrain, double target, Supplier<Double> navXInput) {
+  public AutoTurn(DriveTrainSubsystem driveTrain, double target, Supplier<Double> navXInput) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.target = target;

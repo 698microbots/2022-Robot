@@ -12,7 +12,7 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
-public class DriveTrain extends SubsystemBase {
+public class DriveTrainSubsystem extends SubsystemBase {
   /** Creates a new DriveTrain. */
   private final TalonFX FrontRight = new TalonFX(Constants.FrontRightID);
   private final TalonFX FrontLeft = new TalonFX(Constants.FrontLeftID);
@@ -41,7 +41,7 @@ public class DriveTrain extends SubsystemBase {
 
 //Constructors
 
-  public DriveTrain() {
+  public DriveTrainSubsystem() {
     //initialize all neccessary variables and sensors.
     FrontRight.setInverted(false);
     FrontLeft.setInverted(true);
