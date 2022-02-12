@@ -68,8 +68,10 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     //print pixy tracking information
-    SmartDashboard.putNumber("Pixy X-cor", m_robotContainer.pixy2.getXcordinate());
-    SmartDashboard.putNumber("Pixy Y-cor", m_robotContainer.pixy2.getYcordinate());
+    SmartDashboard.putNumber("Pixy red X-cor", m_robotContainer.pixy2.getRedXcordinate());
+    SmartDashboard.putNumber("Pixy red Y-cor", m_robotContainer.pixy2.getRedYcordinate());
+    SmartDashboard.putNumber("Pixy blue X-cor", m_robotContainer.pixy2.getBlueXcordinate());
+    SmartDashboard.putNumber("Pixy blue Y-cor", m_robotContainer.pixy2.getBlueYcordinate());
   }
 
   @Override

@@ -26,36 +26,47 @@ public class PixyCam extends SubsystemBase {
   }
 
   //getters
-  public int getXcordinate(){
-    blockCount = pixy2.getCCC().getBlocks(false, 1, 255);
+  public int getRedXcordinate(){
+    blockCount = pixy2.getCCC().getBlocks(false, 3, 255);
     pixy2.getCCC().getBlocks(false, 1, 255);
     blocks = pixy2.getCCC().getBlockCache();
     try {
       return blocks.get(0).getX();
     } catch (Exception ArrayIndexOutOfBoundsException) {
-      return 5000;
+      return 0;
     }  }
 
-  public int getYcordinate(){
-    blockCount = pixy2.getCCC().getBlocks(false, 1, 255);
+  public int getRedYcordinate(){
+    blockCount = pixy2.getCCC().getBlocks(false, 3, 255);
     pixy2.getCCC().getBlocks(false, 1, 255);
     blocks = pixy2.getCCC().getBlockCache();
     try {
       return blocks.get(0).getY();
     } catch (Exception ArrayIndexOutOfBoundsException) {
-      return 5000;
+      return 0;
     }  }
 
-  public double getAngle(){
-    blockCount = pixy2.getCCC().getBlocks(false, 1, 255);
-    pixy2.getCCC().getBlocks(false, 1, 255);
-    blocks = pixy2.getCCC().getBlockCache();
-    try {
-      return blocks.get(0).getAngle();
-    } catch (Exception ArrayIndexOutOfBoundsException) {
-      return 5000;
+    public int getBlueXcordinate(){
+      blockCount = pixy2.getCCC().getBlocks(false, 3, 255);
+      pixy2.getCCC().getBlocks(false, 2, 255);
+      blocks = pixy2.getCCC().getBlockCache();
+      try {
+        return blocks.get(0).getX();
+      } catch (Exception ArrayIndexOutOfBoundsException) {
+        return 0;
+      }  }
+  
+    public int getBlueYcordinate(){
+      blockCount = pixy2.getCCC().getBlocks(false, 3, 255);
+      pixy2.getCCC().getBlocks(false, 2, 255);
+      blocks = pixy2.getCCC().getBlockCache();
+      try {
+        return blocks.get(0).getY();
+      } catch (Exception ArrayIndexOutOfBoundsException) {
+        return 0;
+      }  
     }
-  }
+  
 
   public int getBlockCount(){
     return blockCount;
