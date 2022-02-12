@@ -7,13 +7,49 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import io.github.pseudoresonance.pixy2api.*;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
+import io.github.pseudoresonance.pixy2api.links.SPILink;
+import java.util.ArrayList;
+import java.util.function.Supplier;
 
 public class PixyCam extends SubsystemBase {
   /** Creates a new PixyCam. */
-  
-  
-  public PixyCam() {}
+  private final Pixy2 pixy2;
+  private ArrayList<Block> blocks;
+  private int blockCount;
 
+  public PixyCam() {
+    pixy2 = Pixy2.createInstance(new SPILink());//initialize pixy2 for SPI usage
+    pixy2.init();//actually initialize
+    blockCount = pixy2.getCCC().getBlocks(false, 1, 255);//wait for next frame with target object, the signature of object, how many object tracking?
+    pixy2.getCCC().getBlocks(false, 1, 255);
+    blocks = pixy2.getCCC().getBlockCache();
+  }
+
+  //getters
+  public int getXcordinate(){
+    blockCount = pixy2.getCCC().getBlocks(false, 1, 255);
+    pixy2.getCCC().getBlocks(false, 1, 255);
+    blocks = pixy2.getCCC().getBlockCache();
+    return blocks.get(0).getX();
+  }
+
+  public int getYcordinate(){
+    blockCount = pixy2.getCCC().getBlocks(false, 1, 255);
+    pixy2.getCCC().getBlocks(false, 1, 255);
+    blocks = pixy2.getCCC().getBlockCache();
+    return blocks.get(0).getY();
+  }
+
+  public double getAngle(){
+    blockCount = pixy2.getCCC().getBlocks(false, 1, 255);
+    pixy2.getCCC().getBlocks(false, 1, 255);
+    blocks = pixy2.getCCC().getBlockCache();
+    return blocks.get(0).getAngle();
+  }
+
+  public int getBlockCount(){
+    return blockCount;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
