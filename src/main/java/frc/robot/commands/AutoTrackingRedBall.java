@@ -25,9 +25,6 @@ public class AutoTrackingRedBall extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("Pixy X-cor", pixy2.getXcordinate());
-    SmartDashboard.putNumber("Pixy Y-cor", pixy2.getYcordinate());
-    SmartDashboard.putNumber("Pixy angle?", pixy2.getAngle());
   }
 
   // Called once the command ends or is interrupted.

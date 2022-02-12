@@ -30,21 +30,31 @@ public class PixyCam extends SubsystemBase {
     blockCount = pixy2.getCCC().getBlocks(false, 1, 255);
     pixy2.getCCC().getBlocks(false, 1, 255);
     blocks = pixy2.getCCC().getBlockCache();
-    return blocks.get(0).getX();
-  }
+    try {
+      return blocks.get(0).getX();
+    } catch (Exception ArrayIndexOutOfBoundsException) {
+      return 5000;
+    }  }
 
   public int getYcordinate(){
     blockCount = pixy2.getCCC().getBlocks(false, 1, 255);
     pixy2.getCCC().getBlocks(false, 1, 255);
     blocks = pixy2.getCCC().getBlockCache();
-    return blocks.get(0).getY();
-  }
+    try {
+      return blocks.get(0).getY();
+    } catch (Exception ArrayIndexOutOfBoundsException) {
+      return 5000;
+    }  }
 
   public double getAngle(){
     blockCount = pixy2.getCCC().getBlocks(false, 1, 255);
     pixy2.getCCC().getBlocks(false, 1, 255);
     blocks = pixy2.getCCC().getBlockCache();
-    return blocks.get(0).getAngle();
+    try {
+      return blocks.get(0).getAngle();
+    } catch (Exception ArrayIndexOutOfBoundsException) {
+      return 5000;
+    }
   }
 
   public int getBlockCount(){

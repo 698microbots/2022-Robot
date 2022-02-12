@@ -66,7 +66,11 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    //print pixy tracking information
+    SmartDashboard.putNumber("Pixy X-cor", m_robotContainer.pixy2.getXcordinate());
+    SmartDashboard.putNumber("Pixy Y-cor", m_robotContainer.pixy2.getYcordinate());
+  }
 
   @Override
   public void teleopInit() {
@@ -83,6 +87,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    //print limeLight tracking information
     SmartDashboard.putNumber("Vertical Angle: ", m_robotContainer.limeLight.getV_angle());
     SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
     SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());

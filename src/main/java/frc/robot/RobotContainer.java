@@ -29,11 +29,8 @@ public class RobotContainer {
   //subsystems
   private final DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
   public final VisionSystems limeLight = new VisionSystems();
-  private final PixyCam pixy2 = new PixyCam();
+  public final PixyCam pixy2 = new PixyCam();
 
-    //commands
-  private final AutoTrackingRedBall redBallTracking = new AutoTrackingRedBall(pixy2);
-  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     //initializes the driveTrain for command input, there are a few suppliers
@@ -62,7 +59,7 @@ public class RobotContainer {
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       //new AutoTurn(driveTrain, 45.0, () -> navX.getAngle())
       //new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementX())
-      new AutoTrackingRedBall(pixy2)
+      //new AutoTrackingRedBall(pixy2)
             );
   }
 }
