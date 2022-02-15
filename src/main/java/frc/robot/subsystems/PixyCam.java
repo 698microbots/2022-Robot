@@ -25,6 +25,10 @@ public class PixyCam extends SubsystemBase {
     blocks = pixy2.getCCC().getBlockCache();
   }
 
+  //lens can see 60 degrees horizontal, 40 degrees vertical (30 degrees horizontally and 20 degrees vertically to each side)
+  public double getHorizontalAngle(){
+    return 0.0;
+  }
   //getters
   public int getRedXcordinate(){
     blockCount = pixy2.getCCC().getBlocks(false, 3, 255);
