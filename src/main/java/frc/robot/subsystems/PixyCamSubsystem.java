@@ -11,13 +11,13 @@ import io.github.pseudoresonance.pixy2api.links.SPILink;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
-public class PixyCam extends SubsystemBase {
+public class PixyCamSubsystem extends SubsystemBase {
   /** Creates a new PixyCam. */
   private final Pixy2 pixy2;
   private ArrayList<Block> blocks;
   private int blockCount;
 
-  public PixyCam() {
+  public PixyCamSubsystem() {
     pixy2 = Pixy2.createInstance(new SPILink());//initialize pixy2 for SPI usage
     pixy2.init();//actually initialize
     blockCount = pixy2.getCCC().getBlocks(false, 1, 255);//wait for next frame with target object, the signature of object, how many object tracking?
@@ -27,6 +27,7 @@ public class PixyCam extends SubsystemBase {
 
   //lens can see 60 degrees horizontal, 40 degrees vertical (30 degrees horizontally and 20 degrees vertically to each side)
   public double getHorizontalAngle(){
+    
     return 0.0;
   }
   //getters

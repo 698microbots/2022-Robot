@@ -55,7 +55,10 @@ public final class Constants
     public static final double turnkI = 0;
     public static final double turnkD = 0;
 
-
     // Vision constants
     public static final double goalHeight = 107;
+
+    //PixyCamera Constants
+    public static final int pixyWidth = 320;
+    public static final int pixyHeight = 200;
 }
