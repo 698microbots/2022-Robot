@@ -31,11 +31,14 @@ public class Intake extends SubsystemBase {
 
   public static void stopMotor()
   {
-    intakeMotor.set(0);
+    if(getElectricCurrent() >= Constants.ampSpike)
+      intakeMotor.set(0);
+    
   }
 
   public static void outputBall()
   {
+    
     intakeMotor.set(-Constants.intakeMotorSpeed);
   }
 

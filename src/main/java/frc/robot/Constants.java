@@ -46,4 +46,5 @@ public final class Constants
     public static final int deviceIdIntake = 1;
     public static final double intakeMotorSpeed = 0.5;
     public static final int pistonID = 1;   
+    public static final double ampSpike = .1;
 }
