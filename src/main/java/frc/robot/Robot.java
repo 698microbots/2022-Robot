@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
   public static AHRS navx;
   int counter = 0;
   Vision camera;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -50,6 +51,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("number", 5);
     navx = new AHRS(SPI.Port.kMXP);
     camera = new Vision();
+    
   }
 
   /**
@@ -70,6 +72,7 @@ public class Robot extends TimedRobot {
     drive.resetEncoders();
     SmartDashboard.putNumber("Vertical Angle", camera.getV_angle());
     SmartDashboard.putNumber("Horizontal Angle", camera.getH_angle());
+    SmartDashboard.putNumber("Electric Current", Intake.getElectricCurrent());
   }
 
   /**
@@ -95,7 +98,7 @@ public class Robot extends TimedRobot {
     //   m_autonomousCommand.schedule();
     // }
     // auton.initialize();
-    Drive.PIDturnSetTarget(15);
+    //Drive.PIDturnSetTarget(15);
   }
 
   /**
@@ -103,11 +106,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    if(Math.abs(Drive.PIDturnGetError()) < 0.1) counter++;
-    else counter=0;
-    if(counter<5){
-      Drive.PIDturn(navx.getAngle());
-    }
+    // if(Math.abs(Drive.PIDturnGetError()) < 0.1) counter++;
+    // else counter=0;
+    // if(counter<5){
+    //   Drive.PIDturn(navx.getAngle());
+    // }
   }
 
 
