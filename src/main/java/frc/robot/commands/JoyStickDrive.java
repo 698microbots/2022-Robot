@@ -1,64 +1,63 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class JoyStickDrive extends CommandBase {
-  /**
-   * Creates a new JoyStickDrive.
-   */
-
-  public JoyStickDrive() {
+  /** Creates a new JoyStickDrive. */
+  private final DriveTrainSubsystem driveTrain;
+  private final Supplier<Double> rightStickFunction, leftStickFunction;
+  public JoyStickDrive(DriveTrainSubsystem driveTrain, Supplier<Double> rightStick, Supplier <Double> leftStick) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.drive);
+    this.driveTrain = driveTrain;
+    rightStickFunction = rightStick;
+    leftStickFunction = leftStick;
+    addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() 
-  {
-
+  public void initialize() {
+    System.out.println("JoyStickDrive has started!");
   }
-//left and right stick inputs from controller
-  double leftStick;
-  double rightStick;
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() 
-  {
-    leftStick = Math.pow(Robot.oi.Xbox.getRawAxis(Constants.XBOX_L_YAXIS),3.0);
-    rightStick = Math.pow(Robot.oi.Xbox.getRawAxis(Constants.XBOX_R_XAXIS),3.0);
+  public void execute() {
+    double rightStick = rightStickFunction.get();
+    double leftStick = leftStickFunction.get();
+    rightStick = Math.pow(rightStick, 3.0);
+    leftStick = Math.pow(leftStick, 3.0);
 
     //deadband
-    if(Math.abs(leftStick) < 0.06){
-      leftStick = 0;
-    }
-    if(Math.abs(rightStick) < 0.06){
+    if(Math.abs(rightStick) < 0.05){
       rightStick = 0;
     }
-    
-    //config motor speed based on controller input
-    Robot.drive.leftSpeed(leftStick-rightStick/2);
-    Robot.drive.rightSpeed(leftStick +rightStick/2);
+    if(Math.abs(leftStick) < 0.05){
+      leftStick = 0;
+    }
 
-    SmartDashboard.putNumber("leftNumber", leftStick);
-    SmartDashboard.putNumber("rightNumber", rightStick);
+    //set the motors using driveTrain subsystem to correct speeds
+    driveTrain.setRightSpeed(leftStick + rightStick);
+    driveTrain.setLeftSpeed(leftStick - rightStick);
+    
+    //reset encoders for 
+    driveTrain.resetEncoders();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    driveTrain.setRightSpeed(0);
+    driveTrain.setLeftSpeed(0);
   }
-
+  
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

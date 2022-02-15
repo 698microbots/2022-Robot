@@ -9,35 +9,38 @@ import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
-public class AutoDrive extends CommandBase {
-  /** Creates a new AutoDrive. */
+public class AutoTurn extends CommandBase {
+  /** Creates a new AutoTurn. */
   private final DriveTrainSubsystem driveTrain;
-  private final double distance;
-  private final Supplier <Float> navXInput;
+  private final double target;
+  private final Supplier<Double> navXInput;
   private int counter;
 
-  public AutoDrive(DriveTrainSubsystem driveTrain, double distance, Supplier <Float> navXInput) {
+  public AutoTurn(DriveTrainSubsystem driveTrain, double target, Supplier<Double> navXInput) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
-    this.distance = distance;
-    this.navXInput = navXInput;
+    this.target = target;
     counter = 0;
+    this.navXInput = navXInput;
     addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("Auto driving has started!");
-    // driveTrain.PIDdrive(-distance);
+    System.out.println("Automatic turning has started!");
+    driveTrain.setTurnTarget(driveTrain.getTurnTarget() + target);
+    driveTrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    float sensorInput = navXInput.get();
-    driveTrain.PIDdrive(sensorInput);
-    if(driveTrain.getDriveError()<0.1){
+    double sensorInput = navXInput.get();
+    driveTrain.PIDturn(sensorInput);
+
+    //Increment the counter when error is small enough
+    if(driveTrain.getPIDTurnError() < 0.1){
       counter++;
     }else{
       counter = 0;
@@ -47,18 +50,18 @@ public class AutoDrive extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Auto driving has ended!");
+    System.out.println("Automatic turning has ended!");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
+    //if the counter is big enough, this method returns true causing the command to end.
     if(counter > 10){
       return true;
     }else{
       counter = 0;
-    }
     return false;
+    }
   }
 }

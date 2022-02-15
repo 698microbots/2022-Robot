@@ -1,23 +1,14 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
-import com.kauailabs.navx.frc.*;
-
+import frc.robot.subsystems.DriveTrainSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -25,16 +16,8 @@ import com.kauailabs.navx.frc.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  // private Command m_autonomousCommand;
-
-  // private RobotContainer m_robotContainer;
-  //robot container object used for accessing robot controls
-  public static RobotContainer oi;
-  public static Drive drive;
-  AutoDrive auton;
-  public static AHRS navx;
-  int counter = 0;
-  Vision camera;
+  private Command m_autonomousCommand;
+  private RobotContainer m_robotContainer;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -44,22 +27,15 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    // m_robotContainer = new RobotContainer();
-    oi = new RobotContainer();
-    drive = new Drive();
-    auton = new AutoDrive();
-    SmartDashboard.putNumber("number", 5);
-    navx = new AHRS(SPI.Port.kMXP);
-    camera = new Vision();
-    
+    m_robotContainer = new RobotContainer();
   }
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
+   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
+   * SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
@@ -68,51 +44,35 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("angle", navx.getAngle());
-    drive.resetEncoders();
-    SmartDashboard.putNumber("Vertical Angle", camera.getV_angle());
-    SmartDashboard.putNumber("Horizontal Angle", camera.getH_angle());
-    SmartDashboard.putNumber("Electric Current", Intake.getElectricCurrent());
   }
 
-  /**
-   * This function is called once each time the robot enters Disabled mode.
-   */
+  /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {
-  }
+  public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {
-  }
+  public void disabledPeriodic() {}
 
-  /**
-   * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
-   */
+  /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    // // schedule the autonomous command (example)
-    // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.schedule();
-    // }
-    // auton.initialize();
-    //Drive.PIDturnSetTarget(15);
+    // schedule the autonomous command (example)
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
   }
 
-  /**
-   * This function is called periodically during autonomous.
-   */
+  /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    // if(Math.abs(Drive.PIDturnGetError()) < 0.1) counter++;
-    // else counter=0;
-    // if(counter<5){
-    //   Drive.PIDturn(navx.getAngle());
-    // }
+    //print pixy tracking information
+    SmartDashboard.putNumber("Pixy red X-cor", m_robotContainer.pixy2.getRedXcordinate());
+    SmartDashboard.putNumber("Pixy red Y-cor", m_robotContainer.pixy2.getRedYcordinate());
+    SmartDashboard.putNumber("Pixy blue X-cor", m_robotContainer.pixy2.getBlueXcordinate());
+    SmartDashboard.putNumber("Pixy blue Y-cor", m_robotContainer.pixy2.getBlueYcordinate());
   }
-
 
   @Override
   public void teleopInit() {
@@ -120,20 +80,20 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.cancel();
-    // }
-    drive.setDefaultCommand(new JoyStickDrive());
-    
-
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.cancel();
+    }
+    System.out.println("Teleop has started!");
   }
 
-  /**
-   * This function is called periodically during operator control.
-   */
+  /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    
+    //print limeLight tracking information
+    SmartDashboard.putNumber("Vertical Angle: ", m_robotContainer.limeLight.getV_angle());
+    SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
+    SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());
+    SmartDashboard.putNumber("X-dirction Distnace", m_robotContainer.limeLight.getXdistance());
   }
 
   @Override
@@ -142,10 +102,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().cancelAll();
   }
 
-  /**
-   * This function is called periodically during test mode.
-   */
+  /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {
-  }
+  public void testPeriodic() {}
 }
