@@ -30,14 +30,14 @@ public class PixyCamSubsystem extends SubsystemBase {
   public double getRedHorizontalAngle(){
     double angle = 0;
     int b = getRedXcordinate();
-    angle = b - Constants.pixyHcenter *30/160;
+    angle = (b - Constants.pixyHcenter) *30/160;
     return angle;
   }
 
   public double getBlueHorizontalAngle(){
     double angle = 0;
     int b = getRedXcordinate();
-    angle = b - Constants.pixyHcenter *30/160;
+    angle = (b - Constants.pixyHcenter) *30/160;
     return angle;
   }
   //getters
