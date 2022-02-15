@@ -28,8 +28,8 @@ public class RobotContainer {
   
   //subsystems
   private final DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
-  public final VisionSystems limeLight = new VisionSystems();
-  public final PixyCam pixy2 = new PixyCam();
+  public final VisionSubsystems limeLight = new VisionSubsystems();
+  public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
