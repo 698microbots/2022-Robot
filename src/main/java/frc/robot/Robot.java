@@ -72,6 +72,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Pixy red Y-cor", m_robotContainer.pixy2.getRedYcordinate());
     SmartDashboard.putNumber("Pixy blue X-cor", m_robotContainer.pixy2.getBlueXcordinate());
     SmartDashboard.putNumber("Pixy blue Y-cor", m_robotContainer.pixy2.getBlueYcordinate());
+    SmartDashboard.putNumber("Pixy red horizontal offset:", m_robotContainer.pixy2.getRedHorizontalAngle());
+    SmartDashboard.putNumber("Pixy blue horizontal offset:", m_robotContainer.pixy2.getRedHorizontalAngle());
+
   }
 
   @Override

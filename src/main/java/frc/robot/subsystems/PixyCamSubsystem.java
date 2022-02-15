@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import io.github.pseudoresonance.pixy2api.*;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 import io.github.pseudoresonance.pixy2api.links.SPILink;
@@ -28,13 +29,15 @@ public class PixyCamSubsystem extends SubsystemBase {
   //lens can see 60 degrees horizontal, 40 degrees vertical (30 degrees horizontally and 20 degrees vertically to each side)
   public double getRedHorizontalAngle(){
     double angle = 0;
-    
+    int b = getRedXcordinate();
+    angle = b - Constants.pixyHcenter *30/160;
     return angle;
   }
 
   public double getBlueHorizontalAngle(){
     double angle = 0;
-
+    int b = getRedXcordinate();
+    angle = b - Constants.pixyHcenter *30/160;
     return angle;
   }
   //getters

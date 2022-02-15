@@ -49,4 +49,5 @@ public final class Constants
     //PixyCamera Constants
     public static final int pixyWidth = 320;
     public static final int pixyHeight = 200;
+    public static final int pixyHcenter = 159;
 }
