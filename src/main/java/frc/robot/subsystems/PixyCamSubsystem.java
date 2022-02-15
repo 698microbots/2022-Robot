@@ -26,9 +26,16 @@ public class PixyCamSubsystem extends SubsystemBase {
   }
 
   //lens can see 60 degrees horizontal, 40 degrees vertical (30 degrees horizontally and 20 degrees vertically to each side)
-  public double getHorizontalAngle(){
+  public double getRedHorizontalAngle(){
+    double angle = 0;
     
-    return 0.0;
+    return angle;
+  }
+
+  public double getBlueHorizontalAngle(){
+    double angle = 0;
+
+    return angle;
   }
   //getters
   public int getRedXcordinate(){
