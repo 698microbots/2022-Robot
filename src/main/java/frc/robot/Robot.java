@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
    *
    * <p>This runs after the mode specific periodic functions, but before LiveWindow and
-   * SmartDashboard integrated updating.
+   * SmartDashboard integrated updating.  
    */
   @Override
   public void robotPeriodic() {
@@ -68,7 +68,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     //print pixy tracking information
-    SmartDashboard.putNumber("Angle From Pixy: ", m_robotContainer.pixy2.getBlock0Angle());//Just testing code for pixy angle
+    SmartDashboard.putNumber("Angle From Pixy: ", m_robotContainer.pixy2.getBlockXangle(0));//Just testing code for pixy angle
+    SmartDashboard.putNumber("Pixy Block0 X-coor:", m_robotContainer.pixy2.getBlockXcoordinates(0));
+    SmartDashboard.putNumber("Pixy Block0 Y-coor:", m_robotContainer.pixy2.getBlockYcoordinates(0));
   }
 
   @Override
