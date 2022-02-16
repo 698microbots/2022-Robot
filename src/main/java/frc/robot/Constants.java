@@ -49,7 +49,7 @@ public final class Constants
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
     public static final double closestY = 100;
-    public static final double closestX = 100;
+    public static final double closestX = 160;
     // turn PID constants
     public static final double turnkP = 0.02;
     public static final double turnkI = 0;
