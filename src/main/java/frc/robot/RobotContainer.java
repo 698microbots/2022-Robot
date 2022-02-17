@@ -60,6 +60,7 @@ public class RobotContainer {
       //new AutoTurn(driveTrain, 45.0, () -> navX.getAngle())
       //new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementX())
       //new AutoTrackingRedBall(pixy2)
+      new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getAngle())
             );
   }
 }
