@@ -37,9 +37,9 @@ public class AutoTrackingRedBall extends CommandBase {
   public void execute() {
     //checks if the closest or second closest block is a red ball.
     if(pixy2.getBlockSignature(0) == 1){//sets the turn target to closest block if it is red
-      driveTrain.setTurnTarget(driveTrain.getTurnTarget()+pixy2.getBlockXangle(0));
+      driveTrain.setTurnTarget(navXAngleSensor.get()+pixy2.getBlockXangle(0));
     }else if(pixy2.getBlockSignature(1) == 1){//sets turn target to second farthest block iof it is red
-      driveTrain.setTurnTarget(driveTrain.getTurnTarget()+pixy2.getBlockXangle(1));
+      driveTrain.setTurnTarget(navXAngleSensor.get()+pixy2.getBlockXangle(1));
     }else{
       driveTrain.setTurnTarget(0.0);
     }
