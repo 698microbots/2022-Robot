@@ -10,20 +10,35 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class Vision extends SubsystemBase {
+import frc.robot.Constants;
+
+public class VisionSubsystems extends SubsystemBase {
   /** Creates a new Vision. */
   private NetworkTable limeLight;
   private NetworkTableEntry V_angle;
   private NetworkTableEntry H_angle;
-  private double distance;
+  private double zDistance;
+  private double xDistance;
 
-  public Vision() {
+  public VisionSubsystems() {
     limeLight = NetworkTableInstance.getDefault().getTable("limelight");
     V_angle = limeLight.getEntry("ts");
     H_angle = limeLight.getEntry("tx");
-
+    zDistance = -1;//this value is for if there's an error, makes sense that distance will never be negative
+    xDistance = -1;//the distance in the x direction offset from center of robot.
   }
 
+  //methods
+  public double calculateZdistance(){
+    zDistance = Constants.goalHeight/(Math.tan(Math.toRadians(getV_angle())));
+    return zDistance;
+  }
+
+  public double calculateXdistance(){
+    xDistance = calculateZdistance()*Math.tan(Math.toRadians(getH_angle()));
+    return xDistance;
+  }
+  //getters
   public double getV_angle(){
     return V_angle.getDouble(0.0);
   }
@@ -32,14 +47,13 @@ public class Vision extends SubsystemBase {
     return H_angle.getDouble(0.00);
   }
 
-  public double findH_distance(){
-    double angle = Math.toRadians(getV_angle());
-    return Constants.VertDist / (Math.abs(Math.tan(angle)));
-
-    // TODO: fix VertDist to be height - camera height
+  public double getZdistance(){//kind of redundant, but ok?
+    return zDistance;
   }
 
-
+  public double getXdistance(){//same here
+    return xDistance;
+  }
 
   @Override
   public void periodic() {
