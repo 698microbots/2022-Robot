@@ -59,6 +59,11 @@ public final class Constants
     public static final double goalHeight = 107;
 
     //PixyCamera Constants
-    public static final int pixyWidth = 320;
-    public static final int pixyHeight = 200;
+    public static final int pixyWidth = 316;
+    public static final int pixyHeight = 208;
+    public static final int pixyHcenter = 158;
+    public static final int pixyVerticalAngle = 20;
+    public static final int pixyHorizontalAngle = 30;
+    public static final int pixyRedSig = 1;
+    public static final int pixyBlueSig = 2;
 }
