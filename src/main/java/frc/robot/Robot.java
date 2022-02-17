@@ -16,11 +16,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import frc.robot.TrajectoryElement;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import edu.wpi.first.wpilibj.Timer;
 
 
@@ -41,6 +44,7 @@ public class Robot extends TimedRobot {
   public static Drive drive;
   AutoDrive auton;
   public static AHRS navx;
+  public static StraightTrajectory trajectoryGenerator;
   int counter = 0;
   
   Timer timer;
@@ -60,6 +64,7 @@ public class Robot extends TimedRobot {
     auton = new AutoDrive();
     SmartDashboard.putNumber("number", 5);
     navx = new AHRS(SPI.Port.kMXP);
+    trajectoryGenerator = new StraightTrajectory(0.558, 10, 10, 30);
   
     camera = new Vision();
   }
@@ -136,7 +141,7 @@ public class Robot extends TimedRobot {
     drive.setDefaultCommand(new JoyStickDrive());
     timer.reset();
     timer.start();
-
+    
   }
 
   /**
@@ -154,6 +159,9 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    ArrayList<TrajectoryElement> test = new ArrayList<TrajectoryElement>();
+    test = trajectoryGenerator.calculateTurn(0, 90, 0, 0, 0.010);
+    test.forEach((n) -> System.out.println(Double.toString(n.t) + " " + Double.toString(n.x) + " " + Double.toString(n.v) + " " + Double.toString(n.a) + " " + Double.toString(n.j) + "\n"));
   }
 
   /**

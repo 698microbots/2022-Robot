@@ -9,6 +9,5 @@ public class TrajectoryElement {
     // time in ms since beginning of the trajectory
     public double t;
     // x, v, a, j in m, m/s, m/s^2, m/s^3
-    public double leftX, leftV, leftA, leftJ;
-    public double rightX, rightV, rightA, rightJ;
+    public double x, v, a, j;
 }
