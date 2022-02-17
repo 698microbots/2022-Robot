@@ -30,6 +30,7 @@ public class AutoTurn extends CommandBase {
   public void initialize() {
     System.out.println("Automatic turning has started!");
     driveTrain.setTurnTarget(driveTrain.getTurnTarget() + target);
+    //need to check if reset encoders is still neccessary.
     driveTrain.resetEncoders();
   }
 

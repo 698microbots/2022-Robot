@@ -52,4 +52,6 @@ public final class Constants
     public static final int pixyHcenter = 158;
     public static final int pixyVerticalAngle = 20;
     public static final int pixyHorizontalAngle = 30;
+    public static final int pixyRedSig = 1;
+    public static final int pixyBlueSig = 2;
 }

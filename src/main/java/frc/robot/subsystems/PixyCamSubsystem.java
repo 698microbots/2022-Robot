@@ -48,6 +48,13 @@ public class PixyCamSubsystem extends SubsystemBase {
     }
   }
 
+  public int getBlockSignature(int blockNum){
+    if(blockCount > 0){
+      return blocks.get(blockNum).getSignature();
+    }else{
+      return 404;
+    }
+  }
   public int getBlockXcoordinates(int blockNum){//gives the x cor of specific block
     if(blockCount > 0){
     return blocks.get(blockNum).getX();

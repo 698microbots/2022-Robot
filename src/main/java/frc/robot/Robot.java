@@ -69,8 +69,9 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     //print pixy tracking information
     SmartDashboard.putNumber("Angle From Pixy: ", m_robotContainer.pixy2.getBlockXangle(0));//Just testing code for pixy angle
-    SmartDashboard.putNumber("Pixy Block0 X-coor:", m_robotContainer.pixy2.getBlockXcoordinates(0));
-    SmartDashboard.putNumber("Pixy Block0 Y-coor:", m_robotContainer.pixy2.getBlockYcoordinates(0));
+    SmartDashboard.putNumber("Pixy Block0 X-coor: ", m_robotContainer.pixy2.getBlockXcoordinates(0));
+    SmartDashboard.putNumber("Pixy Block0 Y-coor: ", m_robotContainer.pixy2.getBlockYcoordinates(0));
+    SmartDashboard.putNumber("Block Signature: ", m_robotContainer.pixy2.getBlockSignature(0));
   }
 
   @Override
