@@ -66,4 +66,16 @@ public final class Constants
     public static final int pixyHorizontalAngle = 30;
     public static final int pixyRedSig = 1;
     public static final int pixyBlueSig = 2;
+
+    //AutoIntake
+    public static final int x1Range = 0;
+    public static final int y1Range = 20;
+    public static final int x2Range = 315;
+    public static final int y2Range = 207;
+
+    // Photovoltaic Sensor IDs
+    public static final int ID1 = 0;
+    public static final int ID2 = 1;
+
+
 }
