@@ -11,14 +11,14 @@ import frc.robot.subsystems.BallCounter;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.PixyCamSubsystem;
 
-public class AutoRedBallDriver extends CommandBase {
+public class AutoBlueBallDriver extends CommandBase {
   /** Creates a new AutoRedBallDriver. */
   private final DriveTrainSubsystem driveTrain;
   private final PixyCamSubsystem pixy2;
   private final Supplier<Double> navXangle;
   private final BallCounter ballCounter;
 
-  public AutoRedBallDriver(DriveTrainSubsystem driveTrain, PixyCamSubsystem pixy2, BallCounter ballCounter, Supplier<Double> navXangle) {
+  public AutoBlueBallDriver(DriveTrainSubsystem driveTrain, PixyCamSubsystem pixy2, BallCounter ballCounter, Supplier<Double> navXangle) {
     this.driveTrain = driveTrain;
     this.pixy2 = pixy2;
     this.navXangle = navXangle;
@@ -36,9 +36,9 @@ public class AutoRedBallDriver extends CommandBase {
   @Override
   public void execute() {
     //checks if the closest or second closest block is a red ball.
-    if(pixy2.getBlockSignature(0) == 1){//sets the turn target to closest block if it is red
+    if(pixy2.getBlockSignature(0) == 2){//sets the turn target to closest block if it is red
       driveTrain.setTurnTarget(navXangle.get()+pixy2.getBlockXangle(0));
-    }else if(pixy2.getBlockSignature(1) == 1){//sets turn target to second farthest block iof it is red
+    }else if(pixy2.getBlockSignature(1) == 2){//sets turn target to second farthest block iof it is red
       driveTrain.setTurnTarget(navXangle.get()+pixy2.getBlockXangle(1));
     }else{
       driveTrain.setTurnTarget(0.0);
