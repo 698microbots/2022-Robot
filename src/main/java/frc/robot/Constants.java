@@ -22,6 +22,7 @@ public final class Constants
     public static final int FrontLeftID = 3;
     public static final int BackRightID = 5;
     public static final int BackLeftID = 2;
+    public static final int flywheelID = 1;
 
 //Controller Stick Constants
     public static final int XBOX_R_XAXIS = 4;
@@ -48,8 +49,6 @@ public final class Constants
     public static final double intakeMotorSpeed = 0.5;
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
-    public static final double closestY = 100;
-    public static final double closestX = 160;
     // turn PID constants
     public static final double turnkP = 0.02;
     public static final double turnkI = 0;

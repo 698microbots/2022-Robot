@@ -9,12 +9,13 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.simulation.JoystickSim;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants;
-import frc.robot.commands.IntakeBall;
 import frc.robot.subsystems.Intake;
 import  frc.robot.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -38,7 +39,9 @@ public class RobotContainer {
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public static Intake intake = new Intake();
+  public static Flywheel flywheel = new Flywheel();
   public JoystickButton buttonA = new JoystickButton(Xbox, 1);
+  public JoystickButton buttonB = new JoystickButton(Xbox, 2);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -62,6 +65,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     buttonA.whenPressed(new IntakeBall(intake));
+    buttonB.whenPressed(new FlywheelShoot(flywheel));
   }
 
   /**
