@@ -96,9 +96,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // if(output >= 1) output = 1;
     // if(output <= -1) output = -1;
 
-    // set motors to output: left side positive, right side negative for clockwise rotation
-    setRightSpeed(turnOutput);
-    setLeftSpeed(-turnOutput);
   }
 
     public void PIDdrive(float sensorInput) {
@@ -141,6 +138,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double getDriveError(){
     return driveError;
   }
+    
+  public double getTurnOutput(){
+    return turnOutput;
+  }
+
+  public double getDriveOutput(){
+    return driveOutput;
+  }
 //Setters
   public void setTurnTarget(double angle){
     turnTarget = angle;
@@ -149,7 +154,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
-  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

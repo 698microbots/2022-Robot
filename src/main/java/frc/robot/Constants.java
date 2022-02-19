@@ -38,11 +38,6 @@ public final class Constants
     public static final double kI = 0;
     public static final double kD = 0.5;
 
-    public static final double vertDist = 8;
-    public static final double x_dot = 1;
-
-
-
     // Intake Constants
     public static final int deviceIdIntake = 1;
     public static final double intakeMotorSpeed = 0.5;
@@ -77,5 +72,7 @@ public final class Constants
     public static final int ID1 = 0;
     public static final int ID2 = 1;
 
+    //Auto ball driving
+    public static final int turnAggressiveness = 2;
 
 }

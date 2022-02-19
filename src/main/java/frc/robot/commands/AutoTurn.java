@@ -37,8 +37,13 @@ public class AutoTurn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //calculate turn speed
     double sensorInput = navXInput.get();
     driveTrain.PIDturn(sensorInput);
+
+    //set turn speed
+    driveTrain.setRightSpeed(driveTrain.getTurnOutput());
+    driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
 
     //Increment the counter when error is small enough
     if(driveTrain.getPIDTurnError() < 0.1){

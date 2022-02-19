@@ -35,8 +35,15 @@ public class AutoDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //calculate motor speeds
     float sensorInput = navXInput.get();
     driveTrain.PIDdrive(sensorInput);
+
+    //set motor speeds
+    driveTrain.setRightSpeed(driveTrain.getDriveOutput());
+    driveTrain.setLeftSpeed(driveTrain.getDriveOutput());
+
+    //check if target is met
     if(driveTrain.getDriveError()<0.1){
       counter++;
     }else{
