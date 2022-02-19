@@ -85,11 +85,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void PIDturn(double sensorInput){
     turnPrevError = turnError;
     turnError = turnTarget - sensorInput;
-    turnD = turnError;
+    turnP = turnError;
     turnI += turnError;
     turnD = turnError - turnPrevError;
 
-    turnOutput = Constants.turnkP*turnD + Constants.turnkI*turnI + Constants.turnkD*turnD;
+    turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
     SmartDashboard.putNumber("PID output:", turnOutput);
     
     // clamp output between -100% and 100%
@@ -102,11 +102,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
       
       drivePrevError = driveError;
       driveError = driveTarget - sensorInput;
-      driveD = driveError;
+      driveP = driveError;
       driveI += driveError;
       driveD = driveError - turnPrevError;
       
-      driveOutput = Constants.kP*driveD + Constants.kI*driveI + Constants.kD*driveD;
+      driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
       SmartDashboard.putNumber("PID Drive output:", driveOutput);
 
       setRightSpeed(driveOutput);
