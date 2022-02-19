@@ -36,8 +36,20 @@ public final class Constants
     public static final double kF = 0;
     public static final double kP = 0;
     public static final double kI = 0;
-    public static final double kD = 0;
+    public static final double kD = 0.5;
 
+    public static final double vertDist = 8;
+    public static final double x_dot = 1;
+
+
+
+    // Intake Constants
+    public static final int deviceIdIntake = 1;
+    public static final double intakeMotorSpeed = 0.5;
+    public static final int pistonID = 1;   
+    public static final double ampSpike = .1;
+    public static final double closestY = 100;
+    public static final double closestX = 160;
     // turn PID constants
     public static final double turnkP = 0.02;
     public static final double turnkI = 0;
@@ -54,4 +66,16 @@ public final class Constants
     public static final int pixyHorizontalAngle = 30;
     public static final int pixyRedSig = 1;
     public static final int pixyBlueSig = 2;
+
+    //AutoIntake
+    public static final int x1Range = 0;
+    public static final int y1Range = 20;
+    public static final int x2Range = 315;
+    public static final int y2Range = 207;
+
+    // Photovoltaic Sensor IDs
+    public static final int ID1 = 0;
+    public static final int ID2 = 1;
+
+
 }
