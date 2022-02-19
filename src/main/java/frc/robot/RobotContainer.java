@@ -21,6 +21,9 @@ import  frc.robot.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -57,6 +60,11 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
+  public void robotInit() {
+
+  }
+  
+
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -79,6 +87,7 @@ public class RobotContainer {
       //new AutoTurn(driveTrain, 45.0, () -> navX.getAngle())
       //new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementX())
       //new AutoTrackingRedBall(pixy2)
+      new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getAngle())
             );
   }
 }
