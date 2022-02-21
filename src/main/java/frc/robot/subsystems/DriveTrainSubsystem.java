@@ -83,11 +83,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   //takes in sensor input to turn robot into the correct angle
   public void PIDturn(double sensorInput){
-    turnPrevError = turnError;
     turnError = turnTarget - sensorInput;
     turnP = turnError;
     turnI += turnError;
     turnD = turnError - turnPrevError;
+    turnPrevError = turnError;
 
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
     SmartDashboard.putNumber("PID output:", turnOutput);
@@ -100,11 +100,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     public void PIDdrive(float sensorInput) {
       
-      drivePrevError = driveError;
+
       driveError = driveTarget - sensorInput;
       driveP = driveError;
       driveI += driveError;
       driveD = driveError - turnPrevError;
+      drivePrevError = driveError;
       
       driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
       SmartDashboard.putNumber("PID Drive output:", driveOutput);
