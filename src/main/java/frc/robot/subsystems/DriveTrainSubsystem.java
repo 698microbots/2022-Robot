@@ -104,7 +104,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
       driveError = driveTarget - sensorInput;
       driveP = driveError;
       driveI += driveError;
-      driveD = driveError - turnPrevError;
+      driveD = driveError - drivePrevError;
       drivePrevError = driveError;
       
       driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;

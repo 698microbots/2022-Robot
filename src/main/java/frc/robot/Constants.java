@@ -30,6 +30,10 @@ public final class Constants
     public static final int XBOX_L_YAXIS = 1;
     public static final int XBOX_pin = 0;
 
+    //Controller Button IDs
+    public static final int Xbox_Button_A = 1;
+    public static final int Xbox_Button_B = 2;
+
     // auton drive PID constants
     public static final int kTimeoutMs = 20;
     public static final int kPIDLoopIdx = 0;//run primary loop
@@ -75,4 +79,9 @@ public final class Constants
     //Auto ball driving
     public static final int turnAggressiveness = 2;
 
+    //Turret Constants
+    public static final int turrentMotorID = 0;//need to figure out what this value is
+    public static final double turretkP = 0;
+    public static final double turretkI = 0;
+    public static final double turretkD = 0;
 }
