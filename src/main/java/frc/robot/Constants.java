@@ -30,9 +30,16 @@ public final class Constants
     public static final int XBOX_L_YAXIS = 1;
     public static final int XBOX_pin = 0;
 
+
     //Controller Button IDs
     public static final int Xbox_Button_A = 1;
     public static final int Xbox_Button_B = 2;
+    public static final int Xbox_Button_X = 3;
+    public static final int Xbox_Button_Y = 4;
+    public static final int Xbox_Button_LB = 5;
+    public static final int Xbox_Button_RB = 6;
+    public static final int Xbox_Button_LS = 9;
+    public static final int Xbox_Button_RS = 10;
 
     // auton drive PID constants
     public static final int kTimeoutMs = 20;
@@ -44,7 +51,7 @@ public final class Constants
 
     // Intake Constants
     public static final int deviceIdIntake = 6;
-    public static final double intakeMotorSpeed = 0.5;
+    public static final double intakeMotorSpeed = 0.30;
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
     public static final double closestY = 100;
