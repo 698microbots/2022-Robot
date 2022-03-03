@@ -5,7 +5,7 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
- 
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
@@ -14,9 +14,12 @@ import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
+import frc.robot.commands.IntakeBall;
 import frc.robot.subsystems.Intake;
 import  frc.robot.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.IndexControl;
+import frc.robot.subsystems.Index;
 
 
 import frc.robot.commands.*;
@@ -37,13 +40,14 @@ public class RobotContainer {
   private final DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
   public final VisionSubsystems limeLight = new VisionSubsystems();
   public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
-  private final Intake intake = new Intake();
-  private final TurretSubsystem turret = new TurretSubsystem();
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final JoystickButton buttonA = new JoystickButton(Xbox, Constants.Xbox_Button_A);
-  private final JoystickButton buttonB = new JoystickButton(Xbox, Constants.Xbox_Button_B);
-
+  public static Intake intake = new Intake();
+  public static Index indexBottom = new Index();
+  public static Index indexTop = new Index();
+  public JoystickButton buttonA = new JoystickButton(Xbox, 1);
+  public JoystickButton buttonB = new JoystickButton(Xbox, 2);
+  public JoystickButton buttonX = new JoystickButton(Xbox, 3);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -71,8 +75,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonA.whenHeld(new IntakeBall(intake));
-    buttonB.whenHeld(new AutoTrackTopHoop(turret, limeLight));
+    buttonA.whenPressed(new IntakeBall(intake));
+    buttonB.whenPressed(new IndexControl(indexBottom));
+    buttonX.whenPressed(new IndexControl(indexTop));
   }
 
   /**

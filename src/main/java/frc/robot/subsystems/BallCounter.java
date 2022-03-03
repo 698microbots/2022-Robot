@@ -13,9 +13,10 @@ public class BallCounter extends SubsystemBase {
   /** Creates a new BallCounter. */
   
   
-  private DigitalInput input = new DigitalInput(Constants.ID1); // class for port 1
-  private DigitalInput input2 = new DigitalInput(Constants.ID2); // class for port 2
-  private int totalBalls = 0; // total ball counter, changes with current
+  private DigitalInput input = new DigitalInput(Constants.PortID1); // class for port 1
+  private DigitalInput input2 = new DigitalInput(Constants.PortID2); // class for port 2
+  
+  private static int totalBalls = 0; // total ball counter, changes with current
 
   
   public BallCounter() {}
@@ -25,12 +26,13 @@ public class BallCounter extends SubsystemBase {
       totalBalls += 1;}
     }
 
+  
+  
   public void ballsOut() {
     if (input2.get() == true) {
       totalBalls -= 1;}
     }
 
-  //getters
     public int getBalls() {
       return totalBalls;
     }
