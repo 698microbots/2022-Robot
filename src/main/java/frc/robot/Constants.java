@@ -31,6 +31,17 @@ public final class Constants
     public static final int XBOX_L_YAXIS = 1;
     public static final int XBOX_pin = 0;
 
+
+    //Controller Button IDs
+    public static final int Xbox_Button_A = 1;
+    public static final int Xbox_Button_B = 2;
+    public static final int Xbox_Button_X = 3;
+    public static final int Xbox_Button_Y = 4;
+    public static final int Xbox_Button_LB = 5;
+    public static final int Xbox_Button_RB = 6;
+    public static final int Xbox_Button_LS = 9;
+    public static final int Xbox_Button_RS = 10;
+
     // auton drive PID constants
     public static final int kTimeoutMs = 20;
     public static final int kPIDLoopIdx = 0;//run primary loop
@@ -39,14 +50,14 @@ public final class Constants
     public static final double kI = 0;
     public static final double kD = 0.5;
 
-    public static final double vertDist = 8;
-    public static final double x_dot = 1;
-
+    // Index Constants
+    public static final double indexMotorSpeedBottom = 0.5;
+    public static final double indexMotorSpeedTop = 0.5;
 
 
     // Intake Constants
-    public static final int deviceIdIntake = 1;
-    public static final double intakeMotorSpeed = 0.5;
+    public static final int deviceIdIntake = 6;
+    public static final double intakeMotorSpeed = 0.30;
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
     // turn PID constants
@@ -74,8 +85,20 @@ public final class Constants
     public static final int CANIndexerID = 1;//not the actual id
 
     // Photovoltaic Sensor IDs
-    public static final int ID1 = 0;
-    public static final int ID2 = 1;
+    public static final int PortID1 = 0;
+    public static final int PortID2 = 1;
 
+    //Auto ball driving
+    public static final int turnAggressiveness = 2;
+
+    //Turret Constants
+    public static final int turrentMotorID = 0;//need to figure out what this value is
+    public static final double turretkP = 0;
+    public static final double turretkI = 0;
+    public static final double turretkD = 0;
+
+    //SparkMax Motor IDs
+    public static final int lowerIndexerID = 9;
+    public static final int upperIndexerID = 3;
 
 }

@@ -5,40 +5,41 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.VisionSubsystems;
 
-public class IntakeBall extends CommandBase {
-  /** Creates a new Intake. */
+public class AutoTrackTopHoop extends CommandBase {
+  /** Creates a new AutoTrackTopHoop. */
+  private final TurretSubsystem turret;
+  private final VisionSubsystems limelight;
 
-  private final Intake intake;
-  public IntakeBall(Intake intake) {
+  public AutoTrackTopHoop(TurretSubsystem turret, VisionSubsystems limelight) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intake = intake;
-    addRequirements(intake);
+    this.turret = turret;
+    this.limelight = limelight;
+    addRequirements(turret);
+    addRequirements(limelight);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    intake.intputBall();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    turret.turnTurret(limelight.getH_angle());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.stopMotor();
+    turret.turnTurret(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
     return false;
   }
 }

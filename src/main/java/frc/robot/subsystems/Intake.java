@@ -23,7 +23,6 @@ public class Intake extends SubsystemBase {
   public Intake() {
     intakeMotor = new CANSparkMax(Constants.deviceIdIntake, CANSparkMax.MotorType.kBrushless);
     pixy = new PixyCamSubsystem();
-
   }
 
   public static void intputBall()
