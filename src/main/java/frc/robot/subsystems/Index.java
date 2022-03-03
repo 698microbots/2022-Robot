@@ -13,7 +13,6 @@ import frc.robot.Constants;
 
 public class Index extends SubsystemBase {
   /** Creates a new Index. */
-  public static Constants constant;
   private static CANSparkMax indexMotorTop; 
   private static CANSparkMax indexMotorBottom;  
 
@@ -21,14 +20,14 @@ public class Index extends SubsystemBase {
 
 
   public Index() {
-    indexMotorTop = new CANSparkMax(constant.IndexMotorIDTop, MotorType.kBrushless);
-    indexMotorBottom = new CANSparkMax(constant.IndexMotorIDBottom, MotorType.kBrushless);
+    indexMotorTop = new CANSparkMax(Constants.upperIndexerID, MotorType.kBrushless);
+    indexMotorBottom = new CANSparkMax(Constants.lowerIndexerID, MotorType.kBrushless);
   }
 
   public static void IndexOn () {
 
-    indexMotorBottom.set(constant.indexMotorSpeedBottom);
-    indexMotorTop.set(constant.indexMotorSpeedTop);
+    indexMotorBottom.set(Constants.indexMotorSpeedBottom);
+    indexMotorTop.set(Constants.indexMotorSpeedTop);
   }
 
   public static void IndexOff () {

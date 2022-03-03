@@ -49,6 +49,11 @@ public final class Constants
     public static final double kI = 0;
     public static final double kD = 0.5;
 
+    // Index Constants
+    public static final double indexMotorSpeedBottom = 0.5;
+    public static final double indexMotorSpeedTop = 0.5;
+
+
     // Intake Constants
     public static final int deviceIdIntake = 6;
     public static final double intakeMotorSpeed = 0.30;
@@ -80,8 +85,8 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
-    public static final int ID1 = 0;
-    public static final int ID2 = 1;
+    public static final int PortID1 = 0;
+    public static final int PortID2 = 1;
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;
