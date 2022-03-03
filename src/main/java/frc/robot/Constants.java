@@ -43,7 +43,7 @@ public final class Constants
     public static final double kD = 0.5;
 
     // Intake Constants
-    public static final int deviceIdIntake = 1;
+    public static final int deviceIdIntake = 6;
     public static final double intakeMotorSpeed = 0.5;
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
@@ -84,4 +84,9 @@ public final class Constants
     public static final double turretkP = 0;
     public static final double turretkI = 0;
     public static final double turretkD = 0;
+
+    //SparkMax Motor IDs
+    public static final int lowerIndexerID = 9;
+    public static final int upperIndexerID = 3;
+
 }
