@@ -17,20 +17,21 @@ public class BallCounter extends SubsystemBase {
   private DigitalInput input2 = new DigitalInput(Constants.ID2); // class for port 2
   
   private static int totalBalls = 0; // total ball counter, changes with current
-
   
   public BallCounter() {}
 
   public void ballsIn() {
     if (input.get() == true) {
-      totalBalls += 1;}
+      totalBalls += 1;
+      }
     }
 
   
   
   public void ballsOut() {
     if (input2.get() == true) {
-      totalBalls -= 1;}
+      totalBalls -= 1;
+      }
     }
 
     public int getBalls() {

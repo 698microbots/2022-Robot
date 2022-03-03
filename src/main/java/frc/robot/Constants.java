@@ -71,6 +71,7 @@ public final class Constants
     public static final int y1Range = 20;
     public static final int x2Range = 315;
     public static final int y2Range = 207;
+    public static final int CANIndexerID = 1;//not the actual id
 
     // Photovoltaic Sensor IDs
     public static final int ID1 = 0;

@@ -5,19 +5,42 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
+//for teleop, pair with flywheel to the same button
 
 public class Indexer extends SubsystemBase {
   /** Creates a new Indexer. */
   private static CANSparkMax indexer;
-  public Indexer() {}
+  private static BallCounter countBalls;
+  public Indexer() {
+    indexer = new CANSparkMax(Constants.CANIndexerID, CANSparkMax.MotorType.kBrushless);
+    countBalls = new BallCounter();
+  }
+
+  public static void shootBall(int numBalls)
+  {
+    while(numBalls>0)
+    {
+      indexer.set(0.5);
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      indexer.set(0.0);
+      numBalls = countBalls.getBalls();
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+
+
 
   @Override
   public void periodic() {

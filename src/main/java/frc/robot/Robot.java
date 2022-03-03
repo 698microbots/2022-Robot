@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -35,7 +36,7 @@ public class Robot extends TimedRobot {
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
    *
    * <p>This runs after the mode specific periodic functions, but before LiveWindow and
-   * SmartDashboard integrated updating.  
+   * SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
@@ -67,11 +68,17 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+    //fix this later
+
+
+
+
+
     //print pixy tracking information
-    SmartDashboard.putNumber("Angle From Pixy: ", m_robotContainer.pixy2.getBlockXangle(0));//Just testing code for pixy angle
-    SmartDashboard.putNumber("Pixy Block0 X-coor: ", m_robotContainer.pixy2.getBlockXcoordinates(0));
-    SmartDashboard.putNumber("Pixy Block0 Y-coor: ", m_robotContainer.pixy2.getBlockYcoordinates(0));
-    SmartDashboard.putNumber("Block Signature: ", m_robotContainer.pixy2.getBlockSignature(0));
+    // SmartDashboard.putNumber("Pixy red X-cor", m_robotContainer.pixy2.getRedXcordinate());
+    // SmartDashboard.putNumber("Pixy red Y-cor", m_robotContainer.pixy2.getRedYcordinate());
+    // SmartDashboard.putNumber("Pixy blue X-cor", m_robotContainer.pixy2.getBlueXcordinate());
+    // SmartDashboard.putNumber("Pixy blue Y-cor", m_robotContainer.pixy2.getBlueYcordinate());
   }
 
   @Override
@@ -94,6 +101,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
     SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());
     SmartDashboard.putNumber("X-dirction Distnace", m_robotContainer.limeLight.getXdistance());
+    SmartDashboard.putNumber("Electric Current", Intake.getElectricCurrent());
   }
 
   @Override

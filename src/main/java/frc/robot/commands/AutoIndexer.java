@@ -5,26 +5,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Flywheel;
-/*
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.BallCounter;
 
-
-
-
-THIS IS ONLY TEST CODE
-IT IS NOT FINAL
-
-
-
-
-*/
-public class FlywheelShoot extends CommandBase {
-  /** Creates a new FlywheelShoot. */
-  private Flywheel flyWheel;
-  public FlywheelShoot(Flywheel flyWheel) {
+public class AutoIndexer extends CommandBase {
+  /** Creates a new AutoIndexer. */
+  private final Indexer indexer; 
+  private final BallCounter counterOfBalls;
+  public AutoIndexer(Indexer indexer) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.flyWheel = flyWheel;
-    addRequirements(flyWheel);
+    this.indexer = indexer;
+    counterOfBalls = new BallCounter();
+    addRequirements(indexer);
   }
 
   // Called when the command is initially scheduled.
@@ -34,14 +26,12 @@ public class FlywheelShoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    flyWheel.setFlywheelSpeed();
+    indexer.shootBall(counterOfBalls.getBalls());
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    flyWheel.stopFlywheel();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

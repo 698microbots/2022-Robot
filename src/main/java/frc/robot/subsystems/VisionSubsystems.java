@@ -9,7 +9,8 @@ import frc.robot.Constants;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.Constants;
 
 public class VisionSubsystems extends SubsystemBase {
@@ -19,6 +20,7 @@ public class VisionSubsystems extends SubsystemBase {
   private NetworkTableEntry H_angle;
   private double zDistance;
   private double xDistance;
+  private DriveTrainSubsystem turnAim;
 
   public VisionSubsystems() {
     limeLight = NetworkTableInstance.getDefault().getTable("limelight");
@@ -26,6 +28,7 @@ public class VisionSubsystems extends SubsystemBase {
     H_angle = limeLight.getEntry("tx");
     zDistance = -1;//this value is for if there's an error, makes sense that distance will never be negative
     xDistance = -1;//the distance in the x direction offset from center of robot.
+    turnAim = new DriveTrainSubsystem();
   }
 
   //methods
@@ -53,6 +56,11 @@ public class VisionSubsystems extends SubsystemBase {
 
   public double getXdistance(){//same here
     return xDistance;
+  }
+
+  public void aimRobot(double hAngle)
+  {
+    turnAim.PIDturn(hAngle);
   }
 
   @Override
