@@ -5,7 +5,7 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
-
+ 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
@@ -14,7 +14,6 @@ import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
-import frc.robot.commands.IntakeBall;
 import frc.robot.subsystems.Intake;
 import  frc.robot.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -38,10 +37,13 @@ public class RobotContainer {
   private final DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
   public final VisionSubsystems limeLight = new VisionSubsystems();
   public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
+  private final Intake intake = new Intake();
+  private final TurretSubsystem turret = new TurretSubsystem();
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  public static Intake intake = new Intake();
-  public JoystickButton buttonA = new JoystickButton(Xbox, 1);
+  private final JoystickButton buttonA = new JoystickButton(Xbox, Constants.Xbox_Button_A);
+  private final JoystickButton buttonB = new JoystickButton(Xbox, Constants.Xbox_Button_B);
+
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -69,7 +71,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonA.whenPressed(new IntakeBall(intake));
+    buttonA.whenHeld(new IntakeBall(intake));
+    buttonB.whenHeld(new AutoTrackTopHoop(turret, limeLight));
   }
 
   /**

@@ -83,33 +83,31 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   //takes in sensor input to turn robot into the correct angle
   public void PIDturn(double sensorInput){
-    turnPrevError = turnError;
     turnError = turnTarget - sensorInput;
-    turnD = turnError;
+    turnP = turnError;
     turnI += turnError;
     turnD = turnError - turnPrevError;
+    turnPrevError = turnError;
 
-    turnOutput = Constants.turnkP*turnD + Constants.turnkI*turnI + Constants.turnkD*turnD;
+    turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
     SmartDashboard.putNumber("PID output:", turnOutput);
     
     // clamp output between -100% and 100%
     // if(output >= 1) output = 1;
     // if(output <= -1) output = -1;
 
-    // set motors to output: left side positive, right side negative for clockwise rotation
-    setRightSpeed(turnOutput);
-    setLeftSpeed(-turnOutput);
   }
 
     public void PIDdrive(float sensorInput) {
       
-      drivePrevError = driveError;
+
       driveError = driveTarget - sensorInput;
-      driveD = driveError;
+      driveP = driveError;
       driveI += driveError;
-      driveD = driveError - turnPrevError;
+      driveD = driveError - drivePrevError;
+      drivePrevError = driveError;
       
-      driveOutput = Constants.kP*driveD + Constants.kI*driveI + Constants.kD*driveD;
+      driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
       SmartDashboard.putNumber("PID Drive output:", driveOutput);
 
       setRightSpeed(driveOutput);
@@ -141,6 +139,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double getDriveError(){
     return driveError;
   }
+    
+  public double getTurnOutput(){
+    return turnOutput;
+  }
+
+  public double getDriveOutput(){
+    return driveOutput;
+  }
 //Setters
   public void setTurnTarget(double angle){
     turnTarget = angle;
@@ -149,7 +155,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
-  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
