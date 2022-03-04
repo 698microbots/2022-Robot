@@ -18,8 +18,6 @@ import frc.robot.commands.IntakeBall;
 import frc.robot.subsystems.Intake;
 import  frc.robot.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.IndexControl;
-import frc.robot.subsystems.Index;
 
 
 import frc.robot.commands.*;
@@ -40,14 +38,13 @@ public class RobotContainer {
   private final DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
   public final VisionSubsystems limeLight = new VisionSubsystems();
   public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
-
+  private final Indexer index = new Indexer();
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  public static Intake intake = new Intake();
-  public static Index indexBottom = new Index();
-  public static Index indexTop = new Index();
-  public JoystickButton buttonA = new JoystickButton(Xbox, 1);
-  public JoystickButton buttonB = new JoystickButton(Xbox, 2);
-  public JoystickButton buttonX = new JoystickButton(Xbox, 3);
+  public final Intake intake = new Intake();
+  public final JoystickButton buttonA = new JoystickButton(Xbox, Constants.Xbox_Button_A);
+  public final JoystickButton buttonB = new JoystickButton(Xbox, Constants.Xbox_Button_B);
+  public final JoystickButton buttonX = new JoystickButton(Xbox, Constants.Xbox_Button_X);
+  public final JoystickButton buttonY = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -57,7 +54,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     //initializes the driveTrain for command input, there are a few suppliers
-    driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS), () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS)));
+    driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_R_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_L_XAXIS)));
     
     // Configure the button bindings
     configureButtonBindings();
@@ -75,9 +72,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonA.whenPressed(new IntakeBall(intake));
-    buttonB.whenPressed(new IndexControl(indexBottom));
-    buttonX.whenPressed(new IndexControl(indexTop));
+    buttonA.whenHeld(new IntakeBall(intake));
+    buttonB.whenHeld(new IndexHold(index));
+    buttonY.whenHeld(new IndexShoot(index));
   }
 
   /**

@@ -51,7 +51,7 @@ public final class Constants
 
     // Intake Constants
     public static final int deviceIdIntake = 6;
-    public static final double intakeMotorSpeed = 0.30;
+    public static final double intakeMotorSpeed = 0.42;
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
     public static final double closestY = 100;
@@ -80,8 +80,8 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
-    public static final int ID1 = 0;
-    public static final int ID2 = 1;
+    public static final int PhotovoltaicID1 = 0;
+    public static final int PhotovoltaicID2 = 1;
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;
@@ -94,6 +94,10 @@ public final class Constants
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;
-    public static final int upperIndexerID = 3;
+    public static final int upperIndexerID = 10;
+
+    //Indexer speeds
+    public static double indexMotorSpeedTop = 0.5;
+    public static double indexMotorSpeedBottom = 0.5;
 
 }
