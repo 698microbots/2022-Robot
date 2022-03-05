@@ -87,10 +87,12 @@ public final class Constants
     public static final int turnAggressiveness = 2;
 
     //Turret Constants
-    public static final int turrentMotorID = 0;//need to figure out what this value is
+    public static final int turrentMotorID = 6;//need to figure out what this value is
     public static final double turretkP = 0;
     public static final double turretkI = 0;
     public static final double turretkD = 0;
+
+    public static final int flyWheelMotorID = 1;
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;

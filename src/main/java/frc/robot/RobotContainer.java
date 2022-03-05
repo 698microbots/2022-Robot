@@ -14,12 +14,9 @@ import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
-import frc.robot.commands.IntakeBall;
 import frc.robot.subsystems.Intake;
 import  frc.robot.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
-
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
@@ -39,6 +36,7 @@ public class RobotContainer {
   public final VisionSubsystems limeLight = new VisionSubsystems();
   public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
   private final Indexer index = new Indexer();
+  private final TurretSubsystem turret = new TurretSubsystem();
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public final Intake intake = new Intake();
   public final JoystickButton buttonA = new JoystickButton(Xbox, Constants.Xbox_Button_A);
@@ -75,6 +73,7 @@ public class RobotContainer {
     buttonA.whenHeld(new IntakeBall(intake));
     buttonB.whenHeld(new IndexHold(index));
     buttonY.whenHeld(new IndexShoot(index));
+    buttonX.whenHeld(new TestFlywheel(turret));
   }
 
   /**
