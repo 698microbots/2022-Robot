@@ -52,7 +52,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     //initializes the driveTrain for command input, there are a few suppliers
-    driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_R_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_L_XAXIS)));
+    driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
     
     // Configure the button bindings
     configureButtonBindings();
