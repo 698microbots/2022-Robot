@@ -85,8 +85,8 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
-    public static final int PortID1 = 0;
-    public static final int PortID2 = 1;
+    public static final int PortID1 = 3;
+    public static final int PortID2 = 7;
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;
