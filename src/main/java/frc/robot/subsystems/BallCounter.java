@@ -33,7 +33,7 @@ public class BallCounter extends SubsystemBase {
       totalBalls -= 1;}
     }
 
-    public int getBalls() {
+    public static int getBalls() {
       return totalBalls;
     }
   

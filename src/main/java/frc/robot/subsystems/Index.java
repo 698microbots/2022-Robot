@@ -13,8 +13,8 @@ import frc.robot.Constants;
 
 public class Index extends SubsystemBase {
   /** Creates a new Index. */
-  private static CANSparkMax indexMotorTop; 
-  private static CANSparkMax indexMotorBottom;  
+  private static CANSparkMax indexMotorTop, indexMotorBottom; 
+  
 
 
 

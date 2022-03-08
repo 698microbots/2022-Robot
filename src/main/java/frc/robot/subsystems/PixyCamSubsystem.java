@@ -78,4 +78,12 @@ public class PixyCamSubsystem extends SubsystemBase {
     blocks = pixy2.getCCC().getBlockCache();
     blockCount = blocks.size();
   }
+
+public static int getBlockXCoordinate() {
+    return 0;
+}
+
+public static int getBlockYCoordinate() {
+    return 0;
+}
 }
