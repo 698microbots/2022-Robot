@@ -57,7 +57,7 @@ public final class Constants
     public static final double closestY = 100;
     public static final double closestX = 160;
     // turn PID constants
-    public static final double turnkP = 0.02;
+    public static final double turnkP = 0.01;
     public static final double turnkI = 0;
     public static final double turnkD = 0;
 
@@ -80,8 +80,8 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
-    public static final int PhotovoltaicID1 = 0;
-    public static final int PhotovoltaicID2 = 1;
+    public static final int PhotovoltaicID1 = 8;
+    public static final int PhotovoltaicID2 = 3;
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;

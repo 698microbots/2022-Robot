@@ -24,7 +24,7 @@ public class TestFlywheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turret.runFlywheel(0.3);
+    turret.runFlywheel(0.5);
   }
 
   // Called once the command ends or is interrupted.

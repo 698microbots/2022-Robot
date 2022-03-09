@@ -44,6 +44,8 @@ public class RobotContainer {
   public final JoystickButton buttonX = new JoystickButton(Xbox, Constants.Xbox_Button_X);
   public final JoystickButton buttonY = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
 
+  public final BallCounter ballCounter = new BallCounter();
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -84,10 +86,10 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
-      //new AutoTurn(driveTrain, 45.0, () -> navX.getAngle())
+      new AutoTurn(driveTrain, 45.0, () -> navX.getRoll())
       //new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementX())
       //new AutoTrackingRedBall(pixy2)
-      new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getAngle())
+      //  new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getAngle())
             );
   }
 }

@@ -71,6 +71,18 @@ public class PixyCamSubsystem extends SubsystemBase {
     }
   }
   
+  public int getBallWidth(int blockNum){
+    return blocks.get(blockNum).getWidth();
+  }
+
+  public int getBallHeight(int blockNum){
+    return blocks.get(blockNum).getHeight();
+  }
+
+  public double getHWratio(int blockNum){
+    return getBallHeight(blockNum)/getBallWidth(blockNum);
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

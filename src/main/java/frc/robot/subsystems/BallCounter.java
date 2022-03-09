@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -16,20 +17,22 @@ public class BallCounter extends SubsystemBase {
   private DigitalInput input = new DigitalInput(Constants.PhotovoltaicID1); // class for port 1
   private DigitalInput input2 = new DigitalInput(Constants.PhotovoltaicID2); // class for port 2
   
-  private static int totalBalls = 0; // total ball counter, changes with current
+  private static int totalBalls; // total ball counter, changes with current
 
   
-  public BallCounter() {}
+  public BallCounter() {
+    totalBalls = 0;
+  }
 
   public void ballsIn() {
-    if (input.get() == true) {
+    if (input.get() == false) {
       totalBalls += 1;}
     }
 
   
   
   public void ballsOut() {
-    if (input2.get() == true) {
+    if (input2.get() == false) {
       totalBalls -= 1;}
     }
 
@@ -40,7 +43,7 @@ public class BallCounter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    ballsIn();
-    ballsOut();
+    // ballsIn();
+    // ballsOut();
   }
 }

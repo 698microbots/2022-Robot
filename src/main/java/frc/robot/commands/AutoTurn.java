@@ -13,10 +13,10 @@ public class AutoTurn extends CommandBase {
   /** Creates a new AutoTurn. */
   private final DriveTrainSubsystem driveTrain;
   private final double target;
-  private final Supplier<Double> navXInput;
+  private final Supplier<Float> navXInput;
   private int counter;
 
-  public AutoTurn(DriveTrainSubsystem driveTrain, double target, Supplier<Double> navXInput) {
+  public AutoTurn(DriveTrainSubsystem driveTrain, double target, Supplier<Float> navXInput) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.target = target;
@@ -38,7 +38,7 @@ public class AutoTurn extends CommandBase {
   @Override
   public void execute() {
     //calculate turn speed
-    double sensorInput = navXInput.get();
+    double sensorInput = (double) navXInput.get();
     driveTrain.PIDturn(sensorInput);
 
     //set turn speed
