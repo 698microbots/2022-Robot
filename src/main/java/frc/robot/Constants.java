@@ -51,6 +51,11 @@ public final class Constants
     public static final double kI = 0;
     public static final double kD = 0.5;
 
+    // Index Constants
+    public static final double indexMotorSpeedBottom = 0.5;
+    public static final double indexMotorSpeedTop = 0.5;
+
+
     // Intake Constants
     public static final int deviceIdIntake = 6;
     public static final double intakeMotorSpeed = 0.42;
@@ -101,8 +106,8 @@ public final class Constants
     public static final int lowerIndexerID = 9;
     public static final int upperIndexerID = 10;
 
-    //Indexer speeds
-    public static double indexMotorSpeedTop = 0.5;
-    public static double indexMotorSpeedBottom = 0.5;
+    // Ball counter constants
+    public static final int PortID1 = 8;
+    public static final int PortID2 = 3;
 
 }
