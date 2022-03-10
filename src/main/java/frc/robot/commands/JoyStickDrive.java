@@ -36,16 +36,16 @@ public class JoyStickDrive extends CommandBase {
     leftStick = Math.pow(leftStick, 3.0);
 
     //deadband
-    if(Math.abs(rightStick) < 0.05){
-      rightStick = 0;
-    }
-    if(Math.abs(leftStick) < 0.05){
-      leftStick = 0;
-    }
+    // if(Math.abs(rightStick) < 0.05){
+    //   rightStick = 0;
+    // }
+    // if(Math.abs(leftStick) < 0.05){
+    //   leftStick = 0;
+    // }
 
     //set the motors using driveTrain subsystem to correct speeds
-    driveTrain.setRightSpeed(leftStick + rightStick);
-    driveTrain.setLeftSpeed(leftStick - rightStick);
+    driveTrain.setRightSpeed((rightStick + leftStick/3)*0.55);
+    driveTrain.setLeftSpeed((rightStick - leftStick/3)*0.55);
     
     //reset encoders for 
     driveTrain.resetEncoders();

@@ -29,6 +29,8 @@ public final class Constants
     public static final int XBOX_L_XAXIS = 0;
     public static final int XBOX_L_YAXIS = 1;
     public static final int XBOX_pin = 0;
+    public static final int Xbox_LT = 2;
+    public static final int Xbox_RT = 3;
 
 
     //Controller Button IDs
@@ -56,13 +58,13 @@ public final class Constants
 
     // Intake Constants
     public static final int deviceIdIntake = 6;
-    public static final double intakeMotorSpeed = 0.30;
+    public static final double intakeMotorSpeed = 0.42;
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
     public static final double closestY = 100;
     public static final double closestX = 160;
     // turn PID constants
-    public static final double turnkP = 0.02;
+    public static final double turnkP = 0.01;
     public static final double turnkI = 0;
     public static final double turnkD = 0;
 
@@ -85,20 +87,32 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
+<<<<<<< HEAD
     public static final int PortID1 = 3;
     public static final int PortID2 = 7;
+=======
+    public static final int PhotovoltaicID1 = 8;
+    public static final int PhotovoltaicID2 = 3;
+>>>>>>> 276eaaeb0c84d3a54b62025ca3bfcfe706a45d97
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;
 
     //Turret Constants
-    public static final int turrentMotorID = 0;//need to figure out what this value is
+    public static final int turrentMotorID = 6;//need to figure out what this value is
     public static final double turretkP = 0;
     public static final double turretkI = 0;
     public static final double turretkD = 0;
+    public static final int flyWheelMotorID = 1;
+    public static final double turretMotorGearRatio = 98;
+    public static final double flyWheelSpeed = 0.8;
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;
-    public static final int upperIndexerID = 3;
+    public static final int upperIndexerID = 10;
+
+    //Indexer speeds
+    public static double indexMotorSpeedTop = 0.5;
+    public static double indexMotorSpeedBottom = 0.5;
 
 }
