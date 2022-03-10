@@ -29,6 +29,8 @@ public final class Constants
     public static final int XBOX_L_XAXIS = 0;
     public static final int XBOX_L_YAXIS = 1;
     public static final int XBOX_pin = 0;
+    public static final int Xbox_LT = 2;
+    public static final int Xbox_RT = 3;
 
 
     //Controller Button IDs
@@ -91,8 +93,9 @@ public final class Constants
     public static final double turretkP = 0;
     public static final double turretkI = 0;
     public static final double turretkD = 0;
-
     public static final int flyWheelMotorID = 1;
+    public static final double turretMotorGearRatio = 98;
+    public static final double flyWheelSpeed = 0.8;
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;

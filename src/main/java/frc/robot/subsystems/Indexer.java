@@ -20,12 +20,12 @@ public class Indexer extends SubsystemBase {
     this.lowerSparkMax = new CANSparkMax(Constants.lowerIndexerID, MotorType.kBrushless);
   }
 
-  public void runLowerIndexer(){
-    lowerSparkMax.set(Constants.indexMotorSpeedBottom);
+  public void runLowerIndexer(double speed){
+    lowerSparkMax.set(speed);
   }
 
-  public void runUpperIndexer(){
-    upperSparkMax.set(Constants.indexMotorSpeedTop);
+  public void runUpperIndexer(double speed){
+    upperSparkMax.set(speed);
   }
 
   public void stopIndexer(){

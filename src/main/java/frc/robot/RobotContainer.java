@@ -36,13 +36,14 @@ public class RobotContainer {
   public final VisionSubsystems limeLight = new VisionSubsystems();
   public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
   private final Indexer index = new Indexer();
-  private final TurretSubsystem turret = new TurretSubsystem();
+  public final TurretSubsystem turret = new TurretSubsystem();
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public final Intake intake = new Intake();
   public final JoystickButton buttonA = new JoystickButton(Xbox, Constants.Xbox_Button_A);
   public final JoystickButton buttonB = new JoystickButton(Xbox, Constants.Xbox_Button_B);
   public final JoystickButton buttonX = new JoystickButton(Xbox, Constants.Xbox_Button_X);
   public final JoystickButton buttonY = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
+  private final JoystickButton buttonLB = new JoystickButton(Xbox, Constants.Xbox_Button_LB);
 
   public final BallCounter ballCounter = new BallCounter();
 
@@ -55,7 +56,7 @@ public class RobotContainer {
   public RobotContainer() {
     //initializes the driveTrain for command input, there are a few suppliers
     driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
-    
+    turret.setDefaultCommand(new TrigAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -76,6 +77,7 @@ public class RobotContainer {
     buttonB.whenHeld(new IndexHold(index));
     buttonY.whenHeld(new IndexShoot(index));
     buttonX.whenHeld(new TestFlywheel(turret));
+    buttonLB.whenHeld(new IndexReverse(index));
   }
 
   /**
@@ -86,7 +88,7 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
-      new AutoTurn(driveTrain, 45.0, () -> navX.getRoll())
+      //new AutoTurn(driveTrain, 45.0, () -> navX.getRoll())
       //new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementX())
       //new AutoTrackingRedBall(pixy2)
       //  new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getAngle())

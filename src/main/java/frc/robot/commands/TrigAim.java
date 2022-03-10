@@ -4,41 +4,43 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.AddressableLED;
+import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.TurretSubsystem;
 
-public class IndexHold extends CommandBase {
-  /** Creates a new IndexHold. */
-  private final Indexer index;
-  public IndexHold(Indexer index) {
-    this.index = index;
+public class TrigAim extends CommandBase {
+  /** Creates a new TrigAim. */
+  private final TurretSubsystem turret;
+  private final Supplier <Double> RT, LT;
+  public TrigAim(TurretSubsystem turret, Supplier <Double> RT, Supplier <Double> LT) {
+    this.turret = turret;
+    this.RT = RT;
+    this.LT = LT;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(index);
+    addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.runLowerIndexer(Constants.indexMotorSpeedBottom);
+    double inputRT = RT.get();
+    double inputLT = LT.get();
+    turret.turnTurret((inputRT - inputLT)/3);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    index.stopIndexer();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+
     return false;
   }
 }

@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Indexer;
 
 public class IndexShoot extends CommandBase {
@@ -23,8 +24,8 @@ public class IndexShoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.runLowerIndexer();
-    index.runUpperIndexer();
+    index.runLowerIndexer(Constants.indexMotorSpeedBottom);
+    index.runUpperIndexer(Constants.indexMotorSpeedTop);
   }
 
   // Called once the command ends or is interrupted.

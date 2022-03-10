@@ -4,15 +4,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Indexer;
-
-public class IndexHold extends CommandBase {
-  /** Creates a new IndexHold. */
+public class IndexReverse extends CommandBase {
+  /** Creates a new IndexReverse. */
   private final Indexer index;
-  public IndexHold(Indexer index) {
+  public IndexReverse(Indexer index) {
     this.index = index;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(index);
@@ -20,14 +18,13 @@ public class IndexHold extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.runLowerIndexer(Constants.indexMotorSpeedBottom);
+    index.runLowerIndexer(-Constants.indexMotorSpeedBottom);
+    index.runUpperIndexer(-Constants.indexMotorSpeedTop);
   }
 
   // Called once the command ends or is interrupted.
