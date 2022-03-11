@@ -59,6 +59,8 @@ public class TurretSubsystem extends SubsystemBase {
   public void turnTurret(double input){//find out which way the turret turns for positive and negative, needs hardware for testing.
     if(turretAngle<Constants.turretMaxAngle && turretAngle>Constants.turretMinAngle){
       turretMotor.set(ControlMode.PercentOutput, input);
+    }else{
+      turretMotor.set(ControlMode.PercentOutput, 0.0);
     }
   }
 
