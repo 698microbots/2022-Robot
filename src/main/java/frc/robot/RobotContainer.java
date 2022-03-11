@@ -81,7 +81,7 @@ public class RobotContainer {
     buttonA.whenHeld(new IndexShoot(index));
     buttonLB.whenHeld(new RunFlywheel(turret));
     buttonX.whenHeld(new IndexReverse(index));
-    buttonY.whenHeld(new AutoAim(limeLight, turret));
+    buttonY.whenPressed(new AutoAim(limeLight, turret));
   }
 
   /**
