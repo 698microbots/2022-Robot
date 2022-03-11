@@ -101,6 +101,8 @@ public final class Constants
     public static final int flyWheelMotorID = 1;
     public static final double turretMotorGearRatio = 98;
     public static final double flyWheelSpeed = 0.8;
+    public static final double turretMaxAngle = 30.0;
+    public static final double turretMinAngle = 15.0;
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;

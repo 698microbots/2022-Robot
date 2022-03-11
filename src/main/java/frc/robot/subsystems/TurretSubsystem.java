@@ -37,7 +37,7 @@ public class TurretSubsystem extends SubsystemBase {
     turretD = 0;
     turretOutput = 0;
     turretAngle = 0;
-    turretMotor.setSelectedSensorPosition(0.0);
+    turretMotor.setSelectedSensorPosition(0.0);//initialize the turret position in Alex units.
   }
   public void trackTurretAngle(){
     turretAngle = turretMotor.getSelectedSensorPosition()*360/2048/Constants.turretMotorGearRatio;
@@ -57,8 +57,9 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void turnTurret(double input){//find out which way the turret turns for positive and negative, needs hardware for testing.
-
-    turretMotor.set(ControlMode.PercentOutput, input);
+    if(turretAngle<Constants.turretMaxAngle && turretAngle>Constants.turretMinAngle){
+      turretMotor.set(ControlMode.PercentOutput, input);
+    }
   }
 
   public void runFlywheel(double input) {
