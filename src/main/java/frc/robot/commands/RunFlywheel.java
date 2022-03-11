@@ -5,15 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.TurretSubsystem;
 
-public class TestTurn extends CommandBase {
+public class RunFlywheel extends CommandBase {
+  /** Creates a new TestFlywheel. */
   private static TurretSubsystem turret = new TurretSubsystem();
-  /** Creates a new TestTurn. */
-  public TestTurn(TurretSubsystem turret) {
+
+  public RunFlywheel(TurretSubsystem turret) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.turret = turret;
-    addRequirements(this.turret);
+    addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
@@ -23,13 +25,13 @@ public class TestTurn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turret.turnTurret(0.1);
+    turret.runFlywheel(Constants.flyWheelSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    turret.turnTurret(0);
+    turret.runFlywheel(0);
   }
 
   // Returns true when the command should end.
