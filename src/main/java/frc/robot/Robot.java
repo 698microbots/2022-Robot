@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.BallCounter;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 /**
@@ -87,12 +86,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //print limeLight tracking information
-    SmartDashboard.putNumber("Vertical Angle: ", m_robotContainer.limeLight.getV_angle());
-    SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
-    SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());
-    SmartDashboard.putNumber("X-dirction Distnace", m_robotContainer.limeLight.getXdistance());
-    SmartDashboard.putNumber("total balls", m_robotContainer.ballCounter.getBalls());
-    SmartDashboard.putNumber("Turret Angle: ", m_robotContainer.turret.getTurretAngle());
+    // SmartDashboard.putNumber("Vertical Angle: ", m_robotContainer.limeLight.getV_angle());
+    // SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
+    // SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());
+    // SmartDashboard.putNumber("X-dirction Distnace", m_robotContainer.limeLight.getXdistance());
+    // SmartDashboard.putNumber("total balls", m_robotContainer.ballCounter.getBalls());
+    // SmartDashboard.putNumber("Turret Angle: ", m_robotContainer.turret.getTurretAngle());
     // if(m_robotContainer.pixy2.getHWratio(0)>=0.5 && m_robotContainer.pixy2.getHWratio(0)<= 1.5){
     //   SmartDashboard.putNumber("Angle From Pixy: ", m_robotContainer.pixy2.getBlockXangle(0));//Just testing code for pixy angle
     //   SmartDashboard.putNumber("Pixy Block0 X-coor: ", m_robotContainer.pixy2.getBlockXcoordinates(0));

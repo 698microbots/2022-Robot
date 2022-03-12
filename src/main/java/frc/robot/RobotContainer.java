@@ -15,7 +15,6 @@ import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
 import  frc.robot.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
@@ -34,12 +33,12 @@ public class RobotContainer {
   
   //subsystems
   private final DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
-  public final VisionSubsystems limeLight = new VisionSubsystems();
-  public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
-  private final Indexer index = new Indexer();
-  public final TurretSubsystem turret = new TurretSubsystem();
+  // public final VisionSubsystems limeLight = new VisionSubsystems();
+  // public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
+  // private final Indexer index = new Indexer();
+  // public final TurretSubsystem turret = new TurretSubsystem();
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  public final Intake intake = new Intake();
+  // public final Intake intake = new Intake();
   public final JoystickButton buttonA = new JoystickButton(Xbox, Constants.Xbox_Button_A);
   public final JoystickButton buttonB = new JoystickButton(Xbox, Constants.Xbox_Button_B);
   public final JoystickButton buttonX = new JoystickButton(Xbox, Constants.Xbox_Button_X);
@@ -48,7 +47,7 @@ public class RobotContainer {
   private final JoystickButton buttonRB = new JoystickButton(Xbox, Constants.Xbox_Button_RB);
   private final JoystickButton buttonLS = new JoystickButton(Xbox, Constants.Xbox_Button_LS);
   private final JoystickButton buttonRS = new JoystickButton(Xbox, Constants.Xbox_Button_RS);
-  public final BallCounter ballCounter = new BallCounter();
+  // public final BallCounter ballCounter = new BallCounter();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -59,7 +58,7 @@ public class RobotContainer {
   public RobotContainer() {
     //initializes the driveTrain for command input, there are a few suppliers
     driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
-    turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    // turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -76,12 +75,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonRB.whenHeld(new IntakeBall(intake));
-    buttonB.whenHeld(new IndexHold(index));
-    buttonA.whenHeld(new IndexShoot(index));
-    buttonLB.whenHeld(new RunFlywheel(turret));
-    buttonX.whenHeld(new IndexReverse(index));
-    buttonY.whenPressed(new AutoAim(limeLight, turret));
+    // buttonRB.whenHeld(new IntakeBall(intake));
+    // buttonB.whenHeld(new IndexHold(index));
+    // buttonA.whenHeld(new IndexShoot(index));
+    // buttonLB.whenHeld(new RunFlywheel(turret));
+    // buttonX.whenHeld(new IndexReverse(index));
+    // buttonY.whenPressed(new AutoAim(limeLight, turret));
   }
 
   /**
