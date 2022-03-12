@@ -82,6 +82,14 @@ public class PixyCamSubsystem extends SubsystemBase {
     return getBallHeight(blockNum)/getBallWidth(blockNum);
   }
   
+  public void set_LED_On(){
+    pixy2.setLED(255, 255, 255);
+  }
+
+  public void set_LED_Off(){
+    pixy2.setLED(0, 0, 0); 
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

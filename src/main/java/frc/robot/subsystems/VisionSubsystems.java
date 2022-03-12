@@ -36,6 +36,7 @@ public class VisionSubsystems extends SubsystemBase {
     xDistance = calculateZdistance()*Math.tan(Math.toRadians(getH_angle()));
     return xDistance;
   }
+  
   //getters
   public double getV_angle(){
     return V_angle.getDouble(0.0);
