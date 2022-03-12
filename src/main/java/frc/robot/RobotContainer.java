@@ -7,19 +7,14 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
-import  frc.robot.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -93,7 +88,7 @@ public class RobotContainer {
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       //new AutoTurn(driveTrain, 45.0, () -> navX.getRoll())
-      //new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementX())
+      new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementZ())
       //new AutoTrackingRedBall(pixy2)
       //  new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getAngle())
             );

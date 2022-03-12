@@ -48,7 +48,7 @@ public class JoyStickDrive extends CommandBase {
     driveTrain.setLeftSpeed((rightStick - leftStick/3)*0.65);
     
     //reset encoders for 
-    //driveTrain.resetEncoders();
+    driveTrain.resetEncoders();
   }
 
   // Called once the command ends or is interrupted.

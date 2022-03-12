@@ -10,7 +10,7 @@ import frc.robot.subsystems.TurretSubsystem;
 
 public class RunFlywheel extends CommandBase {
   /** Creates a new TestFlywheel. */
-  private static TurretSubsystem turret = new TurretSubsystem();
+  private TurretSubsystem turret = new TurretSubsystem();
 
   public RunFlywheel(TurretSubsystem turret) {
     // Use addRequirements() here to declare subsystem dependencies.

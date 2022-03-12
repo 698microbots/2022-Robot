@@ -96,7 +96,7 @@ public final class Constants
     //Turret Constants
     public static final int turrentMotorID = 6;//need to figure out what this value is
     public static final double turretkP = 0.01;
-    public static final double turretkI = 0;
+    public static final double turretkI = 0.0;
     public static final double turretkD = 0;
     public static final int flyWheelMotorID = 1;
     public static final double turretMotorGearRatio = 98;

@@ -10,7 +10,6 @@ import io.github.pseudoresonance.pixy2api.*;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 import io.github.pseudoresonance.pixy2api.links.SPILink;
 import java.util.ArrayList;
-import java.util.function.Supplier;
 
 public class PixyCamSubsystem extends SubsystemBase {
   /** Creates a new PixyCam. */

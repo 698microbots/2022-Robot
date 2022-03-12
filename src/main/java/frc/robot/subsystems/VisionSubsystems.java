@@ -10,8 +10,6 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-import frc.robot.Constants;
-
 public class VisionSubsystems extends SubsystemBase {
   /** Creates a new Vision. */
   private NetworkTable limeLight;

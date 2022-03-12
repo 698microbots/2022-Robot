@@ -5,12 +5,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.Timer;
-
 
 
 public class BallCounter extends SubsystemBase {
@@ -19,7 +15,7 @@ public class BallCounter extends SubsystemBase {
   private DigitalInput input = new DigitalInput(Constants.PortID1); // class for port 1
   private DigitalInput input2 = new DigitalInput(Constants.PortID2); // class for port 2
   
-  private static int totalBalls; // total ball counter, changes with current
+  private int totalBalls; // total ball counter, changes with current
 
   private boolean portID1Counted = true;
   private boolean portID2Counted = true;
@@ -47,14 +43,14 @@ public class BallCounter extends SubsystemBase {
     }
     }
 
-    public static int getBalls() {
+    public int getBalls() {
       return totalBalls;
     }
   
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // ballsIn();
-    // ballsOut();
+    ballsIn();
+    ballsOut();
   }
 }
