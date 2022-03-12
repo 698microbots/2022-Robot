@@ -6,31 +6,35 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.VisionSubsystems;
 
-public class TestTurn extends CommandBase {
-  private static TurretSubsystem turret = new TurretSubsystem();
-  /** Creates a new TestTurn. */
-  public TestTurn(TurretSubsystem turret) {
-    // Use addRequirements() here to declare subsystem dependencies.
+public class AutoAim extends CommandBase {
+  /** Creates a new AutoAim. */
+  private final VisionSubsystems limelight;
+  private final TurretSubsystem turret;
+  public AutoAim(VisionSubsystems limelight, TurretSubsystem turret) {
+    this.limelight = limelight;
     this.turret = turret;
-    addRequirements(this.turret);
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(limelight);
+    addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turret.turnTurret(0.1);
+    turret.turnTurret(turret.turretPID(limelight.getH_angle()));
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    turret.turnTurret(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

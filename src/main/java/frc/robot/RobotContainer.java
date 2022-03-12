@@ -7,6 +7,7 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
@@ -44,7 +45,9 @@ public class RobotContainer {
   public final JoystickButton buttonX = new JoystickButton(Xbox, Constants.Xbox_Button_X);
   public final JoystickButton buttonY = new JoystickButton(Xbox, Constants.Xbox_Button_Y);
   private final JoystickButton buttonLB = new JoystickButton(Xbox, Constants.Xbox_Button_LB);
-
+  private final JoystickButton buttonRB = new JoystickButton(Xbox, Constants.Xbox_Button_RB);
+  private final JoystickButton buttonLS = new JoystickButton(Xbox, Constants.Xbox_Button_LS);
+  private final JoystickButton buttonRS = new JoystickButton(Xbox, Constants.Xbox_Button_RS);
   public final BallCounter ballCounter = new BallCounter();
 
   /**
@@ -73,11 +76,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonA.whenHeld(new IntakeBall(intake));
+    buttonRB.whenHeld(new IntakeBall(intake));
     buttonB.whenHeld(new IndexHold(index));
-    buttonY.whenHeld(new IndexShoot(index));
-    buttonX.whenHeld(new TestFlywheel(turret));
-    buttonLB.whenHeld(new IndexReverse(index));
+    buttonA.whenHeld(new IndexShoot(index));
+    buttonLB.whenHeld(new RunFlywheel(turret));
+    buttonX.whenHeld(new IndexReverse(index));
+    buttonY.whenPressed(new AutoAim(limeLight, turret));
   }
 
   /**

@@ -52,8 +52,8 @@ public final class Constants
     public static final double kD = 0.5;
 
     // Index Constants
-    public static final double indexMotorSpeedBottom = 0.5;
-    public static final double indexMotorSpeedTop = 0.5;
+    // public static final double indexMotorSpeedBottom = 0.5;
+    // public static final double indexMotorSpeedTop = 0.5;
 
 
     // Intake Constants
@@ -87,13 +87,10 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
-<<<<<<< HEAD
     public static final int PortID1 = 3;
     public static final int PortID2 = 7;
-=======
     public static final int PhotovoltaicID1 = 8;
     public static final int PhotovoltaicID2 = 3;
->>>>>>> 276eaaeb0c84d3a54b62025ca3bfcfe706a45d97
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;
@@ -106,6 +103,8 @@ public final class Constants
     public static final int flyWheelMotorID = 1;
     public static final double turretMotorGearRatio = 98;
     public static final double flyWheelSpeed = 0.8;
+    public static final double turretMaxAngle = 62;
+    public static final double turretMinAngle = -62;
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;

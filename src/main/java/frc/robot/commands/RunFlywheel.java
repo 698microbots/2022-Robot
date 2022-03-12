@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.TurretSubsystem;
 
-public class TestFlywheel extends CommandBase {
+public class RunFlywheel extends CommandBase {
   /** Creates a new TestFlywheel. */
   private static TurretSubsystem turret = new TurretSubsystem();
 
-  public TestFlywheel(TurretSubsystem turret) {
+  public RunFlywheel(TurretSubsystem turret) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.turret = turret;
     addRequirements(turret);

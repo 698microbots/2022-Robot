@@ -30,7 +30,7 @@ public class VisionSubsystems extends SubsystemBase {
 
   //methods
   public double calculateZdistance(){
-    zDistance = Constants.goalHeight/(Math.tan(Math.toRadians(getV_angle())));
+    zDistance = Constants.goalHeight/(Math.tan(Math.toRadians(getV_angle()+25)));
     return zDistance;
   }
 
