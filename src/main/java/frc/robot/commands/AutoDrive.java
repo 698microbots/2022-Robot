@@ -29,6 +29,7 @@ public class AutoDrive extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Auto driving has started!");
+    driveTrain.setDriveTarget(distance);
     // driveTrain.PIDdrive(-distance);
   }
 

@@ -71,7 +71,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonRB.whenHeld(new IntakeBall(intake));
+    buttonRB.whenHeld(new RunIntake(intake));
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld(new IndexShoot(index));
     buttonLB.whenHeld(new RunFlywheel(turret));
@@ -90,7 +90,7 @@ public class RobotContainer {
       //new AutoTurn(driveTrain, 45.0, () -> navX.getRoll())
       new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementZ())
       //new AutoTrackingRedBall(pixy2)
-      //  new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getAngle())
+      //  new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getRoll())
             );
   }
 }

@@ -81,6 +81,9 @@ public final class Constants
     public static final int pixyBlueSig = 2;
     public static final double pixyMaxHW_ratio = 0.7;
     public static final double pixyMinHW_ratio = 1.3;
+    public static final double pixyHkP = 0.0;
+    public static final double pixyHkI = 0.0;
+    public static final double pixyHkD = 0.0;
 
     //AutoIntake
     public static final int x1Range = 0;

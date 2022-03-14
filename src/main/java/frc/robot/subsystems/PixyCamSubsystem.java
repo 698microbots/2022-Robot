@@ -17,11 +17,42 @@ public class PixyCamSubsystem extends SubsystemBase {
   private ArrayList<Block> blocks;
   private int blockCount;
 
+  //Pixy horizontal PID vars
+  private double hTarget;
+  private double hError;
+  private double hPrevError;
+  private double hP;
+  private double hI;
+  private double hD;
+  private double hOutput;
+
   public PixyCamSubsystem() {
     pixy2 = Pixy2.createInstance(new SPILink());//initialize pixy2 for SPI usage
     pixy2.init();//actually initialize
     pixy2.getCCC().getBlocks(true, 3, 5);//starts the initial calculation done
     blocks = pixy2.getCCC().getBlockCache();//stores all block data into blocks arrayList
+    //horizontal PID
+    hTarget = 0;//maybe unnecesary
+    hError = 0;
+    hPrevError = 0;
+    hP = 0;
+    hI = 0;
+    hD = 0;
+    hOutput = 0;
+  }
+
+  //methods
+  public double pixyHorizontalPID(double error){
+    hError = error;
+    hP = error;
+    hI += error;
+    hD = error - hPrevError;
+
+    hPrevError = hError;
+
+    hOutput = Constants.pixyHkD*hP + Constants.pixyHkI*hI+Constants.pixyHkD*hD;
+
+    return hOutput;
   }
 
   //getters
@@ -81,7 +112,12 @@ public class PixyCamSubsystem extends SubsystemBase {
   public double getHWratio(int blockNum){
     return getBallHeight(blockNum)/getBallWidth(blockNum);
   }
+
+  public double getHerror(){
+    return hError;
+  }
   
+  //setters
   public void set_LED_On(){
     pixy2.setLED(255, 255, 255);
   }
