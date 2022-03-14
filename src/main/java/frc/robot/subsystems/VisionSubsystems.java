@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.cscore.VideoMode;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -27,16 +28,14 @@ public class VisionSubsystems extends SubsystemBase {
   }
 
   //methods
-  public double calculateZdistance(){
-    zDistance = Constants.goalHeight/(Math.tan(Math.toRadians(getV_angle()+18.2 )));
-    return zDistance;
+  public void calculateZdistance(){//Z direction is foward from the robot
+    zDistance = (Constants.goalHeight-Constants.limeLightHeight)/(Math.tan(Math.toRadians(getV_angle()+18.2)));
   }
 
-
   //y = 0.0013x + 0.4391 INPUT XDIST AND OUTPUT PERCENT POWER FOR FLYWHEEL
-  public double calculateXdistance(){
-    xDistance = calculateZdistance()*Math.tan(Math.toRadians(getH_angle()));
-    return xDistance;
+
+  public void calculateXdistance(){//X direction is sideways from the robot
+    xDistance = getZdistance()*Math.tan(Math.toRadians(getH_angle()));
   }
   
   //getters

@@ -33,12 +33,6 @@ public class IndexHold extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     index.runLowerIndexer(-Constants.indexMotorSpeedBottom);
-    try {
-      index.wait(300);
-    } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
     index.stopIndexer();
   }
 

@@ -70,6 +70,7 @@ public final class Constants
 
     // Vision constants
     public static final double goalHeight = 107;
+    public static final double limeLightHeight = 10;
 
     //PixyCamera Constants
     public static final int pixyWidth = 316;
@@ -100,7 +101,7 @@ public final class Constants
 
     //Turret Constants
     public static final int turrentMotorID = 6;//need to figure out what this value is
-    public static final double turretkP = 0.02;
+    public static final double turretkP = 0.015;
     public static final double turretkI = 0.001;
     public static final double turretkD = 0;
     public static final int flyWheelMotorID = 1;

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -52,10 +53,11 @@ public class RobotContainer {
     // Configure the button bindings\
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
     //initializes the driveTrain for command input, there are a few suppliers
     driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
     turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
-    //limeLight.setDefaultCommand(new );
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -75,7 +77,7 @@ public class RobotContainer {
     buttonRB.whenHeld(new RunIntake(intake));
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld(new IndexShoot(index));
-    buttonLB.toggleWhenPressed(new RunFlywheel(turret));
+    buttonLB.toggleWhenPressed(new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new AutoAim(limeLight, turret)));
     buttonX.whenHeld(new IndexReverse(index));
     buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
   }
