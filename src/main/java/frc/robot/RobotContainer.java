@@ -55,6 +55,7 @@ public class RobotContainer {
     //initializes the driveTrain for command input, there are a few suppliers
     driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
     turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    //limeLight.setDefaultCommand(new );
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -74,9 +75,9 @@ public class RobotContainer {
     buttonRB.whenHeld(new RunIntake(intake));
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld(new IndexShoot(index));
-    buttonLB.whenHeld(new RunFlywheel(turret));
+    buttonLB.toggleWhenPressed(new RunFlywheel(turret));
     buttonX.whenHeld(new IndexReverse(index));
-    buttonY.whenPressed(new AutoAim(limeLight, turret));
+    buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
   }
 
   /**

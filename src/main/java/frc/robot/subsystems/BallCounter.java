@@ -10,15 +10,15 @@ import frc.robot.Constants;
 
 
 public class BallCounter extends SubsystemBase {
-  /** Creates a new BallCounter. */
+  /** Creates a new BallCounter. **/
   
-  private DigitalInput input = new DigitalInput(Constants.PortID1); // class for port 1
+  private DigitalInput input1 = new DigitalInput(Constants.PortID1); // class for port 1
   private DigitalInput input2 = new DigitalInput(Constants.PortID2); // class for port 2
   
   private int totalBalls; // total ball counter, changes with current
 
-  private boolean portID1Counted = true;
-  private boolean portID2Counted = true;
+  // private boolean portID1Counted = true;
+  // private boolean portID2Counted = true;
 
   
   public BallCounter() {
@@ -28,7 +28,7 @@ public class BallCounter extends SubsystemBase {
   
   public void ballsIn() {
     
-    if (input.get() == true && portID1Counted == true) {
+    if (input1.get() == true) {
       totalBalls += 2;
       totalBalls -= 1;
     }
@@ -37,12 +37,11 @@ public class BallCounter extends SubsystemBase {
   
   
   public void ballsOut() {
-    if (input2.get() == true && portID2Counted == true) {
+    if (input2.get() == true) {
       totalBalls -= 2;
       totalBalls += 1;
     }
     }
-
     public int getBalls() {
       return totalBalls;
     }

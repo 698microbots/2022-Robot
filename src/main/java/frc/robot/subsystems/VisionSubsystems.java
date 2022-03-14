@@ -28,10 +28,12 @@ public class VisionSubsystems extends SubsystemBase {
 
   //methods
   public double calculateZdistance(){
-    zDistance = Constants.goalHeight/(Math.tan(Math.toRadians(getV_angle()+25)));
+    zDistance = Constants.goalHeight/(Math.tan(Math.toRadians(getV_angle()+18.2 )));
     return zDistance;
   }
 
+
+  //y = 0.0013x + 0.4391 INPUT XDIST AND OUTPUT PERCENT POWER FOR FLYWHEEL
   public double calculateXdistance(){
     xDistance = calculateZdistance()*Math.tan(Math.toRadians(getH_angle()));
     return xDistance;
@@ -56,6 +58,8 @@ public class VisionSubsystems extends SubsystemBase {
 
   @Override
   public void periodic() {
+    calculateZdistance();
+    calculateXdistance();
     // This method will be called once per scheduler run
   }
 }
