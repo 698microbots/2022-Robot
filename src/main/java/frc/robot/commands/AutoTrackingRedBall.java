@@ -26,7 +26,7 @@ public class AutoTrackingRedBall extends SubsystemBase {
   private double hD;
   private double hOutput;
 
-  public PixyCamSubsystem() {
+  public AutoTrackingRedBall() {
     pixy2 = Pixy2.createInstance(new SPILink());//initialize pixy2 for SPI usage
     pixy2.init();//actually initialize
     pixy2.getCCC().getBlocks(true, 3, 5);//starts the initial calculation done
