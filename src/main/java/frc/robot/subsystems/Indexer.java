@@ -32,6 +32,7 @@ public class Indexer extends SubsystemBase {
     lowerSparkMax.set(0.0);
     upperSparkMax.set(0.0);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

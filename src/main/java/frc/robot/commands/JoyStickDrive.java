@@ -44,8 +44,8 @@ public class JoyStickDrive extends CommandBase {
     // }
 
     //set the motors using driveTrain subsystem to correct speeds
-    driveTrain.setRightSpeed((rightStick + leftStick/3)*0.55);
-    driveTrain.setLeftSpeed((rightStick - leftStick/3)*0.55);
+    driveTrain.setRightSpeed((rightStick + leftStick/3)*0.65);
+    driveTrain.setLeftSpeed((rightStick - leftStick/3)*0.65);
     
     //reset encoders for 
     driveTrain.resetEncoders();

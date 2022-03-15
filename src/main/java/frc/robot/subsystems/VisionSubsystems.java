@@ -6,11 +6,10 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.cscore.VideoMode;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-
-import frc.robot.Constants;
 
 public class VisionSubsystems extends SubsystemBase {
   /** Creates a new Vision. */
@@ -29,15 +28,16 @@ public class VisionSubsystems extends SubsystemBase {
   }
 
   //methods
-  public double calculateZdistance(){
-    zDistance = Constants.goalHeight/(Math.tan(Math.toRadians(getV_angle()+25)));
-    return zDistance;
+  public void calculateZdistance(){//Z direction is foward from the robot
+    zDistance = (Constants.goalHeight-Constants.limeLightHeight)/(Math.tan(Math.toRadians(getV_angle()+18.2)));
   }
 
-  public double calculateXdistance(){
-    xDistance = calculateZdistance()*Math.tan(Math.toRadians(getH_angle()));
-    return xDistance;
+  //y = 0.0013x + 0.4391 INPUT XDIST AND OUTPUT PERCENT POWER FOR FLYWHEEL
+
+  public void calculateXdistance(){//X direction is sideways from the robot
+    xDistance = getZdistance()*Math.tan(Math.toRadians(getH_angle()));
   }
+  
   //getters
   public double getV_angle(){
     return V_angle.getDouble(0.0);
@@ -55,8 +55,19 @@ public class VisionSubsystems extends SubsystemBase {
     return xDistance;
   }
 
+  public boolean tracking(){
+    boolean result = false;
+    if(limeLight.getEntry("tv").getDouble(0.0) == 1.0){
+      result = true;
+    }else{
+      result = false;
+    }
+    return result;
+  }
   @Override
   public void periodic() {
+    calculateZdistance();
+    calculateXdistance();
     // This method will be called once per scheduler run
   }
 }

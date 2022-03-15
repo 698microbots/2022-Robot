@@ -30,6 +30,7 @@ public class AutoTrackingRedBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    pixy2.set_LED_On();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,18 +38,18 @@ public class AutoTrackingRedBall extends CommandBase {
   public void execute() {
     //checks if the closest or second closest block is a red ball.
     if(pixy2.getBlockSignature(0) == 1){//sets the turn target to closest block if it is red
-      driveTrain.setTurnTarget(navXAngleSensor.get()+pixy2.getBlockXangle(0));
+      driveTrain.setRightSpeed(pixy2.pixyHorizontalPID(pixy2.getBlockXangle(0)));
+      driveTrain.setLeftSpeed(-pixy2.pixyHorizontalPID(pixy2.getBlockXangle(0)));
     }else if(pixy2.getBlockSignature(1) == 1){//sets turn target to second farthest block iof it is red
-      driveTrain.setTurnTarget(navXAngleSensor.get()+pixy2.getBlockXangle(1));
-    }else{
-      driveTrain.setTurnTarget(0.0);
+      driveTrain.setRightSpeed(pixy2.pixyHorizontalPID(pixy2.getBlockXangle(1)));
+      driveTrain.setLeftSpeed(-pixy2.pixyHorizontalPID(pixy2.getBlockXangle(1)));
     }
 
     double sensorInput = navXAngleSensor.get();
     driveTrain.PIDturn(sensorInput);
 
     //Increment the counter when error is small enough
-    if(driveTrain.getPIDTurnError() < 0.1){
+    if(pixy2.getHerror() < 0.5){
       counter++;
     }else{
       counter = 0;
@@ -57,7 +58,9 @@ public class AutoTrackingRedBall extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    pixy2.set_LED_Off();
+  }
 
   // Returns true when the command should end.
   @Override

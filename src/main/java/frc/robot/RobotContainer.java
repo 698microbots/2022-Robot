@@ -7,19 +7,15 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
-import  frc.robot.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -48,7 +44,7 @@ public class RobotContainer {
   private final JoystickButton buttonRB = new JoystickButton(Xbox, Constants.Xbox_Button_RB);
   private final JoystickButton buttonLS = new JoystickButton(Xbox, Constants.Xbox_Button_LS);
   private final JoystickButton buttonRS = new JoystickButton(Xbox, Constants.Xbox_Button_RS);
-  public final BallCounter ballCounter = new BallCounter();
+  public static final BallCounter ballCounter = new BallCounter();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -57,9 +53,12 @@ public class RobotContainer {
     // Configure the button bindings\
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
     //initializes the driveTrain for command input, there are a few suppliers
     driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
-    turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    //turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    turret.setDefaultCommand(new AutoAim(limeLight, turret));
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -76,12 +75,17 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonRB.whenHeld(new IntakeBall(intake));
+    buttonRB.whenHeld(new RunIntake(intake));
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld(new IndexShoot(index));
-    buttonLB.whenHeld(new RunFlywheel(turret));
+    buttonLB.toggleWhenPressed(new ParallelCommandGroup(
+      new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
+        new IndexReverse(index), new Wait(2000), new IndexShoot(index)
+      ))
+      );
     buttonX.whenHeld(new IndexReverse(index));
-    buttonY.whenPressed(new AutoAim(limeLight, turret));
+    buttonY.toggleWhenPressed(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    //buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
   }
 
   /**
@@ -93,9 +97,9 @@ public class RobotContainer {
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       //new AutoTurn(driveTrain, 45.0, () -> navX.getRoll())
-      //new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementX())
+      new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementZ())
       //new AutoTrackingRedBall(pixy2)
-      //  new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getAngle())
+      //  new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getRoll())
             );
   }
 }

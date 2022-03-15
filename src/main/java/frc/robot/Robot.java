@@ -7,8 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.BallCounter;
-import frc.robot.subsystems.DriveTrainSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -96,14 +94,15 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
     SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());
     SmartDashboard.putNumber("X-dirction Distnace", m_robotContainer.limeLight.getXdistance());
-    SmartDashboard.putNumber("total balls", m_robotContainer.ballCounter.getBalls());
+    // SmartDashboard.putNumber("total balls", m_robotContainer.ballCounter.getBalls());
     SmartDashboard.putNumber("Turret Angle: ", m_robotContainer.turret.getTurretAngle());
-    // if(m_robotContainer.pixy2.getHWratio(0)>=0.5 && m_robotContainer.pixy2.getHWratio(0)<= 1.5){
-    //   SmartDashboard.putNumber("Angle From Pixy: ", m_robotContainer.pixy2.getBlockXangle(0));//Just testing code for pixy angle
-    //   SmartDashboard.putNumber("Pixy Block0 X-coor: ", m_robotContainer.pixy2.getBlockXcoordinates(0));
-    //   SmartDashboard.putNumber("Pixy Block0 Y-coor: ", m_robotContainer.pixy2.getBlockYcoordinates(0));
-    //   SmartDashboard.putNumber("Block Signature: ", m_robotContainer.pixy2.getBlockSignature(0));
-    // }
+    if(m_robotContainer.pixy2.getHWratio(0) >=0.7 && m_robotContainer.pixy2.getHWratio(0) <= 1.3){
+      SmartDashboard.putNumber("Angle From Pixy: ", m_robotContainer.pixy2.getBlockXangle(0));//Just testing code for pixy angle
+      SmartDashboard.putNumber("Pixy Block0 X-coor: ", m_robotContainer.pixy2.getBlockXcoordinates(0));
+      SmartDashboard.putNumber("Pixy Block0 Y-coor: ", m_robotContainer.pixy2.getBlockYcoordinates(0));
+      SmartDashboard.putNumber("Block Signature: ", m_robotContainer.pixy2.getBlockSignature(0));
+      SmartDashboard.putNumber("HW ratio of biggest block: ", m_robotContainer.pixy2.getHWratio(0));
+    }
   }
 
   @Override

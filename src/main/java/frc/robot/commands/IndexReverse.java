@@ -10,21 +10,27 @@ import frc.robot.subsystems.Indexer;
 public class IndexReverse extends CommandBase {
   /** Creates a new IndexReverse. */
   private final Indexer index;
+  private int counter;
+
   public IndexReverse(Indexer index) {
     this.index = index;
+    counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(index);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    counter = 0;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     index.runLowerIndexer(-Constants.indexMotorSpeedBottom);
     index.runUpperIndexer(-Constants.indexMotorSpeedTop);
+    counter++;
   }
 
   // Called once the command ends or is interrupted.
@@ -36,6 +42,10 @@ public class IndexReverse extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(counter>20){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

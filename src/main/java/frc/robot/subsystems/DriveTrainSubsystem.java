@@ -112,8 +112,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("PID Drive output:", driveOutput);
 
       setRightSpeed(driveOutput);
+      
       setLeftSpeed(driveOutput);
-
     }  
 
   public void resetEncoders(){

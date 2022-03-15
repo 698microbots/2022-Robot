@@ -4,47 +4,41 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
-import frc.robot.subsystems.*;
-import io.github.pseudoresonance.pixy2api.Pixy2;
-import edu.wpi.first.wpilibj.*;
-import com.revrobotics.REVLibError;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
-  private static CANSparkMax intakeMotor;  
-  private static PixyCamSubsystem pixy;
+  private final CANSparkMax intakeMotor;  
+  private final PixyCamSubsystem pixy;
   
   public Intake() {
     intakeMotor = new CANSparkMax(Constants.deviceIdIntake, CANSparkMax.MotorType.kBrushless);
     pixy = new PixyCamSubsystem();
   }
 
-  public static void intputBall()
+  public void intputBall()
   {
     intakeMotor.set(Constants.intakeMotorSpeed);
   }
 
 
-  public static void stopMotor()
+  public void stopMotor()
   {
     if(getElectricCurrent() >= Constants.ampSpike)
       intakeMotor.set(0);
     
   }
 
-  public static void outputBall()
+  public void outputBall()
   {
     
     intakeMotor.set(-Constants.intakeMotorSpeed);
   }
 
-  public static double getElectricCurrent()
+  public double getElectricCurrent()
   {
     return intakeMotor.getOutputCurrent();
   }
