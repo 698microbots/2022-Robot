@@ -44,7 +44,7 @@ public class RobotContainer {
   private final JoystickButton buttonRB = new JoystickButton(Xbox, Constants.Xbox_Button_RB);
   private final JoystickButton buttonLS = new JoystickButton(Xbox, Constants.Xbox_Button_LS);
   private final JoystickButton buttonRS = new JoystickButton(Xbox, Constants.Xbox_Button_RS);
-  public final BallCounter ballCounter = new BallCounter();
+  public static final BallCounter ballCounter = new BallCounter();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -56,7 +56,8 @@ public class RobotContainer {
 
     //initializes the driveTrain for command input, there are a few suppliers
     driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
-    turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    //turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    turret.setDefaultCommand(new AutoAim(limeLight, turret));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -77,9 +78,14 @@ public class RobotContainer {
     buttonRB.whenHeld(new RunIntake(intake));
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld(new IndexShoot(index));
-    buttonLB.toggleWhenPressed(new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new AutoAim(limeLight, turret)));
+    buttonLB.toggleWhenPressed(new ParallelCommandGroup(
+      new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
+        new IndexReverse(index), new Wait(2000), new IndexShoot(index)
+      ))
+      );
     buttonX.whenHeld(new IndexReverse(index));
-    buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
+    buttonY.toggleWhenPressed(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    //buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
   }
 
   /**
