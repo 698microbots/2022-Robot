@@ -30,7 +30,7 @@ public class RobotContainer {
   
   //subsystems
   private final DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
-  public final VisionSubsystems limeLight = new VisionSubsystems();
+  public VisionSubsystems limeLight = new VisionSubsystems();
   public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
   private final Indexer index = new Indexer();
   public final TurretSubsystem turret = new TurretSubsystem();
@@ -44,9 +44,9 @@ public class RobotContainer {
   private final JoystickButton buttonRB = new JoystickButton(Xbox, Constants.Xbox_Button_RB);
   private final JoystickButton buttonLS = new JoystickButton(Xbox, Constants.Xbox_Button_LS);
   private final JoystickButton buttonRS = new JoystickButton(Xbox, Constants.Xbox_Button_RS);
-  public static final BallCounter ballCounter = new BallCounter();
+  public static BallCounter ballCounter = new BallCounter();
 
-  /**
+  /**d
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   
@@ -56,8 +56,8 @@ public class RobotContainer {
 
     //initializes the driveTrain for command input, there are a few suppliers
     driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
-    //turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
-    turret.setDefaultCommand(new AutoAim(limeLight, turret));
+    turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    //turret.setDefaultCommand(new AutoAim(limeLight, turret));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -78,15 +78,20 @@ public class RobotContainer {
     buttonRB.whenHeld(new RunIntake(intake));
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld(new IndexShoot(index));
+    buttonX.whenHeld(new IndexReverse(index));
+    //buttonY.toggleWhenPressed(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
+  
+    //Command Groups
     buttonLB.toggleWhenPressed(new ParallelCommandGroup(
       new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
-        new IndexReverse(index), new Wait(2000), new IndexShoot(index)
+        //new AutoAim(limeLight, turret),
+        new IndexReverse(index),
+        new Wait(800),
+        new IndexShoot(index)
       ))
       );
-    buttonX.whenHeld(new IndexReverse(index));
-    buttonY.toggleWhenPressed(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
-    //buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
-  }
+   }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

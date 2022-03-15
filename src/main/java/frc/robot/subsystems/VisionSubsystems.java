@@ -21,7 +21,7 @@ public class VisionSubsystems extends SubsystemBase {
 
   public VisionSubsystems() {
     limeLight = NetworkTableInstance.getDefault().getTable("limelight");
-    V_angle = limeLight.getEntry("ts");
+    V_angle = limeLight.getEntry("ty");
     H_angle = limeLight.getEntry("tx");
     zDistance = -1;//this value is for if there's an error, makes sense that distance will never be negative
     xDistance = -1;//the distance in the x direction offset from center of robot.
@@ -29,7 +29,7 @@ public class VisionSubsystems extends SubsystemBase {
 
   //methods
   public void calculateZdistance(){//Z direction is foward from the robot
-    zDistance = (Constants.goalHeight-Constants.limeLightHeight)/(Math.tan(Math.toRadians(getV_angle()+18.2)));
+    zDistance = ((Constants.goalHeight-Constants.limeLightHeight)/(Math.tan(Math.toRadians(getV_angle()+18.2))))*0.;
   }
 
   //y = 0.0013x + 0.4391 INPUT XDIST AND OUTPUT PERCENT POWER FOR FLYWHEEL
@@ -56,14 +56,13 @@ public class VisionSubsystems extends SubsystemBase {
   }
 
   public boolean tracking(){
-    boolean result = false;
     if(limeLight.getEntry("tv").getDouble(0.0) == 1.0){
-      result = true;
+      return true;
     }else{
-      result = false;
+      return false;
     }
-    return result;
   }
+
   @Override
   public void periodic() {
     calculateZdistance();

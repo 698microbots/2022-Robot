@@ -70,7 +70,7 @@ public final class Constants
 
     // Vision constants
     public static final double goalHeight = 107;
-    public static final double limeLightHeight = 10;
+    public static final double limeLightHeight = 32;
 
     //PixyCamera Constants
     public static final int pixyWidth = 316;
@@ -94,7 +94,7 @@ public final class Constants
 
     // Photovoltaic Sensor IDs
     public static final int PhotovoltaicID1 = 8;
-    public static final int PhotovoltaicID2 = 3;
+    public static final int PhotovoltaicID2 = 2;
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;

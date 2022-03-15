@@ -129,8 +129,8 @@ public class PixyCamSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    pixy2.getCCC().getBlocks(true, 3, 5);
-    blocks = pixy2.getCCC().getBlockCache();
-    blockCount = blocks.size();
+    // pixy2.getCCC().getBlocks(true, 3, 5);
+    // blocks = pixy2.getCCC().getBlockCache();
+    // blockCount = blocks.size();
   }
 }

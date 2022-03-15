@@ -14,9 +14,11 @@ public class AutoAim extends CommandBase {
   /** Creates a new AutoAim. */
   private final VisionSubsystems limelight;
   private final TurretSubsystem turret;
+  private int counter;
   public AutoAim(VisionSubsystems limelight, TurretSubsystem turret) {
     this.limelight = limelight;
     this.turret = turret;
+    counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(limelight);
     addRequirements(turret);
@@ -31,11 +33,12 @@ public class AutoAim extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(limelight.tracking()){
+    //if(limelight.tracking()){
       turret.turnTurret(turret.turretPID(limelight.getH_angle()));
-    }else{
-      turret.turnTurret(turret.turretPID(-turret.getTurretAngle()));//sets the turret back to center if not tracking
-    }
+      counter++;
+      //}else{
+     // turret.turnTurret(turret.turretPID(-turret.getTurretAngle()));//sets the turret back to center if not tracking
+    //}
   }
 
   // Called once the command ends or is interrupted.
@@ -45,6 +48,10 @@ public class AutoAim extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(counter >= 40){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

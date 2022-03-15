@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
+
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -15,19 +17,24 @@ public class RunFlywheel extends CommandBase {
   private final TurretSubsystem turret;
   private final VisionSubsystems limelight;
   private double flyWheelSpeed;
+  private int counter;
 
   public RunFlywheel(TurretSubsystem turret, VisionSubsystems limelight) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.turret = turret;
     this.limelight = limelight;
     flyWheelSpeed = 0.0;
+    counter = 0;
     addRequirements(turret);
     addRequirements(limelight);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    counter = 0;
+    turret.runFlywheel(0.3);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -41,17 +48,24 @@ public class RunFlywheel extends CommandBase {
     }
 
     //put the calculated value in to runFlywheel
-    turret.runFlywheel(flyWheelSpeed);
+    turret.runFlywheel(flyWheelSpeed*1.05);
+    counter++;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    turret.runFlywheel(0.3);
+    counter = 0;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (counter>=200){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
