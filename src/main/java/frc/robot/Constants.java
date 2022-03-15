@@ -70,6 +70,8 @@ public final class Constants
 
     // Vision constants
     public static final double goalHeight = 107;
+    public static final double limeLightHeight = 10;
+
 
     //PixyCamera Constants
     public static final int pixyWidth = 316;
