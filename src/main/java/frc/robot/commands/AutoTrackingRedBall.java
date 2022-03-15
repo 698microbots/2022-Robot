@@ -9,6 +9,9 @@ import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.PixyCamSubsystem;
+import io.github.pseudoresonance.pixy2api.*;
+import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
+import io.github.pseudoresonance.pixy2api.links.SPILink;
 
 public class AutoTrackingRedBall extends CommandBase {
   /** Creates a new AutoTrackingRedBall. */

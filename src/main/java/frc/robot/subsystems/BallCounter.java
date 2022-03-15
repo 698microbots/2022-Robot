@@ -14,7 +14,7 @@ public class BallCounter extends SubsystemBase {
   
   private DigitalInput input1 = new DigitalInput(Constants.PortID1); // class for port 1
   private DigitalInput input2 = new DigitalInput(Constants.PortID2); // class for port 2
-  private int totalBalls; // total ball counter, changes with current
+  private static int totalBalls; // total ball counter, changes with current
   private boolean latch1;
   private boolean latch2;
   // private boolean portID1Counted = true;
@@ -59,7 +59,7 @@ public class BallCounter extends SubsystemBase {
     }
   }
 
-  public int getBalls() {
+  public static int getBalls() {
       return totalBalls;
     }
   
