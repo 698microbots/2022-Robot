@@ -37,7 +37,7 @@ public class Wait extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter >= millis){
+    if(counter >= (millis/20)){
       return true;
     }else{
       return false;
