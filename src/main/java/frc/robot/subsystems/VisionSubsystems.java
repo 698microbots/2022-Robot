@@ -55,6 +55,15 @@ public class VisionSubsystems extends SubsystemBase {
     return xDistance;
   }
 
+  public boolean tracking(){
+    boolean result = false;
+    if(limeLight.getEntry("tv").getDouble(0.0) == 1.0){
+      result = true;
+    }else{
+      result = false;
+    }
+    return result;
+  }
   @Override
   public void periodic() {
     calculateZdistance();

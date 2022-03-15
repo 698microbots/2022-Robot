@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.VisionSubsystems;
@@ -29,7 +31,11 @@ public class AutoAim extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turret.turnTurret(turret.turretPID(limelight.getH_angle()));
+    if(limelight.tracking()){
+      turret.turnTurret(turret.turretPID(limelight.getH_angle()));
+    }else{
+      turret.turnTurret(turret.turretPID(-turret.getTurretAngle()));//sets the turret back to center if not tracking
+    }
   }
 
   // Called once the command ends or is interrupted.
