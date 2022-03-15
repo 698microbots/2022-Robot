@@ -52,8 +52,8 @@ public final class Constants
     public static final double kD = 0.5;
 
     // Index Constants
-    // public static final double indexMotorSpeedBottom = 0.5;
-    // public static final double indexMotorSpeedTop = 0.5;
+    public static final double indexMotorSpeedBottom = 0.5;
+    public static final double indexMotorSpeedTop = 0.5;
 
 
     // Intake Constants
@@ -72,7 +72,6 @@ public final class Constants
     public static final double goalHeight = 107;
     public static final double limeLightHeight = 10;
 
-
     //PixyCamera Constants
     public static final int pixyWidth = 316;
     public static final int pixyHeight = 208;
@@ -81,6 +80,11 @@ public final class Constants
     public static final int pixyHorizontalAngle = 30;
     public static final int pixyRedSig = 1;
     public static final int pixyBlueSig = 2;
+    public static final double pixyMaxHW_ratio = 0.7;
+    public static final double pixyMinHW_ratio = 1.3;
+    public static final double pixyHkP = 0.0;
+    public static final double pixyHkI = 0.0;
+    public static final double pixyHkD = 0.0;
 
     //AutoIntake
     public static final int x1Range = 0;
@@ -89,31 +93,29 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
-    public static final int PortID1 = 3;
-    public static final int PortID2 = 7;
-    public static final int PhotovoltaicID1 = 3;
-    public static final int PhotovoltaicID2 = 7;
+    public static final int PhotovoltaicID1 = 8;
+    public static final int PhotovoltaicID2 = 3;
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;
 
     //Turret Constants
     public static final int turrentMotorID = 6;//need to figure out what this value is
-    public static final double turretkP = 0;
-    public static final double turretkI = 0;
+    public static final double turretkP = 0.015;
+    public static final double turretkI = 0.001;
     public static final double turretkD = 0;
     public static final int flyWheelMotorID = 1;
     public static final double turretMotorGearRatio = 98;
-    public static final double flyWheelSpeed = 0.8;
-    public static final double turretMaxAngle = 62;
-    public static final double turretMinAngle = -62;
+    public static final double flyWheelSpeed = 0.58;
+    public static final double turretMaxAngle = 62;//62
+    public static final double turretMinAngle = -62; //-62
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;
     public static final int upperIndexerID = 10;
 
-    //Indexer speeds
-    public static double indexMotorSpeedTop = 0.5;
-    public static double indexMotorSpeedBottom = 0.5;
+    // Ball counter constants
+    public static final int PortID1 = 8;
+    public static final int PortID2 = 3;
 
 }
