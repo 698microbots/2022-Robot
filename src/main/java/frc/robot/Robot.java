@@ -75,6 +75,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("NavX-Angle: ", m_robotContainer.navX.getAngle());
     SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
     SmartDashboard.putNumber("NavX-RawGyroY: ", m_robotContainer.navX.getRawGyroY());
+    SmartDashboard.putNumber("Encoder Pos: ", m_robotContainer.driveTrain.getEncoderPosition());
+
     //SmartDashboard.putNumber("NavX-2D-Rotation: ", m_robotContainer.navX.getRotation2d());
 
     SmartDashboard.putNumber("Z-NavX displacement: ", m_robotContainer.navX.getDisplacementZ());
@@ -109,6 +111,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("NavX-Angle: ", m_robotContainer.navX.getAngle());
     SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
     SmartDashboard.putNumber("NavX-RawGyroY: ", m_robotContainer.navX.getRawGyroY());
+    SmartDashboard.putNumber("Encoder Pos: ", m_robotContainer.driveTrain.getEncoderPosition());
     //SmartDashboard.putNumber("NavX-2D-Rotation: ", m_robotContainer.navX.getRotation2d());
 
     SmartDashboard.putNumber("Z-NavX displacement: ", m_robotContainer.navX.getDisplacementZ());

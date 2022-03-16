@@ -77,8 +77,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   //pass in a double input for setting the left side speed.
   public void setLeftSpeed(double speed){
-    FrontLeft.set(ControlMode.PercentOutput, speed);
-    BackLeft.set(ControlMode.PercentOutput, speed);
+    FrontLeft.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
+    BackLeft.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
   }
 
   //takes in sensor input to turn robot into the correct angle
@@ -105,20 +105,16 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
     public void PIDdrive(double sensorInput) {
-      
-
       driveError = driveTarget - sensorInput;
       driveP = driveError;
       driveI += driveError;
       driveD = driveError - drivePrevError;
-      drivePrevError = driveError;
+      
       
       driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+      drivePrevError = driveError;
       SmartDashboard.putNumber("PID Drive output:", driveOutput);
 
-      setRightSpeed(driveOutput);
-      
-      setLeftSpeed(driveOutput);
     }  
 
   public void resetEncoders(){
@@ -154,9 +150,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return driveOutput;
   }
 
-  public double getEncoderPosition(){
-    return (FrontRight.getSelectedSensorPosition()+BackRight.getSelectedSensorPosition()+FrontLeft.getSelectedSensorPosition()+BackLeft.getSelectedSensorPosition())/2;
+  public double getRightEncoderPosition(){
+    return (FrontRight.getSelectedSensorPosition()+BackRight.getSelectedSensorPosition())/2;
   }
+
+  public double getLeftEncoderPosition(){
+    return (FrontLeft.getSelectedSensorPosition()+BackLeft.getSelectedSensorPosition())/2;
+  }
+
 
 //Setters
   public void setTurnTarget(double angle){
