@@ -13,14 +13,12 @@ public class AutoDrive extends CommandBase {
   /** Creates a new AutoDrive. */
   private final DriveTrainSubsystem driveTrain;
   private final double distance;
-  private final Supplier <Float> navXInput;
   private int counter;
 
-  public AutoDrive(DriveTrainSubsystem driveTrain, double distance, Supplier <Float> navXInput) {
+  public AutoDrive(DriveTrainSubsystem driveTrain, double distance) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.distance = distance;
-    this.navXInput = navXInput;
     counter = 0;
     addRequirements(driveTrain);
   }
@@ -30,26 +28,24 @@ public class AutoDrive extends CommandBase {
   public void initialize() {
     System.out.println("Auto driving has started!");
     driveTrain.setDriveTarget(distance);
-    // driveTrain.PIDdrive(-distance);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     //calculate motor speeds
-    float sensorInput = navXInput.get();
-    driveTrain.PIDdrive(sensorInput);
+    driveTrain.PIDdrive(driveTrain.getEncoderPosition());
 
     //set motor speeds
     driveTrain.setRightSpeed(driveTrain.getDriveOutput());
     driveTrain.setLeftSpeed(driveTrain.getDriveOutput());
 
     //check if target is met
-    if(driveTrain.getDriveError()<0.1){
-      counter++;
-    }else{
-      counter = 0;
-    }
+    // if(driveTrain.getDriveError()<0.1){
+    //   counter++;
+    // }else{
+    //   counter = 0;
+    // }
   }
 
   // Called once the command ends or is interrupted.
@@ -62,11 +58,11 @@ public class AutoDrive extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    if(counter > 10){
-      return true;
-    }else{
-      counter = 0;
-    }
+    // if(counter > 10){
+    //   return true;
+    // }else{
+    //   counter = 0;
+    // }
     return false;
-  }
+   }
 }

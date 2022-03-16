@@ -104,7 +104,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   }
 
-    public void PIDdrive(float sensorInput) {
+    public void PIDdrive(double sensorInput) {
       
 
       driveError = driveTarget - sensorInput;
@@ -153,6 +153,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double getDriveOutput(){
     return driveOutput;
   }
+
+  public double getEncoderPosition(){
+    return (FrontRight.getSelectedSensorPosition()+BackRight.getSelectedSensorPosition()+FrontLeft.getSelectedSensorPosition()+BackLeft.getSelectedSensorPosition())/2;
+  }
+
 //Setters
   public void setTurnTarget(double angle){
     turnTarget = angle;
@@ -161,6 +166,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
+
 
   @Override
   public void periodic() {

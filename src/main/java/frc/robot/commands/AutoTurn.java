@@ -48,6 +48,7 @@ public class AutoTurn extends CommandBase {
     driveTrain.setRightSpeed(driveTrain.getTurnOutput());
     driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
 
+    driveTrain.resetEncoders();
     //Increment the counter when error is small enough
     // if(Math.abs(driveTrain.getPIDTurnError()) < 0.1){
     //   counter++;
