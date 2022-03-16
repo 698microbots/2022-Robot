@@ -79,8 +79,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     buttonRB.whenHeld(new ParallelCommandGroup(new IndexHold(index), new RunIntake(intake)));
     buttonB.whenHeld(new IndexHold(index));
-     buttonA.whenHeld( new IndexShoot(index));
-       buttonX.whenHeld(new IndexReverse(index));
+    buttonA.whenHeld( new IndexShoot(index));
+    buttonX.whenHeld(new ParallelCommandGroup(new IntakeReverse(intake), new IndexReverse(index)));
     buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
   
     //Command Groups
@@ -89,7 +89,8 @@ public class RobotContainer {
         //new AutoAim(limeLight, turret),
         new IndexReverse(index),
         new Wait(1200),
-        new IndexShoot(index)
+        new IndexShoot(index),
+        new RecenterTurret(turret)
       ))
       );
    }

@@ -30,7 +30,7 @@ public class TriggerAim extends CommandBase {
   public void execute() {
     double inputRT = RT.get();
     double inputLT = LT.get();
-    turret.turnTurret((inputRT - inputLT)/3);
+    turret.turnTurret((inputRT - inputLT)/5);
   }
 
   // Called once the command ends or is interrupted.
