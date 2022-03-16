@@ -27,7 +27,7 @@ public class AutoDrive extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Auto driving has started!");
-    driveTrain.setDriveTarget(-distance);
+    driveTrain.setDriveTarget(-distance*2048/2.75);
     driveTrain.resetEncoders();
   }
 
