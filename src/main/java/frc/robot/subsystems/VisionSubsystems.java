@@ -29,7 +29,7 @@ public class VisionSubsystems extends SubsystemBase {
 
   //methods
   public void calculateZdistance(){//Z direction is foward from the robot
-    zDistance = ((Constants.goalHeight-Constants.limeLightHeight)/(Math.tan(Math.toRadians(getV_angle()+18.2))))*0.;
+    zDistance = ((Constants.goalHeight-Constants.limeLightHeight)/(Math.tan(Math.toRadians(getV_angle()+Constants.limeLightInitAngle))));
   }
 
   //y = 0.0013x + 0.4391 INPUT XDIST AND OUTPUT PERCENT POWER FOR FLYWHEEL

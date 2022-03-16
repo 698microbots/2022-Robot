@@ -12,11 +12,9 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
   private final CANSparkMax intakeMotor;  
-  private final PixyCamSubsystem pixy;
   
   public Intake() {
     intakeMotor = new CANSparkMax(Constants.deviceIdIntake, CANSparkMax.MotorType.kBrushless);
-    pixy = new PixyCamSubsystem();
   }
 
   public void intputBall()

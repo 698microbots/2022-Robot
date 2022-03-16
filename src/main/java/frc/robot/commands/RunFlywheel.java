@@ -48,7 +48,7 @@ public class RunFlywheel extends CommandBase {
     }
 
     //put the calculated value in to runFlywheel
-    turret.runFlywheel(flyWheelSpeed*1.05);
+    turret.runFlywheel(flyWheelSpeed*0.95);
     counter++;
   }
 
@@ -62,7 +62,7 @@ public class RunFlywheel extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (counter>=200){
+    if (counter>=(3000/20)){
       return true;
     }else{
       return false;

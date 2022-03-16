@@ -4,36 +4,34 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
 
-public class IndexHold extends CommandBase {
-  /** Creates a new IndexHold. */
-  private final Indexer index;
-  public IndexHold(Indexer index) {
-    this.index = index;
+public class IntakeReverse extends CommandBase {
+  /** Creates a new ReverseIntake. */
+  private final Intake intake;
+
+  public IntakeReverse(Intake intake) {
+    this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(index);
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    index.runLowerIndexer(Constants.indexMotorSpeedBottom);
+    intake.outputBall();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    index.stopIndexer();
+    intake.stopMotor();
   }
 
   // Returns true when the command should end.

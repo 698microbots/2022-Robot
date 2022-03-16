@@ -14,7 +14,7 @@ import frc.robot.RobotContainer;
 public class IndexShoot extends CommandBase {
   /** Creates a new IndexShoot. */
   private final Indexer index;
-  private int ballCount;
+  private int counter;
   public IndexShoot(Indexer index) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.index = index;
@@ -24,17 +24,16 @@ public class IndexShoot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ballCount = RobotContainer.ballCounter.getBalls();
+    counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(ballCount == RobotContainer.ballCounter.getBalls()){
       index.runLowerIndexer(Constants.indexMotorSpeedBottom);
       index.runUpperIndexer(Constants.indexMotorSpeedTop);
-    }
-    //ballCount = RobotContainer.ballCounter.getBalls();
+      counter++;
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -46,9 +45,10 @@ public class IndexShoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ballCount != RobotContainer.ballCounter.getBalls()){
+    if(counter>10){
       return true;
-    }else{
+    }
+    else{
       return false;
     }
   }

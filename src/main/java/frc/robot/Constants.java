@@ -93,8 +93,8 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
-    public static final int PhotovoltaicID1 = 8;
-    public static final int PhotovoltaicID2 = 2;
+    public static final int topPhotovalticID = 7;
+    public static final int bottomPhotovalticID = 2;
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;
@@ -109,6 +109,7 @@ public final class Constants
     public static final double flyWheelSpeed = 0.58;
     public static final double turretMaxAngle = 62;//62
     public static final double turretMinAngle = -62; //-62
+    public static final double limeLightInitAngle = 22.5; //22.5
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;
