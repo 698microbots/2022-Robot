@@ -63,9 +63,10 @@ public final class Constants
     public static final double ampSpike = .1;
     public static final double closestY = 100;
     public static final double closestX = 160;
+
     // turn PID constants
-    public static final double turnkP = 0.01;
-    public static final double turnkI = 0;
+    public static final double turnkP = 0.007;
+    public static final double turnkI = 0.00;
     public static final double turnkD = 0;
 
     // Vision constants
@@ -118,5 +119,6 @@ public final class Constants
     // Ball counter constants
     public static final int PortID1 = 8;
     public static final int PortID2 = 3;
+    public static final double IactZone = 0;
 
 }

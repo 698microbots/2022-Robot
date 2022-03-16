@@ -6,22 +6,25 @@ package frc.robot.commands;
 
 import java.util.function.Supplier;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class AutoTurn extends CommandBase {
   /** Creates a new AutoTurn. */
   private final DriveTrainSubsystem driveTrain;
   private final double target;
-  private final Supplier<Float> navXInput;
+  private final AHRS navX;
   private int counter;
 
-  public AutoTurn(DriveTrainSubsystem driveTrain, double target, Supplier<Float> navXInput) {
+  public AutoTurn(DriveTrainSubsystem driveTrain, double target, AHRS navX) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.target = target;
     counter = 0;
-    this.navXInput = navXInput;
+    this.navX = navX;
     addRequirements(driveTrain);
   }
 
@@ -29,7 +32,7 @@ public class AutoTurn extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Automatic turning has started!");
-    driveTrain.setTurnTarget(driveTrain.getTurnTarget() + target);
+    driveTrain.setTurnTarget(target);
     //need to check if reset encoders is still neccessary.
     driveTrain.resetEncoders();
   }
@@ -38,7 +41,7 @@ public class AutoTurn extends CommandBase {
   @Override
   public void execute() {
     //calculate turn speed
-    double sensorInput = (double) navXInput.get();
+    double sensorInput = (double) navX.getAngle();
     driveTrain.PIDturn(sensorInput);
 
     //set turn speed
@@ -46,13 +49,12 @@ public class AutoTurn extends CommandBase {
     driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
 
     //Increment the counter when error is small enough
-    if(driveTrain.getPIDTurnError() < 0.1){
-      counter++;
-    }else{
-      counter = 0;
-    }
+    // if(Math.abs(driveTrain.getPIDTurnError()) < 0.1){
+    //   counter++;
+    // }else{
+    //   counter = 0;
+    // }
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
@@ -63,11 +65,12 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
     //if the counter is big enough, this method returns true causing the command to end.
-    if(counter > 10){
-      return true;
-    }else{
-      counter = 0;
+    // if(counter > 10){
+    //   return true;
+    // }else{
+    //   counter = 0;
+    // return false;
+    // }
     return false;
-    }
   }
 }

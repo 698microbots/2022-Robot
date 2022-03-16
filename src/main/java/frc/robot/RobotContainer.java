@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
@@ -26,7 +27,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController Xbox = new XboxController(Constants.XBOX_pin);
-  public final AHRS navX = new AHRS(SPI.Port.kMXP);
+  public final AHRS navX = new AHRS(SerialPort.Port.kUSB);
   
   //subsystems
   private final DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
@@ -51,7 +52,7 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   
-    // Configure the button bindings\
+    // Configure the button bindings
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
@@ -89,8 +90,8 @@ public class RobotContainer {
         //new AutoAim(limeLight, turret),
         new IndexReverse(index),
         new Wait(1200),
-        new IndexShoot(index),
-        new RecenterTurret(turret)
+        new IndexShoot(index)
+        //new RecenterTurret(turret)
       ))
       );
    }
@@ -103,8 +104,8 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
-      //new AutoTurn(driveTrain, 45.0, () -> navX.getRoll())
-     // new AutoDrive(driveTrain, 1.0, () -> navX.getDisplacementZ())
+      new AutoTurn(driveTrain, 150.0, navX)
+      // new AutoDrive(driveTrain, 10.0, () -> navX.getDisplacementZ())
       //new AutoTrackingRedBall(pixy2)
       //  new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getRoll())
             );

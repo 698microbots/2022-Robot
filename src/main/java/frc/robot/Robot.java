@@ -27,6 +27,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    m_robotContainer.navX.calibrate();
+    
   }
 
   /**
@@ -67,6 +69,18 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     //print pixy tracking information
+    SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("NavX-Roll: ", m_robotContainer.navX.getRoll());
+    SmartDashboard.putNumber("NavX-Pitch: ", m_robotContainer.navX.getPitch());
+    SmartDashboard.putNumber("NavX-Angle: ", m_robotContainer.navX.getAngle());
+    SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("NavX-RawGyroY: ", m_robotContainer.navX.getRawGyroY());
+    //SmartDashboard.putNumber("NavX-2D-Rotation: ", m_robotContainer.navX.getRotation2d());
+
+    SmartDashboard.putNumber("Z-NavX displacement: ", m_robotContainer.navX.getDisplacementZ());
+    SmartDashboard.putNumber("X-NavX displacement: ", m_robotContainer.navX.getDisplacementX());
+    SmartDashboard.putNumber("Y-NavX displacement: ", m_robotContainer.navX.getDisplacementY());
+
   }
 
   @Override
@@ -85,10 +99,22 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //print limeLight tracking information
-    SmartDashboard.putNumber("Vertical Angle: ", m_robotContainer.limeLight.getV_angle());
-    SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
-    SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());
-    SmartDashboard.putNumber("X-direction Distnace", m_robotContainer.limeLight.getXdistance());
+    // SmartDashboard.putNumber("Vertical Angle: ", m_robotContainer.limeLight.getV_angle());
+    // SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
+    // SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());
+    // SmartDashboard.putNumber("X-direction Distnace", m_robotContainer.limeLight.getXdistance());
+    SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("NavX-Roll: ", m_robotContainer.navX.getRoll());
+    SmartDashboard.putNumber("NavX-Pitch: ", m_robotContainer.navX.getPitch());
+    SmartDashboard.putNumber("NavX-Angle: ", m_robotContainer.navX.getAngle());
+    SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("NavX-RawGyroY: ", m_robotContainer.navX.getRawGyroY());
+    //SmartDashboard.putNumber("NavX-2D-Rotation: ", m_robotContainer.navX.getRotation2d());
+
+    SmartDashboard.putNumber("Z-NavX displacement: ", m_robotContainer.navX.getDisplacementZ());
+    SmartDashboard.putNumber("X-NavX displacement: ", m_robotContainer.navX.getDisplacementX());
+    SmartDashboard.putNumber("Y-NavX displacement: ", m_robotContainer.navX.getDisplacementY());
+
     // SmartDashboard.putNumber("total balls", m_robotContainer.ballCounter.getBalls());
     SmartDashboard.putNumber("Turret Angle: ", m_robotContainer.turret.getTurretAngle());
     // if(m_robotContainer.pixy2.getHWratio(0) >=0.7 && m_robotContainer.pixy2.getHWratio(0) <= 1.3){

@@ -85,14 +85,19 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;
     turnP = turnError;
-    turnI += turnError;
+    if(turnError<Constants.IactZone){
+      turnI += turnError;
+    } else{
+      turnI=0;
+    }
+
     turnD = turnError - turnPrevError;
     
-    turnPrevError = turnError;
+
 
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
-    SmartDashboard.putNumber("PID output:", turnOutput);
-    
+    //SmartDashboard.putNumber("PID output:", turnOutput);
+    turnPrevError = turnError;
     // clamp output between -100% and 100%
     // if(output >= 1) output = 1;
     // if(output <= -1) output = -1;

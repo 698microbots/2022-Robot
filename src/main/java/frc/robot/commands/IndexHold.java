@@ -26,7 +26,7 @@ public class IndexHold extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.runUpperIndexer(-0.1);
+    index.runUpperIndexer(-0.2);
     index.runLowerIndexer(Constants.indexMotorSpeedBottom);
   }
 
