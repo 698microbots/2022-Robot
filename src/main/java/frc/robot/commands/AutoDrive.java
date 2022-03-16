@@ -38,8 +38,8 @@ public class AutoDrive extends CommandBase {
     driveTrain.PIDdrive(driveTrain.getEncoderPosition());
 
     //set motor speeds
-    driveTrain.setRightSpeed(driveTrain.getDriveOutput());
     driveTrain.setLeftSpeed(driveTrain.getDriveOutput());
+    driveTrain.setRightSpeed(driveTrain.getDriveOutput());
 
     //driveTrain.resetEncoders();
     //check if target is met

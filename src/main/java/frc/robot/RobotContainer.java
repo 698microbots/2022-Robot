@@ -105,7 +105,7 @@ public class RobotContainer {
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       //new AutoTurn(driveTrain, 150.0, navX)
-       new AutoDrive(driveTrain, 16384)
+       new AutoDrive(driveTrain, -16384)
       //new AutoTrackingRedBall(pixy2)
       //  new AutoTrackingRedBall(driveTrain, pixy2, () -> navX.getRoll())
             );

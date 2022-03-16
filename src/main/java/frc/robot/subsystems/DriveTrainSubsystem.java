@@ -150,12 +150,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return driveOutput;
   }
 
-  public double getRightEncoderPosition(){
-    return (FrontRight.getSelectedSensorPosition()+BackRight.getSelectedSensorPosition())/2;
-  }
-
-  public double getLeftEncoderPosition(){
-    return (FrontLeft.getSelectedSensorPosition()+BackLeft.getSelectedSensorPosition())/2;
+  public double getEncoderPosition(){
+    return (FrontRight.getSelectedSensorPosition()+BackRight.getSelectedSensorPosition()+FrontLeft.getSelectedSensorPosition()+BackLeft.getSelectedSensorPosition())/4;
   }
 
 
