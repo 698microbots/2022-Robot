@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import java.util.function.Supplier;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
@@ -14,12 +15,15 @@ public class AutoDrive extends CommandBase {
   private final DriveTrainSubsystem driveTrain;
   private final double distance;
   private int counter;
+  private double ltime;
+  private double limit;
 
-  public AutoDrive(DriveTrainSubsystem driveTrain, double distance) {
+  public AutoDrive(DriveTrainSubsystem driveTrain, double distance, double ltime, double limit) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.distance = distance;
-    counter = 0;
+    this.ltime = ltime;
+    this.limit = limit;
     addRequirements(driveTrain);
   }
 
@@ -27,15 +31,17 @@ public class AutoDrive extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Auto driving has started!");
+    SmartDashboard.putString("AutoDrive Stat", "Auto driving has started!");
     driveTrain.setDriveTarget(-distance*2048/2.75);
-    // driveTrain.resetEncoders();
+    counter = 0;
+    driveTrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     //calculate motor speeds
-    driveTrain.PIDdrive(driveTrain.getEncoderPosition());
+    driveTrain.PIDdrive(driveTrain.getEncoderPosition(), limit);
 
     //set motor speeds
     driveTrain.setLeftSpeed(driveTrain.getDriveOutput());
@@ -43,16 +49,21 @@ public class AutoDrive extends CommandBase {
 
     //driveTrain.resetEncoders();
     //check if target is met
-    if(Math.abs(driveTrain.getDriveError())<100){
-      counter++;
-    }else{
-      counter = 0;
-    }
+    
+    // if(Math.abs(driveTrain.getDriveError()) < 10000){
+    //   counter++;
+    // }else{
+    //   counter = 0;
+    // }
+    counter++;
+    SmartDashboard.putNumber("Counter: ", counter);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    driveTrain.setLeftSpeed(0.0);
+    driveTrain.setRightSpeed(0.0);
     System.out.println("Auto driving has ended!");
   }
 
@@ -60,11 +71,11 @@ public class AutoDrive extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    if(counter > 10){
+    if(counter >= ltime/20){
       return true;
     }else{
-      counter = 0;
+      return false;
     }
-    return false;
+    
    }
 }

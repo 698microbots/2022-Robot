@@ -18,13 +18,15 @@ public class AutoTurn extends CommandBase {
   private final double target;
   private final AHRS navX;
   private int counter;
+  private final int time;
 
-  public AutoTurn(DriveTrainSubsystem driveTrain, double target, AHRS navX) {
+  public AutoTurn(DriveTrainSubsystem driveTrain, double target, AHRS navX, int millis) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.target = target;
     counter = 0;
     this.navX = navX;
+    time = millis;
     addRequirements(driveTrain);
   }
 
@@ -33,6 +35,7 @@ public class AutoTurn extends CommandBase {
   public void initialize() {
     System.out.println("Automatic turning has started!");
     driveTrain.setTurnTarget(target);
+    counter = 0;
     //need to check if reset encoders is still neccessary.
     // driveTrain.resetEncoders();
   }
@@ -50,11 +53,7 @@ public class AutoTurn extends CommandBase {
 
     driveTrain.resetEncoders();
     //Increment the counter when error is small enough
-    if(Math.abs(driveTrain.getPIDTurnError()) < 20){
-      counter++;
-    }else{
-      counter = 0;
-    }
+    counter++;
   }
   // Called once the command ends or is interrupted.
   @Override
@@ -66,11 +65,10 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
     //if the counter is big enough, this method returns true causing the command to end.
-    if(counter > 10){
+    if(counter >= time/20){
       return true;
     }else{
-      counter = 0;
+     return false;
     }
-    return false;
   }
 }

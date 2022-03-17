@@ -48,7 +48,7 @@ public final class Constants
     public static final double driveAdjustment = 1.0;
     public static final int kPIDLoopIdx = 0;//run primary loop
     public static final double kF = 0;
-    public static final double kP = 0.001;
+    public static final double kP = 0.00005;
     public static final double kI = 0.0;
     public static final double kD = 0;
 

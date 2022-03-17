@@ -104,21 +104,23 @@ public class RobotContainer {
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       //new AutoTurn(driveTrain, 150.0, navX)
-      //new AutoDrive(driveTrain, 1000)
-       new AutoDrive(driveTrain, -95),
-       new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
-        new AutonAim(limeLight, turret),
+      //new AutoDrive(driveTrain, 10.0, 300),
+      new AutoDrive(driveTrain, -95.0, 2000, 1),
+      //  new AutoTimedDrive(driveTrain, 2000, -0.3)
+       new AutonAim(limeLight, turret),  
+       new ParallelCommandGroup(new RunFlywheel(turret, limeLight), 
+      new SequentialCommandGroup(
         new IndexReverse(index),
         new Wait(1200),
         new IndexShoot(index))),
-        new AutoTurn(driveTrain, 37.5, navX),
-        new ParallelCommandGroup(new AutoDrive(driveTrain, 10), new AutoIntake(ballCounter, intake)),
-        new TurnTurretTo(turret, -37.5),
-        new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
-        new AutonAim(limeLight, turret),
-        new IndexReverse(index),
-        new Wait(1200),
-        new IndexShoot(index)))
+       new AutoTurn(driveTrain, 37.5, navX, 2000),
+         new ParallelCommandGroup(new AutoDrive(driveTrain, 25, 700, .075), new AutoIntake(ballCounter, intake), new IndexHold(index)),
+        //  new TurnTurretTo(turret, -37.5),
+         new AutonAim(limeLight, turret),
+         new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
+         new IndexReverse(index),
+         new Wait(1200),
+         new IndexShoot(index)))
     );
   }
 }

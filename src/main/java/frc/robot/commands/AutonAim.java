@@ -53,7 +53,8 @@ public class AutonAim extends CommandBase {
   public boolean isFinished() {
     if(counter > 5){
       return true;
-    }
-    return false;
+    }else{
+      return false;
+    } 
   }
 }

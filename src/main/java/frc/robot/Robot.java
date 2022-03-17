@@ -76,6 +76,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
     SmartDashboard.putNumber("NavX-RawGyroY: ", m_robotContainer.navX.getRawGyroY());
     SmartDashboard.putNumber("Encoder Pos: ", m_robotContainer.driveTrain.getEncoderPosition());
+    SmartDashboard.putNumber("Drive Error:", m_robotContainer.driveTrain.getDriveError());
 
     //SmartDashboard.putNumber("NavX-2D-Rotation: ", m_robotContainer.navX.getRotation2d());
 

@@ -36,6 +36,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private double driveI;
   private double driveD;
   private double driveOutput;
+  private double potDriveOutput;
+  private double prevDriveOutput;
 
 
 //Constructors
@@ -74,6 +76,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
     driveI = 0;
     driveD = 0;
     driveOutput = 0;
+    potDriveOutput = 0;
+    prevDriveOutput = 0;
   }
 //Methods
 
@@ -112,15 +116,24 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   }
 
-    public void PIDdrive(double sensorInput) {
+    public void PIDdrive(double sensorInput, double limit) {
       driveError = driveTarget - sensorInput;
       driveP = driveError;
       driveI += driveError;
       driveD = driveError - drivePrevError;
       
       
-      driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+      potDriveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+      if(potDriveOutput - prevDriveOutput > limit){
+        driveOutput = limit;
+      }
+      else{
+        driveOutput = potDriveOutput;
+      }
+
+      
       drivePrevError = driveError;
+      prevDriveOutput = driveOutput;
       SmartDashboard.putNumber("PID Drive output:", driveOutput);
 
     }  
