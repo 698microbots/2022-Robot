@@ -7,12 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Indexer;
-
-public class IndexHold extends CommandBase {
-  /** Creates a new IndexHold. */
+import frc.robot.subsystems.Intake;
+public class TeleopRejected extends CommandBase {
+  /** Creates a new IndexReverse. */
   private final Indexer index;
-  public IndexHold(Indexer index) {
+  private int counter;
+
+  public TeleopRejected(Indexer index) {
     this.index = index;
+    counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(index);
   }
@@ -20,14 +23,15 @@ public class IndexHold extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.runUpperIndexer(-0.05);
-    index.runLowerIndexer(Constants.indexMotorSpeedBottom);
+    index.runLowerIndexer(-Constants.indexMotorSpeedBottom);
+    index.runUpperIndexer(-Constants.indexMotorSpeedTop);
+    counter++;
   }
 
   // Called once the command ends or is interrupted.
@@ -39,6 +43,6 @@ public class IndexHold extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+      return false;
   }
 }

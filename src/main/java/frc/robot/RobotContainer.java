@@ -80,7 +80,7 @@ public class RobotContainer {
     buttonRB.whenHeld(new ParallelCommandGroup(new IndexHold(index), new RunIntake(intake)));
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld( new IndexShoot(index));
-    buttonX.whenHeld(new ParallelCommandGroup(new IntakeReverse(intake), new IndexReverse(index)));
+    buttonX.whenHeld(new ParallelCommandGroup(new IntakeReverse(intake), new TeleopRejected(index)));
     buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
     buttonRS.whenPressed(new RecenterTurret(turret));
     //Command Groups
