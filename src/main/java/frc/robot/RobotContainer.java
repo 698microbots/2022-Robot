@@ -32,7 +32,6 @@ public class RobotContainer {
   //subsystems
   public DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
   public final VisionSubsystems limeLight = new VisionSubsystems();
-  // public final PixyCamSubsystem pixy2 = new PixyCamSubsystem();
   private final Indexer index = new Indexer();
   public final TurretSubsystem turret = new TurretSubsystem();
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);

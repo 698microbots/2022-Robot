@@ -101,34 +101,20 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //print limeLight tracking information
-    // SmartDashboard.putNumber("Vertical Angle: ", m_robotContainer.limeLight.getV_angle());
-    // SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
-    // SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());
-    // SmartDashboard.putNumber("X-direction Distnace", m_robotContainer.limeLight.getXdistance());
+    SmartDashboard.putNumber("Vertical Angle: ", m_robotContainer.limeLight.getV_angle());
+    SmartDashboard.putNumber("Horizontal Angle: ", m_robotContainer.limeLight.getH_angle());
+    SmartDashboard.putNumber("Z-direction Distance: ", m_robotContainer.limeLight.getZdistance());
+    SmartDashboard.putNumber("X-direction Distnace", m_robotContainer.limeLight.getXdistance());
     SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
     SmartDashboard.putNumber("NavX-Roll: ", m_robotContainer.navX.getRoll());
     SmartDashboard.putNumber("NavX-Pitch: ", m_robotContainer.navX.getPitch());
-    SmartDashboard.putNumber("NavX-Angle: ", m_robotContainer.navX.getAngle());
-    SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
-    SmartDashboard.putNumber("NavX-RawGyroY: ", m_robotContainer.navX.getRawGyroY());
+    
     SmartDashboard.putNumber("Encoder Pos: ", m_robotContainer.driveTrain.getEncoderPosition());
-    //SmartDashboard.putNumber("NavX-2D-Rotation: ", m_robotContainer.navX.getRotation2d());
 
     SmartDashboard.putNumber("Turret output", m_robotContainer.turret.getTurretPIDOutput());
 
-    SmartDashboard.putNumber("Z-NavX displacement: ", m_robotContainer.navX.getDisplacementZ());
-    SmartDashboard.putNumber("X-NavX displacement: ", m_robotContainer.navX.getDisplacementX());
-    SmartDashboard.putNumber("Y-NavX displacement: ", m_robotContainer.navX.getDisplacementY());
-
     // SmartDashboard.putNumber("total balls", m_robotContainer.ballCounter.getBalls());
     SmartDashboard.putNumber("Turret Angle: ", m_robotContainer.turret.getTurretAngle());
-    // if(m_robotContainer.pixy2.getHWratio(0) >=0.7 && m_robotContainer.pixy2.getHWratio(0) <= 1.3){
-    //   SmartDashboard.putNumber("Angle From Pixy: ", m_robotContainer.pixy2.getBlockXangle(0));//Just testing code for pixy angle
-    //   SmartDashboard.putNumber("Pixy Block0 X-coor: ", m_robotContainer.pixy2.getBlockXcoordinates(0));
-    //   SmartDashboard.putNumber("Pixy Block0 Y-coor: ", m_robotContainer.pixy2.getBlockYcoordinates(0));
-    //   SmartDashboard.putNumber("Block Signature: ", m_robotContainer.pixy2.getBlockSignature(0));
-    //   SmartDashboard.putNumber("HW ratio of biggest block: ", m_robotContainer.pixy2.getHWratio(0));
-    // }
   }
 
   @Override
