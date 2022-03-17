@@ -105,7 +105,7 @@ public class RobotContainer {
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       //new AutoTurn(driveTrain, 150.0, navX)
       //new AutoDrive(driveTrain, 10.0, 300),
-      new AutoDrive(driveTrain, -95.0, 2000, 1),
+      new AutoDrive(driveTrain, -95.0, 1500, 1),
       //  new AutoTimedDrive(driveTrain, 2000, -0.3)
        new AutonAim(limeLight, turret),  
        new ParallelCommandGroup(new RunFlywheel(turret, limeLight), 
@@ -113,9 +113,10 @@ public class RobotContainer {
         new IndexReverse(index),
         new Wait(1200),
         new IndexShoot(index))),
-       new AutoTurn(driveTrain, 37.5, navX, 2000),
-         new ParallelCommandGroup(new AutoDrive(driveTrain, 25, 700, .075), new AutoIntake(ballCounter, intake), new IndexHold(index)),
+       new AutoTurn(driveTrain, 40, navX, 500),
+         new ParallelCommandGroup(new AutoDrive(driveTrain, 50, 1500, .075), new AutoIntake(ballCounter, intake), new IndexHold(index)),
         //  new TurnTurretTo(turret, -37.5),
+        new AutoTurn(driveTrain, 340, navX, 750),
          new AutonAim(limeLight, turret),
          new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
          new IndexReverse(index),

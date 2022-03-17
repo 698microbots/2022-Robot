@@ -45,7 +45,7 @@ public final class Constants
 
     // auton drive PID constants
     //public static final int kTimeoutMs = 20;
-    public static final double driveAdjustment = 1.0;
+    public static final double driveAdjustment = 0.9;
     public static final int kPIDLoopIdx = 0;//run primary loop
     public static final double kF = 0;
     public static final double kP = 0.00005;

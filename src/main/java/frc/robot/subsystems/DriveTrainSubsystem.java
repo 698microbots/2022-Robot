@@ -83,14 +83,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   //pass in a double input for setting the right side speed.
   public void setRightSpeed(double speed){
-    FrontRight.set(ControlMode.PercentOutput, speed);
-    BackRight.set(ControlMode.PercentOutput, speed);
+    FrontRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
+    BackRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
   }
 
   //pass in a double input for setting the left side speed.
   public void setLeftSpeed(double speed){
-    FrontLeft.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
-    BackLeft.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
+    FrontLeft.set(ControlMode.PercentOutput, speed);
+    BackLeft.set(ControlMode.PercentOutput, speed);
   }
 
   //takes in sensor input to turn robot into the correct angle

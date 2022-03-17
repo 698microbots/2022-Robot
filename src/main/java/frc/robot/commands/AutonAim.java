@@ -35,7 +35,7 @@ public class AutonAim extends CommandBase {
   @Override
   public void execute() {
       turret.turnTurret(turret.turretPID(limelight.getH_angle()));
-      if(Math.abs(turret.getTurretError()) < 2.0){
+      if(Math.abs(turret.getTurretError()) < 3.0){
         counter++;
       }else{
         counter = 0;
@@ -51,7 +51,7 @@ public class AutonAim extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter > 5){
+    if(counter > 3){
       return true;
     }else{
       return false;
