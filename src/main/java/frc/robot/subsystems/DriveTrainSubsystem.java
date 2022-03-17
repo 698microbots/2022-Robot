@@ -50,6 +50,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
     FrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     BackRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     BackLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    FrontLeft.configReverseSoftLimitEnable(false);
+    FrontLeft.configForwardSoftLimitEnable(false);
+    FrontRight.configReverseSoftLimitEnable(false);
+    FrontRight.configForwardSoftLimitEnable(false);
+    BackLeft.configReverseSoftLimitEnable(false);
+    BackLeft.configForwardSoftLimitEnable(false);
+    BackRight.configReverseSoftLimitEnable(false);
+    BackRight.configForwardSoftLimitEnable(false);
     //turn variables
     turnTarget = 0;
     turnError = 0;

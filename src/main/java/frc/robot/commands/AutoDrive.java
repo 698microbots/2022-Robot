@@ -28,7 +28,7 @@ public class AutoDrive extends CommandBase {
   public void initialize() {
     System.out.println("Auto driving has started!");
     driveTrain.setDriveTarget(-distance*2048/2.75);
-    driveTrain.resetEncoders();
+    // driveTrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
