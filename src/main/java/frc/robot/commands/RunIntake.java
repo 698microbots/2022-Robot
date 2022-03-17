@@ -6,14 +6,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.BallCounterSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
+import frc.robot.subsystems.IntakeSubsytem;
 
 public class RunIntake extends CommandBase {
   /** Creates a new Intake. */
 
-  private final Intake intake;
-  public RunIntake(Intake intake) {
+  private final IntakeSubsytem intake;
+
+  public RunIntake(IntakeSubsytem intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intake = intake;
     addRequirements(intake);

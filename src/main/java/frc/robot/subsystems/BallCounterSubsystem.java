@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 
-public class BallCounter extends SubsystemBase {
+public class BallCounterSubsystem extends SubsystemBase {
   /** Creates a new BallCounter. **/
   
   private DigitalInput bottomPhotovalticSensor = new DigitalInput(Constants.bottomPhotovalticID); // class for port 1
   private DigitalInput topPhotovolaticSenor = new DigitalInput(Constants.topPhotovalticID); // class for port 2
 
   
-  public BallCounter() {
+  public BallCounterSubsystem() {
   
   }
 

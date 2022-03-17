@@ -15,7 +15,7 @@ import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeSubsytem;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 /**
@@ -32,10 +32,10 @@ public class RobotContainer {
   //subsystems
   public DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
   public final VisionSubsystems limeLight = new VisionSubsystems();
-  private final Indexer index = new Indexer();
+  private final IndexerSubsystem index = new IndexerSubsystem();
   public final TurretSubsystem turret = new TurretSubsystem();
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  public final Intake intake = new Intake();
+  public final IntakeSubsytem intake = new IntakeSubsytem();
   public final JoystickButton buttonA = new JoystickButton(Xbox, Constants.Xbox_Button_A);
   public final JoystickButton buttonB = new JoystickButton(Xbox, Constants.Xbox_Button_B);
   public final JoystickButton buttonX = new JoystickButton(Xbox, Constants.Xbox_Button_X);
@@ -44,7 +44,7 @@ public class RobotContainer {
   private final JoystickButton buttonRB = new JoystickButton(Xbox, Constants.Xbox_Button_RB);
   private final JoystickButton buttonLS = new JoystickButton(Xbox, Constants.Xbox_Button_LS);
   private final JoystickButton buttonRS = new JoystickButton(Xbox, Constants.Xbox_Button_RS);
-  public static BallCounter ballCounter = new BallCounter();
+  public static BallCounterSubsystem ballCounter = new BallCounterSubsystem();
   public static int ballCount = 0;
 
   /**d
@@ -81,7 +81,7 @@ public class RobotContainer {
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld( new IndexShoot(index));
     buttonX.whenHeld(new ParallelCommandGroup(new IntakeReverse(intake), new TeleopRejected(index)));
-    buttonY.toggleWhenPressed(new AutoAim(limeLight, turret));
+    buttonY.toggleWhenPressed(new TeleopAutoAim(limeLight, turret));
     buttonRS.whenPressed(new RecenterTurret(turret));
     //Command Groups
     buttonLB.toggleWhenPressed(new ParallelCommandGroup(
@@ -104,15 +104,21 @@ public class RobotContainer {
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       //new AutoTurn(driveTrain, 150.0, navX)
-      new AutoDrive(driveTrain, 1000)
-      //  new AutoDrive(driveTrain, 40),
-      //  new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
-      //   //new AutoAim(limeLight, turret),
-      //   new IndexReverse(index),
-      //   new Wait(1200),
-      //   new IndexShoot(index))),
-      //   new AutoTurn(driveTrain, 180, navX),
-      //   new ParallelCommandGroup(new AutoTimedDrive(driveTrain, 2000, 0.3), new RunIntake(intake))
+      //new AutoDrive(driveTrain, 1000)
+       new AutoDrive(driveTrain, -95),
+       new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
+        new AutonAim(limeLight, turret),
+        new IndexReverse(index),
+        new Wait(1200),
+        new IndexShoot(index))),
+        new AutoTurn(driveTrain, 37.5, navX),
+        new ParallelCommandGroup(new AutoDrive(driveTrain, 10), new AutoIntake(ballCounter, intake)),
+        new TurnTurretTo(turret, -37.5),
+        new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
+        new AutonAim(limeLight, turret),
+        new IndexReverse(index),
+        new Wait(1200),
+        new IndexShoot(index)))
     );
   }
 }

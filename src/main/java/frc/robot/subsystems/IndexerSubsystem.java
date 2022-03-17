@@ -10,12 +10,12 @@ import frc.robot.Constants;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class Indexer extends SubsystemBase {
+public class IndexerSubsystem extends SubsystemBase {
   /** Creates a new Indexer. */
   private final CANSparkMax upperSparkMax;
   private final CANSparkMax lowerSparkMax;
 
-  public Indexer() {
+  public IndexerSubsystem() {
     this.upperSparkMax = new CANSparkMax(Constants.upperIndexerID, MotorType.kBrushless);
     this.lowerSparkMax = new CANSparkMax(Constants.lowerIndexerID, MotorType.kBrushless);
   }

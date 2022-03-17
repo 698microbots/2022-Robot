@@ -27,7 +27,7 @@ public class RecenterTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turret.turnTurret(-1*(turret.turretPID(turret.getTurretAngle())/2));
+    turret.turnTurret(-(turret.turretPID(turret.getTurretAngle())/2));
     if(Math.abs(turret.getTurretAngle())<= 1){
       counter++;
     }else{

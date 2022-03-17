@@ -4,20 +4,25 @@
 
 package frc.robot.commands;
 
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.IndexerSubsystem;
-import frc.robot.subsystems.IntakeSubsytem;
-public class IndexReverse extends CommandBase {
-  /** Creates a new IndexReverse. */
-  private final IndexerSubsystem index;
+import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.VisionSubsystems;
+
+public class AutonAim extends CommandBase {
+  /** Creates a new AutoAim. */
+  private final VisionSubsystems limelight;
+  private final TurretSubsystem turret;
   private int counter;
 
-  public IndexReverse(IndexerSubsystem index) {
-    this.index = index;
+  public AutonAim(VisionSubsystems limelight, TurretSubsystem turret) {
+    this.limelight = limelight;
+    this.turret = turret;
     counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(index);
+    addRequirements(limelight);
+    addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
@@ -29,24 +34,26 @@ public class IndexReverse extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.runLowerIndexer(-Constants.indexMotorSpeedBottom);
-    index.runUpperIndexer(-Constants.indexMotorSpeedTop);
-    counter++;
+      turret.turnTurret(turret.turretPID(limelight.getH_angle()));
+      if(Math.abs(turret.getTurretError()) < 2.0){
+        counter++;
+      }else{
+        counter = 0;
+      }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    index.stopIndexer();
+    turret.turnTurret(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter>4){
+    if(counter > 5){
       return true;
-    }else{
-      return false;
     }
+    return false;
   }
 }

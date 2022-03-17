@@ -5,19 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.IndexerSubsystem;
-import frc.robot.subsystems.IntakeSubsytem;
-public class IndexReverse extends CommandBase {
-  /** Creates a new IndexReverse. */
-  private final IndexerSubsystem index;
-  private int counter;
+import frc.robot.subsystems.TurretSubsystem;
 
-  public IndexReverse(IndexerSubsystem index) {
-    this.index = index;
+public class TurnTurretTo extends CommandBase {
+  /** Creates a new RecenterTurret. */
+  private final TurretSubsystem turret;
+  private final double angle;
+  private int counter;
+  public TurnTurretTo(TurretSubsystem turret, double angle) {
+    this.turret = turret;
+    this.angle = angle;
     counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(index);
+    addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
@@ -29,21 +29,24 @@ public class IndexReverse extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.runLowerIndexer(-Constants.indexMotorSpeedBottom);
-    index.runUpperIndexer(-Constants.indexMotorSpeedTop);
-    counter++;
+    turret.turnTurret(-(turret.turretPID(angle - turret.getTurretAngle())/2));
+    if(Math.abs(turret.getTurretAngle())<= 1){
+      counter++;
+    }else{
+      counter = 0;
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    index.stopIndexer();
+    turret.turnTurret(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter>4){
+    if(counter >= 10){
       return true;
     }else{
       return false;

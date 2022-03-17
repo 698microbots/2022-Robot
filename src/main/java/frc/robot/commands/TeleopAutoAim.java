@@ -10,15 +10,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.VisionSubsystems;
 
-public class AutoAim extends CommandBase {
+public class TeleopAutoAim extends CommandBase {
   /** Creates a new AutoAim. */
   private final VisionSubsystems limelight;
   private final TurretSubsystem turret;
-  private int counter;
-  public AutoAim(VisionSubsystems limelight, TurretSubsystem turret) {
+  public TeleopAutoAim(VisionSubsystems limelight, TurretSubsystem turret) {
     this.limelight = limelight;
     this.turret = turret;
-    counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(limelight);
     addRequirements(turret);
@@ -27,18 +25,12 @@ public class AutoAim extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //if(limelight.tracking()){
       turret.turnTurret(turret.turretPID(limelight.getH_angle()));
-      counter++;
-      //}else{
-     // turret.turnTurret(turret.turretPID(-turret.getTurretAngle()));//sets the turret back to center if not tracking
-    //}
   }
 
   // Called once the command ends or is interrupted.

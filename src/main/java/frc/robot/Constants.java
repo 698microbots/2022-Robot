@@ -104,7 +104,8 @@ public final class Constants
     //Turret Constants
     public static final int turrentMotorID = 6;//need to figure out what this value is
     public static final double turretkP = 0.017;
-    public static final double turretkI = 0.0007;
+    public static final double  turretIActZone = 10;
+    public static final double turretkI = 0.00012;
     public static final double turretkD = 0.002;
     public static final int flyWheelMotorID = 1;
     public static final double turretMotorGearRatio = 98;
@@ -112,6 +113,7 @@ public final class Constants
     public static final double turretMaxAngle = 62;//62
     public static final double turretMinAngle = -62; //-62
     public static final double limeLightInitAngle = 22.5; //22.5
+
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;
@@ -121,5 +123,6 @@ public final class Constants
     public static final int PortID1 = 8;
     public static final int PortID2 = 3;
     public static final double IactZone = 0;
+
 
 }

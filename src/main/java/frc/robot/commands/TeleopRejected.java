@@ -6,14 +6,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IndexerSubsystem;
+import frc.robot.subsystems.IntakeSubsytem;
 public class TeleopRejected extends CommandBase {
   /** Creates a new IndexReverse. */
-  private final Indexer index;
+  private final IndexerSubsystem index;
   private int counter;
 
-  public TeleopRejected(Indexer index) {
+  public TeleopRejected(IndexerSubsystem index) {
     this.index = index;
     counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.

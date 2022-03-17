@@ -7,15 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.BallCounter;
-import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.BallCounterSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.RobotContainer;
 
 public class IndexShoot extends CommandBase {
   /** Creates a new IndexShoot. */
-  private final Indexer index;
+  private final IndexerSubsystem index;
   private int counter;
-  public IndexShoot(Indexer index) {
+  public IndexShoot(IndexerSubsystem index) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.index = index;
     addRequirements(index);

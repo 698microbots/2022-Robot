@@ -6,14 +6,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.BallCounter;
+import frc.robot.subsystems.BallCounterSubsystem;
 
 public class CountBalls extends CommandBase {
   /** Creates a new CountBalls. */
-  private BallCounter ballCounter;
+  private BallCounterSubsystem ballCounter;
   private boolean latchTop;
   private boolean latchBottom;
-  public CountBalls(BallCounter ballCounter) {
+  public CountBalls(BallCounterSubsystem ballCounter) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.ballCounter = ballCounter;
     addRequirements(this.ballCounter);

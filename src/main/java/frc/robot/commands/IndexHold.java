@@ -6,13 +6,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.IndexerSubsystem;
 
 public class IndexHold extends CommandBase {
   /** Creates a new IndexHold. */
-  private final Indexer index;
-  public IndexHold(Indexer index) {
+  private final IndexerSubsystem index;
+  private int counter;
+  public IndexHold(IndexerSubsystem index) {
     this.index = index;
+    counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(index);
   }
@@ -20,12 +22,13 @@ public class IndexHold extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    counter++;
     index.runUpperIndexer(-0.05);
     index.runLowerIndexer(Constants.indexMotorSpeedBottom);
   }
@@ -39,6 +42,10 @@ public class IndexHold extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(counter >= 2000/20){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

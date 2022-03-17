@@ -6,13 +6,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeSubsytem;
 
 public class IntakeReverse extends CommandBase {
   /** Creates a new ReverseIntake. */
-  private final Intake intake;
+  private final IntakeSubsytem intake;
 
-  public IntakeReverse(Intake intake) {
+  public IntakeReverse(IntakeSubsytem intake) {
     this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);
