@@ -79,6 +79,9 @@ public class TurretSubsystem extends SubsystemBase {
     return turretAngle;
   }
 
+  public double getTurretPIDOutput() {
+    return turretOutput;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

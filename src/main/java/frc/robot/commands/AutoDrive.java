@@ -43,11 +43,11 @@ public class AutoDrive extends CommandBase {
 
     //driveTrain.resetEncoders();
     //check if target is met
-    // if(driveTrain.getDriveError()<0.1){
-    //   counter++;
-    // }else{
-    //   counter = 0;
-    // }
+    if(Math.abs(driveTrain.getDriveError())<100){
+      counter++;
+    }else{
+      counter = 0;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -60,11 +60,11 @@ public class AutoDrive extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    // if(counter > 10){
-    //   return true;
-    // }else{
-    //   counter = 0;
-    // }
+    if(counter > 10){
+      return true;
+    }else{
+      counter = 0;
+    }
     return false;
    }
 }

@@ -53,7 +53,7 @@ public final class Constants
     public static final double kD = 0;
 
     // Index Constants
-    public static final double indexMotorSpeedBottom = 0.5;
+    public static final double indexMotorSpeedBottom = 0.3;
     public static final double indexMotorSpeedTop = 0.5;
 
 

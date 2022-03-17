@@ -114,6 +114,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Encoder Pos: ", m_robotContainer.driveTrain.getEncoderPosition());
     //SmartDashboard.putNumber("NavX-2D-Rotation: ", m_robotContainer.navX.getRotation2d());
 
+    SmartDashboard.putNumber("Turret output", m_robotContainer.turret.getTurretPIDOutput());
+
     SmartDashboard.putNumber("Z-NavX displacement: ", m_robotContainer.navX.getDisplacementZ());
     SmartDashboard.putNumber("X-NavX displacement: ", m_robotContainer.navX.getDisplacementX());
     SmartDashboard.putNumber("Y-NavX displacement: ", m_robotContainer.navX.getDisplacementY());

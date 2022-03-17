@@ -43,8 +43,8 @@ public class RunFlywheel extends CommandBase {
     flyWheelSpeed = limelight.getZdistance()*0.00127 + 0.439;
     
     //clamp down maximum speed
-    if(flyWheelSpeed > 0.68){
-      flyWheelSpeed = 0.68;
+    if(flyWheelSpeed > 0.8){
+      flyWheelSpeed = 0.8;
     }
 
     //put the calculated value in to runFlywheel

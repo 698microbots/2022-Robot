@@ -50,11 +50,11 @@ public class AutoTurn extends CommandBase {
 
     driveTrain.resetEncoders();
     //Increment the counter when error is small enough
-    // if(Math.abs(driveTrain.getPIDTurnError()) < 0.1){
-    //   counter++;
-    // }else{
-    //   counter = 0;
-    // }
+    if(Math.abs(driveTrain.getPIDTurnError()) < 20){
+      counter++;
+    }else{
+      counter = 0;
+    }
   }
   // Called once the command ends or is interrupted.
   @Override
@@ -66,12 +66,11 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
     //if the counter is big enough, this method returns true causing the command to end.
-    // if(counter > 10){
-    //   return true;
-    // }else{
-    //   counter = 0;
-    // return false;
-    // }
+    if(counter > 10){
+      return true;
+    }else{
+      counter = 0;
+    }
     return false;
   }
 }

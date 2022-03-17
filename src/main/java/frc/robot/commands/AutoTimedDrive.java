@@ -5,17 +5,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
-public class RecenterTurret extends CommandBase {
-  /** Creates a new RecenterTurret. */
-  private final TurretSubsystem turret;
+public class AutoTimedDrive extends CommandBase {
+  /** Creates a new AutoTimedDrive. */
+  private final DriveTrainSubsystem driveTrain;
   private int counter;
-  public RecenterTurret(TurretSubsystem turret) {
-    this.turret = turret;
+  private double time;
+  private final double speed;
+  public AutoTimedDrive(DriveTrainSubsystem driveTrain, double time, double speed) {
+    this.driveTrain = driveTrain;
+    this.time = time;
+    this.speed = -speed;
     counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(turret);
+    addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
@@ -27,24 +31,22 @@ public class RecenterTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    turret.turnTurret(-1*(turret.turretPID(turret.getTurretAngle())/2));
-    if(Math.abs(turret.getTurretAngle())<= 1){
-      counter++;
-    }else{
-      counter = 0;
-    }
+    driveTrain.setRightSpeed(speed);
+    driveTrain.setLeftSpeed(speed);
+    counter++;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    turret.turnTurret(0.0);
+    driveTrain.setLeftSpeed(0);
+    driveTrain.setRightSpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter >= 10){
+    if(counter>=time/20){
       return true;
     }else{
       return false;
