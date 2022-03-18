@@ -42,10 +42,6 @@ public class IndexHold extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter >= 10000/20){
-      return true;
-    }else{
       return false;
-    }
   }
 }

@@ -83,7 +83,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Z-NavX displacement: ", m_robotContainer.navX.getDisplacementZ());
     SmartDashboard.putNumber("X-NavX displacement: ", m_robotContainer.navX.getDisplacementX());
     SmartDashboard.putNumber("Y-NavX displacement: ", m_robotContainer.navX.getDisplacementY());
-
   }
 
   @Override

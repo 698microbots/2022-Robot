@@ -26,14 +26,18 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final XboxController Xbox = new XboxController(Constants.XBOX_pin);
+  public static final XboxController Xbox = new XboxController(Constants.XBOX_pin);
   public final AHRS navX = new AHRS(SerialPort.Port.kUSB);
   
   //subsystems
   public DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
   public final VisionSubsystems limeLight = new VisionSubsystems();
+  private final VisionSubsystems limeLight2 = new VisionSubsystems();
   private final IndexerSubsystem index = new IndexerSubsystem();
+  private final FlyWheelSubsystem flyWheel = new FlyWheelSubsystem();
+  // private final IndexerSubsystem index
   public final TurretSubsystem turret = new TurretSubsystem();
+
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   public final IntakeSubsytem intake = new IntakeSubsytem();
   public final JoystickButton buttonA = new JoystickButton(Xbox, Constants.Xbox_Button_A);
@@ -60,6 +64,7 @@ public class RobotContainer {
     turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
     //turret.setDefaultCommand(new AutoAim(limeLight, turret));
     ballCounter.setDefaultCommand(new CountBalls(ballCounter));
+    
 
     // Configure the button bindings
     configureButtonBindings();
@@ -78,7 +83,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    buttonRB.whenReleased(new ParallelCommandGroup(new IndexHold(index), new AutoIntake(ballCounter, intake)));
+    buttonRB.toggleWhenPressed(new ParallelCommandGroup(new IndexHold(index), new RunIntake(intake)));
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld(new IndexShoot(index));
     buttonX.whenHeld(new ParallelCommandGroup(new IntakeReverse(intake), new TeleopRejected(index)));
@@ -89,8 +94,8 @@ public class RobotContainer {
     buttonLB.toggleWhenPressed(new SequentialCommandGroup(
       //shoot first ball
       new ParallelCommandGroup(
-      new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
-        new AutonAim(limeLight, turret),//if limeLight not in range, will shoot randomly
+      new RunFlywheel(flyWheel, limeLight), new SequentialCommandGroup(
+        new AutonAim(limeLight2, turret),//if limeLight not in range, will shoot randomly
         new IndexReverse(index),
         new Wait(500),
         new IndexShoot(index)
@@ -98,8 +103,8 @@ public class RobotContainer {
       //shoots second ball
       new Wait(500),
       new ParallelCommandGroup(
-        new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
-          new AutonAim(limeLight, turret),//if limeLight not in range, will shoot randomly
+        new RunFlywheel(flyWheel, limeLight), new SequentialCommandGroup(
+          new AutonAim(limeLight2, turret),//if limeLight not in range, will shoot randomly
           new IndexReverse(index),
           new Wait(500),
           new IndexShoot(index)
@@ -116,10 +121,10 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
-      new SpinFlyWheelAt(turret, 0.5),//20ms
+      new SpinFlyWheelAt(flyWheel, 0.5),//20ms
       new AutoDrive(driveTrain, -95.0, 1500, 1),//1500ms
        new AutonAim(limeLight, turret),  //2000ms
-      new ParallelCommandGroup(new RunFlywheel(turret, limeLight),//300ms
+      new ParallelCommandGroup(new RunFlywheel(flyWheel, limeLight),//300ms
        new SequentialCommandGroup(
         new IndexReverse(index),//80ms
         new Wait(Constants.HoldTime),//500ms
@@ -129,7 +134,7 @@ public class RobotContainer {
         //  new TurnTurretTo(turret, -37.5),
         new AutoTurn(driveTrain, -30, navX, 1500),//1500ms
          new AutonAim(limeLight, turret),//2000ms
-         new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(//300ms
+         new ParallelCommandGroup(new RunFlywheel(flyWheel, limeLight), new SequentialCommandGroup(//300ms
          new IndexReverse(index),//20ms
          new Wait(Constants.HoldTime),//500ms
          new IndexShoot(index))),//200ms

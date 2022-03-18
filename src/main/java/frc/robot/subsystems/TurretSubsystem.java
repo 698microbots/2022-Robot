@@ -12,7 +12,6 @@ import frc.robot.Constants;
 public class TurretSubsystem extends SubsystemBase {
   /** Creates a new TurretSubsystem. */
   private final TalonFX turretMotor = new TalonFX(Constants.turrentMotorID);
-  private final TalonFX flyWheelMotor = new TalonFX(Constants.flyWheelMotorID);
 
   //turretPID variables
   private double turretError;
@@ -76,10 +75,7 @@ public class TurretSubsystem extends SubsystemBase {
       }
     }
   }
-  public void runFlywheel(double input) {
-    flyWheelMotor.set(ControlMode.PercentOutput, input);
-  }
-
+  
   public double getTurretAngle(){
     return turretAngle;
   }

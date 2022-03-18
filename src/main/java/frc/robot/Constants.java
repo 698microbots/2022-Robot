@@ -59,7 +59,7 @@ public final class Constants
 
     // Intake Constants
     public static final int deviceIdIntake = 6;
-    public static final double intakeMotorSpeed = 0.42;
+    public static final double intakeMotorSpeed = 0.55;
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
     public static final double closestY = 100;
@@ -95,7 +95,7 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
-    public static final int topPhotovalticID = 7;
+    public static final int topPhotovalticID = 8;
     public static final int bottomPhotovalticID = 2;
 
     //Auto ball driving
@@ -103,9 +103,9 @@ public final class Constants
 
     //Turret Constants
     public static final int turrentMotorID = 6;//need to figure out what this value is
-    public static final double turretkP = 0.017;
+    public static final double turretkP = 0.015;
     public static final double  turretIActZone = 10;
-    public static final double turretkI = 0.00012;
+    public static final double turretkI = 0.00024;
     public static final double turretkD = 0.002;
     public static final int flyWheelMotorID = 1;
     public static final double turretMotorGearRatio = 98;

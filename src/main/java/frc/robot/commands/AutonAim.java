@@ -35,7 +35,7 @@ public class AutonAim extends CommandBase {
   @Override
   public void execute() {
       turret.turnTurret(turret.turretPID(limelight.getH_angle()));
-      if(Math.abs(turret.getTurretError()) < 3.0){
+      if(Math.abs(turret.getTurretError()) < 2.0){
         counter++;
       }else{
         counter = 0;

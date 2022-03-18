@@ -9,17 +9,18 @@ import javax.swing.text.DefaultStyledDocument.ElementSpec;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.FlyWheelSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.VisionSubsystems;
 
 public class RunFlywheel extends CommandBase {
   /** Creates a new TestFlywheel. */
-  private final TurretSubsystem turret;
+  private final FlyWheelSubsystem turret;
   private final VisionSubsystems limelight;
   private double flyWheelSpeed;
   private int counter;
 
-  public RunFlywheel(TurretSubsystem turret, VisionSubsystems limelight) {
+  public RunFlywheel(FlyWheelSubsystem turret, VisionSubsystems limelight) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.turret = turret;
     this.limelight = limelight;
@@ -48,7 +49,7 @@ public class RunFlywheel extends CommandBase {
     }
 
     //put the calculated value in to runFlywheel
-    turret.runFlywheel(flyWheelSpeed*0.9);//adjusted from 91% for testing auto speed tuning
+    turret.runFlywheel(flyWheelSpeed*0.91);//adjusted from 91% for testing auto speed tuning
     counter++;
   }
 

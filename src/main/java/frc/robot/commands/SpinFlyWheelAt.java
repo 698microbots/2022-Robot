@@ -5,13 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.FlyWheelSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 
 public class SpinFlyWheelAt extends CommandBase {
   /** Creates a new SpinFlyWheelAt. */
-  private final TurretSubsystem flyWheel;
+  private final FlyWheelSubsystem flyWheel;
   private final double speed;
-  public SpinFlyWheelAt(TurretSubsystem flyWheel, double speed) {
+  public SpinFlyWheelAt(FlyWheelSubsystem flyWheel, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.flyWheel = flyWheel;
     this.speed = speed;
