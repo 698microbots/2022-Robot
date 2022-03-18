@@ -77,22 +77,35 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonRB.toggleWhenPressed(new ParallelCommandGroup(new IndexHold(index), new AutoIntake(ballCounter, intake)));
+
+    buttonRB.whenReleased(new ParallelCommandGroup(new IndexHold(index), new AutoIntake(ballCounter, intake)));
     buttonB.whenHeld(new IndexHold(index));
-    buttonA.whenHeld( new IndexShoot(index));
+    buttonA.whenHeld(new IndexShoot(index));
     buttonX.whenHeld(new ParallelCommandGroup(new IntakeReverse(intake), new TeleopRejected(index)));
     buttonY.toggleWhenPressed(new TeleopAutoAim(limeLight, turret));
     buttonRS.whenPressed(new RecenterTurret(turret));
+
     //Command Groups
-    buttonLB.toggleWhenPressed(new ParallelCommandGroup(
+    buttonLB.toggleWhenPressed(new SequentialCommandGroup(
+      //shoot first ball
+      new ParallelCommandGroup(
       new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
-        //new AutoAim(limeLight, turret),
+        new AutonAim(limeLight, turret),//if limeLight not in range, will shoot randomly
         new IndexReverse(index),
-        new Wait(1200),
+        new Wait(500),
         new IndexShoot(index)
-        //new RecenterTurret(turret)
-      ))
-      );
+      )),
+      //shoots second ball
+      new Wait(500),
+      new ParallelCommandGroup(
+        new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
+          new AutonAim(limeLight, turret),//if limeLight not in range, will shoot randomly
+          new IndexReverse(index),
+          new Wait(500),
+          new IndexShoot(index)
+        )),
+        new RecenterTurret(turret)//might mess up stabilization
+      ));
    }
 
   /**
@@ -103,26 +116,28 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
-      //new AutoTurn(driveTrain, 150.0, navX)
-      //new AutoDrive(driveTrain, 10.0, 300),
-      new SpinFlyWheelAt(turret, 0.5),
-      new AutoDrive(driveTrain, -95.0, 1500, 1),
-      //  new AutoTimedDrive(driveTrain, 2000, -0.3)
-       new AutonAim(limeLight, turret),  
-       new ParallelCommandGroup(new RunFlywheel(turret, limeLight), 
-      new SequentialCommandGroup(
-        new IndexReverse(index),
-        new Wait(Constants.HoldTime),
-        new IndexShoot(index))),
-       new AutoTurn(driveTrain, 40, navX, 500),
-         new ParallelCommandGroup(new AutoDrive(driveTrain, 50, 1500, .075), new AutoIntake(ballCounter, intake), new IndexHold(index)),
+      new SpinFlyWheelAt(turret, 0.5),//20ms
+      new AutoDrive(driveTrain, -95.0, 1500, 1),//1500ms
+       new AutonAim(limeLight, turret),  //2000ms
+      new ParallelCommandGroup(new RunFlywheel(turret, limeLight),//300ms
+       new SequentialCommandGroup(
+        new IndexReverse(index),//80ms
+        new Wait(Constants.HoldTime),//500ms
+        new IndexShoot(index))),//200ms
+       new AutoTurn(driveTrain, 37.5, navX, 1500),//1500ms
+        new ParallelCommandGroup(new AutoDrive(driveTrain, 80, 1500, .075), new AutoIntake(ballCounter, intake), new IndexHold(index)),//1500ms
         //  new TurnTurretTo(turret, -37.5),
-        new AutoTurn(driveTrain, -30, navX, 750),
-         new AutonAim(limeLight, turret),
-         new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
-         new IndexReverse(index),
-         new Wait(Constants.HoldTime),
-         new IndexShoot(index)))
+        new AutoTurn(driveTrain, -30, navX, 1500),//1500ms
+         new AutonAim(limeLight, turret),//2000ms
+         new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(//300ms
+         new IndexReverse(index),//20ms
+         new Wait(Constants.HoldTime),//500ms
+         new IndexShoot(index))),//200ms
+
+         //drive help
+         new AutoDrive(driveTrain, -40, 1000, 0.5),//1000ms
+         new AutoTurn(driveTrain, 180, navX, 2000),//1000ms
+        new RecenterTurret(turret)//rest of the time
     );
   }
 }

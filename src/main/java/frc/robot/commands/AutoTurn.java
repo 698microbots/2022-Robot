@@ -58,6 +58,8 @@ public class AutoTurn extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    driveTrain.setLeftSpeed(0.0);
+    driveTrain.setRightSpeed(0.0);
     System.out.println("Automatic turning has ended!");
   }
 
