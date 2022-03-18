@@ -123,31 +123,32 @@ public class RobotContainer {
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       new Wait(2000),
       new SpinFlyWheelAt(flyWheel, 0.5),//20ms
-      new AutoDrive(driveTrain, -85.0, 3000, 1),//1500ms
+      new AutoDrive(driveTrain, -85.0, 3500, 0.7),//1500ms
        new AutonAim(limeLight, turret),  //2000ms
       new ParallelCommandGroup(new RunFlywheel(flyWheel, limeLight),//300ms
        new SequentialCommandGroup(
         new IndexReverse(index),//80ms
         new Wait(Constants.HoldTime),//500ms
-        new IndexShoot(index, ballCounter))),//200ms
-       new AutoTurn(driveTrain, 40.5, navX, 3000),//2000ms
-        new ParallelCommandGroup(new AutoDrive(driveTrain, 60, 1500, 0.5), new AutoIntake(ballCounter, intake), new AutoIndexHold(index)),//1500ms
-        //  new TurnTurretTo(turret, -37.5),
-        new AutoTurn(driveTrain, -30, navX, 1500),//1500ms
-         new AutonAim(limeLight, turret),//2000ms
-         new ParallelCommandGroup(new RunFlywheel(flyWheel, limeLight), new SequentialCommandGroup(//300ms
-         new IndexReverse(index),//20ms
-         new Wait(Constants.HoldTime),//500ms
-         new IndexShoot(index, ballCounter))),//200ms
+        new IndexShoot(index, ballCounter)))//200ms
+      //  new AutoTurn(driveTrain, 40.5, navX, 2500),//2000ms
+      //   new ParallelCommandGroup(new AutoDrive(driveTrain, 60, 1500, 0.5), new AutoIntake(ballCounter, intake), new AutoIndexHold(index)),//1500ms
+      //   //  new TurnTurretTo(turret, -37.5),
+      //   new AutoTurn(driveTrain, -30, navX, 1500),//1500ms
+      //    new AutonAim(limeLight, turret),//2000ms
+      //    new ParallelCommandGroup(new RunFlywheel(flyWheel, limeLight), new SequentialCommandGroup(//300ms
+      //    new IndexReverse(index),//20ms
+      //    new Wait(Constants.HoldTime),//500ms
+      //    new IndexShoot(index, ballCounter))),//200ms
 
-         //drive help
-         new AutoDrive(driveTrain, -40, 1000, 0.5),//1000ms
-         new AutoTurn(driveTrain, 180, navX, 2000),//1000ms
-        new RecenterTurret(turret)//rest of the time
+      //    //drive help
+      //    new AutoDrive(driveTrain, -40, 1000, 0.5),//1000ms
+      //    new AutoTurn(driveTrain, 180, navX, 2000),//1000ms
+      //   new RecenterTurret(turret)//rest of the time
     );
   }
 
   public Command getTestCommand(){
-    return new AutoTurn(driveTrain, 90, navX, 3000);
+    return new AutoDrive(driveTrain, -90, 2500, 1);
+    //return new AutoTurn(driveTrain, 90, navX, 3000);
   }
 }

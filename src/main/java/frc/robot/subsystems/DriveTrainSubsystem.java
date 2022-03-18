@@ -83,8 +83,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   //pass in a double input for setting the right side speed.
   public void setRightSpeed(double speed){
-    FrontRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
-    BackRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
+    FrontRight.set(ControlMode.PercentOutput, speed);
+    BackRight.set(ControlMode.PercentOutput, speed);
   }
 
   //pass in a double input for setting the left side speed.
@@ -197,7 +197,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return (FrontRight.getSelectedSensorPosition()+BackRight.getSelectedSensorPosition()+FrontLeft.getSelectedSensorPosition()+BackLeft.getSelectedSensorPosition())/4;
   }
 
+  public double getRightVelocity(){
+    return (FrontRight.getSelectedSensorVelocity() + BackRight.getSelectedSensorVelocity())/2;
+  }
 
+  public double getLeftVelocity(){
+    return (FrontLeft.getSelectedSensorVelocity() + BackLeft.getSelectedSensorVelocity())/2;
+  }
+  
 //Setters
   public void setTurnTarget(double angle){
     turnTarget = angle;

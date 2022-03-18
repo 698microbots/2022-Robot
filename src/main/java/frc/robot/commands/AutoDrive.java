@@ -17,11 +17,13 @@ public class AutoDrive extends CommandBase {
   private int counter;
   private double ltime;
   private double limit;
+  private double offset;
 
   public AutoDrive(DriveTrainSubsystem driveTrain, double distance, double ltime, double limit) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.distance = distance;
+    offset = 0;
     this.ltime = ltime;
     this.limit = limit;
     addRequirements(driveTrain);
@@ -34,6 +36,7 @@ public class AutoDrive extends CommandBase {
     SmartDashboard.putString("AutoDrive Stat", "Auto driving has started!");
     driveTrain.resetEncoders();
     driveTrain.setDriveTarget(-distance*2048/2.75);
+    offset = 0;
     counter = 0;
   }
 
@@ -43,9 +46,15 @@ public class AutoDrive extends CommandBase {
     //calculate motor speeds
     driveTrain.PIDdrive(driveTrain.getEncoderPosition(), limit);
 
+    if(driveTrain.getRightVelocity() > driveTrain.getLeftVelocity()){
+      offset+= 0.002;
+    }else{
+      offset-= 0.002;
+    }
+
     //set motor speeds
     driveTrain.setLeftSpeed(driveTrain.getDriveOutput());
-    driveTrain.setRightSpeed(driveTrain.getDriveOutput());
+    driveTrain.setRightSpeed(driveTrain.getDriveOutput() - offset);
 
     //driveTrain.resetEncoders();
     //check if target is met
