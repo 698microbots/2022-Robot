@@ -64,6 +64,7 @@ public class AutoDrive extends CommandBase {
   public void end(boolean interrupted) {
     driveTrain.setLeftSpeed(0.0);
     driveTrain.setRightSpeed(0.0);
+    driveTrain.resetEncoders();
     System.out.println("Auto driving has ended!");
   }
 

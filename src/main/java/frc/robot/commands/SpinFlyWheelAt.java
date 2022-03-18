@@ -5,47 +5,40 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.IndexerSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
-public class IndexHold extends CommandBase {
-  /** Creates a new IndexHold. */
-  private final IndexerSubsystem index;
-  private int counter;
-  public IndexHold(IndexerSubsystem index) {
-    this.index = index;
-    counter = 0;
+public class SpinFlyWheelAt extends CommandBase {
+  /** Creates a new SpinFlyWheelAt. */
+  private final TurretSubsystem flyWheel;
+  private final double speed;
+  public SpinFlyWheelAt(TurretSubsystem flyWheel, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(index);
+    this.flyWheel = flyWheel;
+    this.speed = speed;
+    addRequirements(flyWheel);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    counter = 0;
+    flyWheel.runFlywheel(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    counter++;
-    index.runUpperIndexer(-0.05);
-    index.runLowerIndexer(Constants.indexMotorSpeedBottom);
+    flyWheel.runFlywheel(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    index.stopIndexer();
+    flyWheel.runFlywheel(speed);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter >= 10000/20){
-      return true;
-    }else{
-      return false;
-    }
+    return true;
   }
 }

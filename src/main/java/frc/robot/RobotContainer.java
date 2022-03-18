@@ -77,7 +77,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonRB.whenHeld(new ParallelCommandGroup(new IndexHold(index), new RunIntake(intake)));
+    buttonRB.toggleWhenPressed(new ParallelCommandGroup(new IndexHold(index), new AutoIntake(ballCounter, intake)));
     buttonB.whenHeld(new IndexHold(index));
     buttonA.whenHeld( new IndexShoot(index));
     buttonX.whenHeld(new ParallelCommandGroup(new IntakeReverse(intake), new TeleopRejected(index)));
@@ -105,22 +105,23 @@ public class RobotContainer {
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
       //new AutoTurn(driveTrain, 150.0, navX)
       //new AutoDrive(driveTrain, 10.0, 300),
+      new SpinFlyWheelAt(turret, 0.5),
       new AutoDrive(driveTrain, -95.0, 1500, 1),
       //  new AutoTimedDrive(driveTrain, 2000, -0.3)
        new AutonAim(limeLight, turret),  
        new ParallelCommandGroup(new RunFlywheel(turret, limeLight), 
       new SequentialCommandGroup(
         new IndexReverse(index),
-        new Wait(1200),
+        new Wait(Constants.HoldTime),
         new IndexShoot(index))),
        new AutoTurn(driveTrain, 40, navX, 500),
          new ParallelCommandGroup(new AutoDrive(driveTrain, 50, 1500, .075), new AutoIntake(ballCounter, intake), new IndexHold(index)),
         //  new TurnTurretTo(turret, -37.5),
-        new AutoTurn(driveTrain, 340, navX, 750),
+        new AutoTurn(driveTrain, -30, navX, 750),
          new AutonAim(limeLight, turret),
          new ParallelCommandGroup(new RunFlywheel(turret, limeLight), new SequentialCommandGroup(
          new IndexReverse(index),
-         new Wait(1200),
+         new Wait(Constants.HoldTime),
          new IndexShoot(index)))
     );
   }
