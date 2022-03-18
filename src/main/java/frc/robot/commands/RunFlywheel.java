@@ -34,7 +34,7 @@ public class RunFlywheel extends CommandBase {
   @Override
   public void initialize() {
     counter = 0;
-    turret.runFlywheel(0.3);
+    turret.runFlywheel(0.45);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -49,14 +49,14 @@ public class RunFlywheel extends CommandBase {
     }
 
     //put the calculated value in to runFlywheel
-    turret.runFlywheel(flyWheelSpeed*0.91);//adjusted from 91% for testing auto speed tuning
+    turret.runFlywheel(flyWheelSpeed*0.907);//adjusted from 91% for testing auto speed tuning
     counter++;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    turret.runFlywheel(0.5);
+    turret.runFlywheel(0.45);
     counter = 0;
   }
 

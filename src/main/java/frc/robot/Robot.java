@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  private Command m_testCommand;
   private RobotContainer m_robotContainer;
 
   /**
@@ -119,11 +120,28 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testInit() {
+    m_testCommand = m_robotContainer.getTestCommand();
     // Cancels all running commands at the start of test mode.
+    if (m_testCommand != null) {
+      m_testCommand.schedule();
+    }
     CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("NavX-Roll: ", m_robotContainer.navX.getRoll());
+    SmartDashboard.putNumber("NavX-Pitch: ", m_robotContainer.navX.getPitch());
+    SmartDashboard.putNumber("NavX-Angle: ", m_robotContainer.navX.getAngle());
+    SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
+    SmartDashboard.putNumber("NavX-RawGyroY: ", m_robotContainer.navX.getRawGyroY());
+    SmartDashboard.putNumber("Encoder Pos: ", m_robotContainer.driveTrain.getEncoderPosition());
+    SmartDashboard.putNumber("Drive Error:", m_robotContainer.driveTrain.getDriveError());
+
+    SmartDashboard.putNumber("Z-NavX displacement: ", m_robotContainer.navX.getDisplacementZ());
+    SmartDashboard.putNumber("X-NavX displacement: ", m_robotContainer.navX.getDisplacementX());
+    SmartDashboard.putNumber("Y-NavX displacement: ", m_robotContainer.navX.getDisplacementY());
+  }
 }

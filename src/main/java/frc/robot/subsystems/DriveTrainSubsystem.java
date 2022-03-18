@@ -93,6 +93,28 @@ public class DriveTrainSubsystem extends SubsystemBase {
     BackLeft.set(ControlMode.PercentOutput, speed);
   }
 
+  public void resetDrivePID(){
+    driveTarget = 0;
+    driveError = 0;
+    drivePrevError = 0;
+    driveP = 0;
+    driveI = 0;
+    driveD = 0;
+    driveOutput = 0;
+    potDriveOutput = 0;
+    prevDriveOutput = 0;
+  }
+
+  public void resetTurnPID(){
+    turnTarget = 0;
+    turnError = 0;
+    turnPrevError = 0;
+    turnP = 0;
+    turnI = 0;
+    turnD = 0;
+    turnOutput = 0;
+  }
+
   //takes in sensor input to turn robot into the correct angle
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;

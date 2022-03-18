@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -13,7 +14,7 @@ public class BallCounterSubsystem extends SubsystemBase {
   /** Creates a new BallCounter. **/
   
   private DigitalInput bottomPhotovalticSensor = new DigitalInput(Constants.bottomPhotovalticID); // class for port 1
-  private DigitalInput topPhotovolaticSenor = new DigitalInput(Constants.topPhotovalticID); // class for port 2
+  private AnalogInput topPhotovolaticSenor = new AnalogInput(0); // class for port 2
 
   
   public BallCounterSubsystem() {
@@ -27,7 +28,10 @@ public class BallCounterSubsystem extends SubsystemBase {
 
   public boolean topSensorStatus()
   {
-    return topPhotovolaticSenor.get();
+    if (topPhotovolaticSenor.getVoltage() > 3) 
+      return false;
+    else
+      return true;
   }
 
   @Override

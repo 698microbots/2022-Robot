@@ -14,10 +14,12 @@ import frc.robot.RobotContainer;
 public class IndexShoot extends CommandBase {
   /** Creates a new IndexShoot. */
   private final IndexerSubsystem index;
+  private final BallCounterSubsystem balls;
   private int counter;
-  public IndexShoot(IndexerSubsystem index) {
+  public IndexShoot(IndexerSubsystem index, BallCounterSubsystem balls) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.index = index;
+    this.balls = balls;
     addRequirements(index);
   }
 
@@ -45,7 +47,7 @@ public class IndexShoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter>10){
+    if(balls.topSensorStatus()){
       return true;
     }
     else{

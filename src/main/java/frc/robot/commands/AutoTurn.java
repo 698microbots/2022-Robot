@@ -60,6 +60,7 @@ public class AutoTurn extends CommandBase {
   public void end(boolean interrupted) {
     driveTrain.setLeftSpeed(0.0);
     driveTrain.setRightSpeed(0.0);
+    driveTrain.resetTurnPID();
     System.out.println("Automatic turning has ended!");
   }
 

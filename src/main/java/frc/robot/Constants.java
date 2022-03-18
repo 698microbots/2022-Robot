@@ -45,7 +45,7 @@ public final class Constants
 
     // auton drive PID constants
     //public static final int kTimeoutMs = 20;
-    public static final double driveAdjustment = 0.9;
+    public static final double driveAdjustment = 0.6;
     public static final int kPIDLoopIdx = 0;//run primary loop
     public static final double kF = 0;
     public static final double kP = 0.00005;
@@ -66,7 +66,7 @@ public final class Constants
     public static final double closestX = 160;
 
     // turn PID constants
-    public static final double turnkP = 0.007;
+    public static final double turnkP = 0.01;
     public static final double turnkI = 0.00;
     public static final double turnkD = 0;
 
@@ -105,11 +105,11 @@ public final class Constants
     public static final int turrentMotorID = 6;//need to figure out what this value is
     public static final double turretkP = 0.015;
     public static final double  turretIActZone = 10;
-    public static final double turretkI = 0.00024;
-    public static final double turretkD = 0.002;
+    public static final double turretkI = 0.00084;
+    public static final double turretkD = 0.008;
     public static final int flyWheelMotorID = 1;
     public static final double turretMotorGearRatio = 98;
-    public static final double flyWheelSpeed = 0.58;
+    public static double flyWheelSpeed = 0.58;
     public static final double turretMaxAngle = 62;//62
     public static final double turretMinAngle = -62; //-62
     public static final double limeLightInitAngle = 22.5; //22.5

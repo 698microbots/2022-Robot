@@ -63,7 +63,7 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
     turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
     //turret.setDefaultCommand(new AutoAim(limeLight, turret));
-    ballCounter.setDefaultCommand(new CountBalls(ballCounter));
+    // ballCounter.setDefaultCommand(new CountBalls(ballCounter));
     
 
     // Configure the button bindings
@@ -85,7 +85,7 @@ public class RobotContainer {
 
     buttonRB.toggleWhenPressed(new ParallelCommandGroup(new IndexHold(index), new RunIntake(intake)));
     buttonB.whenHeld(new IndexHold(index));
-    buttonA.whenHeld(new IndexShoot(index));
+    buttonA.whenHeld(new IndexShoot(index, ballCounter));
     buttonX.whenHeld(new ParallelCommandGroup(new IntakeReverse(intake), new TeleopRejected(index)));
     buttonY.toggleWhenPressed(new TeleopAutoAim(limeLight, turret));
     buttonRS.whenPressed(new RecenterTurret(turret));
@@ -98,7 +98,7 @@ public class RobotContainer {
         new AutonAim(limeLight2, turret),//if limeLight not in range, will shoot randomly
         new IndexReverse(index),
         new Wait(500),
-        new IndexShoot(index)
+        new IndexShoot(index, ballCounter)
       )),
       //shoots second ball
       new Wait(500),
@@ -107,7 +107,7 @@ public class RobotContainer {
           new AutonAim(limeLight2, turret),//if limeLight not in range, will shoot randomly
           new IndexReverse(index),
           new Wait(500),
-          new IndexShoot(index)
+          new IndexShoot(index, ballCounter)
         )),
         new RecenterTurret(turret)//might mess up stabilization
       ));
@@ -121,28 +121,33 @@ public class RobotContainer {
   public Command getAutonomousCommand(){
     //All commands that should be run in autonomous goes here
     return new SequentialCommandGroup( //parallel command is also possible new parallel command group
+      new Wait(2000),
       new SpinFlyWheelAt(flyWheel, 0.5),//20ms
-      new AutoDrive(driveTrain, -95.0, 1500, 1),//1500ms
+      new AutoDrive(driveTrain, -85.0, 3000, 1),//1500ms
        new AutonAim(limeLight, turret),  //2000ms
       new ParallelCommandGroup(new RunFlywheel(flyWheel, limeLight),//300ms
        new SequentialCommandGroup(
         new IndexReverse(index),//80ms
         new Wait(Constants.HoldTime),//500ms
-        new IndexShoot(index))),//200ms
-       new AutoTurn(driveTrain, 37.5, navX, 1500),//1500ms
-        new ParallelCommandGroup(new AutoDrive(driveTrain, 80, 1500, .075), new AutoIntake(ballCounter, intake), new IndexHold(index)),//1500ms
+        new IndexShoot(index, ballCounter))),//200ms
+       new AutoTurn(driveTrain, 40.5, navX, 3000),//2000ms
+        new ParallelCommandGroup(new AutoDrive(driveTrain, 60, 1500, 0.5), new AutoIntake(ballCounter, intake), new AutoIndexHold(index)),//1500ms
         //  new TurnTurretTo(turret, -37.5),
         new AutoTurn(driveTrain, -30, navX, 1500),//1500ms
          new AutonAim(limeLight, turret),//2000ms
          new ParallelCommandGroup(new RunFlywheel(flyWheel, limeLight), new SequentialCommandGroup(//300ms
          new IndexReverse(index),//20ms
          new Wait(Constants.HoldTime),//500ms
-         new IndexShoot(index))),//200ms
+         new IndexShoot(index, ballCounter))),//200ms
 
          //drive help
          new AutoDrive(driveTrain, -40, 1000, 0.5),//1000ms
          new AutoTurn(driveTrain, 180, navX, 2000),//1000ms
         new RecenterTurret(turret)//rest of the time
     );
+  }
+
+  public Command getTestCommand(){
+    return new AutoTurn(driveTrain, 90, navX, 3000);
   }
 }

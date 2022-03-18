@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.IndexerSubsystem;
 
-public class IndexHold extends CommandBase {
+public class AutoIndexHold extends CommandBase {
   /** Creates a new IndexHold. */
   private final IndexerSubsystem index;
   private int counter;
-  public IndexHold(IndexerSubsystem index) {
+  public AutoIndexHold(IndexerSubsystem index) {
     this.index = index;
     counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -42,6 +42,10 @@ public class IndexHold extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-      return false;
+      if(counter >= 2000/20){
+        return true;
+      }else{
+        return false;
+      }
   }
 }

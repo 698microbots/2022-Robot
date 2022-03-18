@@ -32,9 +32,9 @@ public class AutoDrive extends CommandBase {
   public void initialize() {
     System.out.println("Auto driving has started!");
     SmartDashboard.putString("AutoDrive Stat", "Auto driving has started!");
+    driveTrain.resetEncoders();
     driveTrain.setDriveTarget(-distance*2048/2.75);
     counter = 0;
-    driveTrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -65,6 +65,7 @@ public class AutoDrive extends CommandBase {
     driveTrain.setLeftSpeed(0.0);
     driveTrain.setRightSpeed(0.0);
     driveTrain.resetEncoders();
+    driveTrain.resetDrivePID();
     System.out.println("Auto driving has ended!");
   }
 
