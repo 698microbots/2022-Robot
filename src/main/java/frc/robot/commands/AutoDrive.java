@@ -46,11 +46,11 @@ public class AutoDrive extends CommandBase {
     //calculate motor speeds
     driveTrain.PIDdrive(driveTrain.getEncoderPosition(), limit);
 
-    if(driveTrain.getRightVelocity() > driveTrain.getLeftVelocity()){
-      offset+= 0.002;
-    }else{
-      offset-= 0.002;
-    }
+    // if(driveTrain.getRightVelocity() > driveTrain.getLeftVelocity()){
+    //   offset+= 0.002;
+    // }else{
+    //   offset-= 0.002;
+    // }
 
     //set motor speeds
     driveTrain.setLeftSpeed(driveTrain.getDriveOutput());

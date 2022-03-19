@@ -49,7 +49,7 @@ public class RunFlywheel extends CommandBase {
     }
 
     //put the calculated value in to runFlywheel
-    turret.runFlywheel(flyWheelSpeed*0.906);//adjusted from 91% for testing auto speed tuning
+    turret.runFlywheel(flyWheelSpeed*0.904);//adjusted from 91% for testing auto speed tuning
     counter++;
   }
 

@@ -6,17 +6,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.BallCounterSubsystem;
 import frc.robot.subsystems.IndexerSubsystem;
 
 public class AutoIndexHold extends CommandBase {
   /** Creates a new IndexHold. */
   private final IndexerSubsystem index;
+  private final BallCounterSubsystem ballCounter;
   private int counter;
-  public AutoIndexHold(IndexerSubsystem index) {
+  public AutoIndexHold(IndexerSubsystem index, BallCounterSubsystem ballCounter) {
     this.index = index;
+    this.ballCounter = ballCounter;
     counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(index);
+    addRequirements(ballCounter);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +33,7 @@ public class AutoIndexHold extends CommandBase {
   @Override
   public void execute() {
     counter++;
-    index.runUpperIndexer(-0.2);
+    index.runUpperIndexer(-0.3);
     index.runLowerIndexer(Constants.indexMotorSpeedBottom);
   }
 
@@ -42,7 +46,7 @@ public class AutoIndexHold extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-      if(counter >= 2000/20){
+      if(counter >= 1500/20){
         return true;
       }else{
         return false;

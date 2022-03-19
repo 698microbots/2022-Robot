@@ -8,25 +8,31 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallCounterSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsytem;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class AutoIntake extends CommandBase {
   /** Creates a new AutoIntake. */
   private final BallCounterSubsystem ballCounter;
   private final IntakeSubsytem intake;
-  public AutoIntake(BallCounterSubsystem ballCounter, IntakeSubsytem intake) {
+  private final IndexerSubsystem index;
+  public AutoIntake(BallCounterSubsystem ballCounter, IntakeSubsytem intake, IndexerSubsystem index) {
     this.ballCounter = ballCounter;
     this.intake = intake;
+    this.index = index;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(ballCounter);
     addRequirements(intake);
+    addRequirements(index);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     intake.intputBall();
+    index.runLowerIndexer(Constants.indexMotorSpeedBottom);
     RobotContainer.Xbox.setRumble(RumbleType.kRightRumble, 1.0);
     
   }
@@ -41,6 +47,7 @@ public class AutoIntake extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.stopMotor();
+    index.stopIndexer();
     RobotContainer.Xbox.setRumble(RumbleType.kRightRumble, 0.0);
   }
 

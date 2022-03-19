@@ -45,7 +45,7 @@ public final class Constants
 
     // auton drive PID constants
     //public static final int kTimeoutMs = 20;
-    public static final double driveAdjustment = 0.6;
+    public static final double driveAdjustment = 0.85;
     public static final int kPIDLoopIdx = 0;//run primary loop
     public static final double kF = 0;
     public static final double kP = 0.00005;
@@ -59,14 +59,14 @@ public final class Constants
 
     // Intake Constants
     public static final int deviceIdIntake = 6;
-    public static final double intakeMotorSpeed = 0.55;
+    public static final double intakeMotorSpeed = 0.4;
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
     public static final double closestY = 100;
     public static final double closestX = 160;
 
     // turn PID constants
-    public static final double turnkP = 0.01;
+    public static final double turnkP = 0.02;
     public static final double turnkI = 0.00;
     public static final double turnkD = 0;
 

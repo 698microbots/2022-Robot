@@ -122,10 +122,10 @@ public class Robot extends TimedRobot {
   public void testInit() {
     m_testCommand = m_robotContainer.getTestCommand();
     // Cancels all running commands at the start of test mode.
+    CommandScheduler.getInstance().cancelAll();
     if (m_testCommand != null) {
       m_testCommand.schedule();
     }
-    CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */

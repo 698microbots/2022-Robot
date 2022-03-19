@@ -83,8 +83,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   //pass in a double input for setting the right side speed.
   public void setRightSpeed(double speed){
-    FrontRight.set(ControlMode.PercentOutput, speed);
-    BackRight.set(ControlMode.PercentOutput, speed);
+    FrontRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
+    BackRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
   }
 
   //pass in a double input for setting the left side speed.
@@ -145,15 +145,15 @@ public class DriveTrainSubsystem extends SubsystemBase {
       driveD = driveError - drivePrevError;
       
       
-      potDriveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
-      if(potDriveOutput - prevDriveOutput > limit){
+      driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+      if(driveOutput > limit){
         driveOutput = limit;
       }
-      else{
-        driveOutput = potDriveOutput;
+
+      if(driveOutput < -limit){
+        driveOutput = -limit;
       }
 
-      
       drivePrevError = driveError;
       prevDriveOutput = driveOutput;
       SmartDashboard.putNumber("PID Drive output:", driveOutput);
@@ -204,7 +204,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double getLeftVelocity(){
     return (FrontLeft.getSelectedSensorVelocity() + BackLeft.getSelectedSensorVelocity())/2;
   }
-  
+
 //Setters
   public void setTurnTarget(double angle){
     turnTarget = angle;
