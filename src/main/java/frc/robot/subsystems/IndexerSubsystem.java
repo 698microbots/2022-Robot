@@ -14,14 +14,26 @@ public class IndexerSubsystem extends SubsystemBase {
   /** Creates a new Indexer. */
   private final CANSparkMax upperSparkMax;
   private final CANSparkMax lowerSparkMax;
+  private boolean reverse;
 
   public IndexerSubsystem() {
     this.upperSparkMax = new CANSparkMax(Constants.upperIndexerID, MotorType.kBrushless);
     this.lowerSparkMax = new CANSparkMax(Constants.lowerIndexerID, MotorType.kBrushless);
+    reverse = false;
   }
+  
 
   public void runLowerIndexer(double speed){
     lowerSparkMax.set(speed);
+    if(speed<0){
+      reverse = true;
+    } else{
+      reverse = false;
+    }
+  }
+  
+  public boolean isReversed(){
+    return reverse;
   }
 
   public void runUpperIndexer(double speed){

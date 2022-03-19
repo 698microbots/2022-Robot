@@ -7,23 +7,27 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.BallCounterSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 
 public class CountBalls extends CommandBase {
   /** Creates a new CountBalls. */
   private BallCounterSubsystem ballCounter;
+  private IndexerSubsystem index;
   private boolean latchTop;
   private boolean latchBottom;
-  public CountBalls(BallCounterSubsystem ballCounter) {
+  public CountBalls(BallCounterSubsystem ballCounter, IndexerSubsystem index) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.ballCounter = ballCounter;
+    this.index = index;
     addRequirements(this.ballCounter);
+    addRequirements(index);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    latchBottom = false;
-    latchTop = false;
+    latchBottom = true;
+    latchTop = true;
     RobotContainer.ballCount = 0;
   }
 
@@ -31,25 +35,31 @@ public class CountBalls extends CommandBase {
   @Override
   public void execute() {
     System.out.println("" + ballCounter.topSensorStatus());
-    if (ballCounter.bottomSensorStatus()){
+    if (!ballCounter.bottomSensorStatus()){
       if (!latchBottom){
-        RobotContainer.ballCount++;
-        System.out.println("Ball added: " + RobotContainer.ballCount);
+        if(!index.isReversed()){
+          RobotContainer.ballCount++;
+          System.out.println("Ball added: " + RobotContainer.ballCount);
+        } else{
+          RobotContainer.ballCount--;
+          System.out.println("Ball removed: " + RobotContainer.ballCount);
+        }
+        
         latchBottom = true;
       }
     }else {
       latchBottom = false;
     }
 
-    // if (ballCounter.topSensorStatus()){
-    //     if (!latchTop){
-    //       RobotContainer.ballCount--;
-    //       System.out.println("Ball removed: " + RobotContainer.ballCount);
-    //       latchTop = true;
-    //     }
-    //   }else {
-    //     latchTop = false;
-    //   }
+    if (!ballCounter.topSensorStatus()){
+        if (!latchTop){
+          RobotContainer.ballCount--;
+          System.out.println("Ball removed: " + RobotContainer.ballCount);
+          latchTop = true;
+        }
+      }else {
+        latchTop = false;
+      }
     }
 
   // Called once the command ends or is interrupted.

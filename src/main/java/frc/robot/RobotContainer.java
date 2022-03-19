@@ -102,7 +102,6 @@ public class RobotContainer {
         new IndexShoot(index, ballCounter)
       )),
       //shoots second ball
-      new Wait(500),
       new ParallelCommandGroup(
         new RunFlywheel(flyWheel, limeLight), new SequentialCommandGroup(
           new AutonAim(limeLight2, turret),//if limeLight not in range, will shoot randomly
@@ -162,7 +161,7 @@ public class RobotContainer {
       new RunFlywheel(flyWheel, limeLight), new SequentialCommandGroup(
         new AutonAim(limeLight2, turret),//if limeLight not in range, will shoot randomly
         //new IndexReverse(index),
-        new Wait(1200),
+        new Wait(1000),
         new IndexShoot(index, ballCounter)
       )),
       //shoots second ball
@@ -170,7 +169,7 @@ public class RobotContainer {
         new RunFlywheel(flyWheel, limeLight), new SequentialCommandGroup(
           new AutonAim(limeLight2, turret),//if limeLight not in range, will shoot randomly
           //new IndexReverse(index),
-          new Wait(1200),
+          new Wait(1000),
           new IndexShoot(index, ballCounter)
         )),
         new RecenterTurret(turret)//might mess up stabilization
