@@ -4,47 +4,50 @@
 
 package frc.robot.commands;
 
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TurretSubsystem;
-import frc.robot.subsystems.VisionSubsystems;
 
-public class AutoAim extends CommandBase {
-  /** Creates a new AutoAim. */
-  private final VisionSubsystems limelight;
+public class RecenterTurret extends CommandBase {
+  /** Creates a new RecenterTurret. */
   private final TurretSubsystem turret;
-  public AutoAim(VisionSubsystems limelight, TurretSubsystem turret) {
-    this.limelight = limelight;
+  private int counter;
+  public RecenterTurret(TurretSubsystem turret) {
     this.turret = turret;
+    counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(limelight);
     addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(limelight.tracking()){
-      turret.turnTurret(turret.turretPID(limelight.getH_angle()));
+    turret.turnTurret(-(turret.turretPID(turret.getTurretAngle())));
+    if(Math.abs(turret.getTurretAngle())<= 1){
+      counter++;
     }else{
-      turret.turnTurret(turret.turretPID(-turret.getTurretAngle()));//sets the turret back to center if not tracking
+      counter = 0;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    turret.turnTurret(0.0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(counter >= 10){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

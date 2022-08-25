@@ -7,34 +7,35 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.BallCounter;
-import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.BallCounterSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.RobotContainer;
 
 public class IndexShoot extends CommandBase {
   /** Creates a new IndexShoot. */
-  private final Indexer index;
-  private int ballCount;
-  public IndexShoot(Indexer index) {
+  private final IndexerSubsystem index;
+  private final BallCounterSubsystem balls;
+  private int counter;
+  public IndexShoot(IndexerSubsystem index, BallCounterSubsystem balls) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.index = index;
+    this.balls = balls;
     addRequirements(index);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ballCount = RobotContainer.ballCounter.getBalls();
+    counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(ballCount == RobotContainer.ballCounter.getBalls()){
       index.runLowerIndexer(Constants.indexMotorSpeedBottom);
       index.runUpperIndexer(Constants.indexMotorSpeedTop);
-    }
-    //ballCount = RobotContainer.ballCounter.getBalls();
+      counter++;
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -46,9 +47,10 @@ public class IndexShoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ballCount != RobotContainer.ballCounter.getBalls()){
+    if(balls.topSensorStatus()){
       return true;
-    }else{
+    }
+    else{
       return false;
     }
   }

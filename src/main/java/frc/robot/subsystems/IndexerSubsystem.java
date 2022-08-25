@@ -10,18 +10,30 @@ import frc.robot.Constants;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class Indexer extends SubsystemBase {
+public class IndexerSubsystem extends SubsystemBase {
   /** Creates a new Indexer. */
   private final CANSparkMax upperSparkMax;
   private final CANSparkMax lowerSparkMax;
+  private boolean reverse;
 
-  public Indexer() {
+  public IndexerSubsystem() {
     this.upperSparkMax = new CANSparkMax(Constants.upperIndexerID, MotorType.kBrushless);
     this.lowerSparkMax = new CANSparkMax(Constants.lowerIndexerID, MotorType.kBrushless);
+    reverse = false;
   }
+  
 
   public void runLowerIndexer(double speed){
     lowerSparkMax.set(speed);
+    if(speed<0){
+      reverse = true;
+    } else{
+      reverse = false;
+    }
+  }
+  
+  public boolean isReversed(){
+    return reverse;
   }
 
   public void runUpperIndexer(double speed){
@@ -31,6 +43,10 @@ public class Indexer extends SubsystemBase {
   public void stopIndexer(){
     lowerSparkMax.set(0.0);
     upperSparkMax.set(0.0);
+  }
+  
+  public void stopLowerIndexer(){
+    lowerSparkMax.set(0.0);
   }
 
   @Override

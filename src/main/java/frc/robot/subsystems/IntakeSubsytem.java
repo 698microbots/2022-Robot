@@ -9,14 +9,12 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Intake extends SubsystemBase {
+public class IntakeSubsytem extends SubsystemBase {
   /** Creates a new Intake. */
   private final CANSparkMax intakeMotor;  
-  private final PixyCamSubsystem pixy;
   
-  public Intake() {
+  public IntakeSubsytem() {
     intakeMotor = new CANSparkMax(Constants.deviceIdIntake, CANSparkMax.MotorType.kBrushless);
-    pixy = new PixyCamSubsystem();
   }
 
   public void intputBall()

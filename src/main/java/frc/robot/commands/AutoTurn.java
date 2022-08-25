@@ -6,22 +6,27 @@ package frc.robot.commands;
 
 import java.util.function.Supplier;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class AutoTurn extends CommandBase {
   /** Creates a new AutoTurn. */
   private final DriveTrainSubsystem driveTrain;
   private final double target;
-  private final Supplier<Float> navXInput;
+  private final AHRS navX;
   private int counter;
+  private final int time;
 
-  public AutoTurn(DriveTrainSubsystem driveTrain, double target, Supplier<Float> navXInput) {
+  public AutoTurn(DriveTrainSubsystem driveTrain, double target, AHRS navX, int millis) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.target = target;
     counter = 0;
-    this.navXInput = navXInput;
+    this.navX = navX;
+    time = millis;
     addRequirements(driveTrain);
   }
 
@@ -29,33 +34,33 @@ public class AutoTurn extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Automatic turning has started!");
-    driveTrain.setTurnTarget(driveTrain.getTurnTarget() + target);
+    driveTrain.setTurnTarget(target);
+    counter = 0;
     //need to check if reset encoders is still neccessary.
-    driveTrain.resetEncoders();
+    // driveTrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     //calculate turn speed
-    double sensorInput = (double) navXInput.get();
+    double sensorInput = (double) navX.getAngle();
     driveTrain.PIDturn(sensorInput);
 
     //set turn speed
     driveTrain.setRightSpeed(driveTrain.getTurnOutput());
     driveTrain.setLeftSpeed(-driveTrain.getTurnOutput());
 
+    driveTrain.resetEncoders();
     //Increment the counter when error is small enough
-    if(driveTrain.getPIDTurnError() < 0.1){
-      counter++;
-    }else{
-      counter = 0;
-    }
+    counter++;
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    driveTrain.setLeftSpeed(0.0);
+    driveTrain.setRightSpeed(0.0);
+    driveTrain.resetTurnPID();
     System.out.println("Automatic turning has ended!");
   }
 
@@ -63,11 +68,10 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
     //if the counter is big enough, this method returns true causing the command to end.
-    if(counter > 10){
+    if(counter >= time/20){
       return true;
     }else{
-      counter = 0;
-    return false;
+     return false;
     }
   }
 }

@@ -5,48 +5,41 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.IndexerSubsystem;
-import frc.robot.subsystems.IntakeSubsytem;
-public class IndexReverse extends CommandBase {
-  /** Creates a new IndexReverse. */
-  private final IndexerSubsystem index;
-  private int counter;
+import frc.robot.subsystems.FlyWheelSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
-  public IndexReverse(IndexerSubsystem index) {
-    this.index = index;
-    counter = 0;
+public class SpinFlyWheelAt extends CommandBase {
+  /** Creates a new SpinFlyWheelAt. */
+  private final FlyWheelSubsystem flyWheel;
+  private final double speed;
+  public SpinFlyWheelAt(FlyWheelSubsystem flyWheel, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(index);
+    this.flyWheel = flyWheel;
+    this.speed = speed;
+    addRequirements(flyWheel);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    counter = 0;
+    flyWheel.runFlywheel(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.runLowerIndexer(-Constants.indexMotorSpeedBottom);
-    index.runUpperIndexer(-Constants.indexMotorSpeedTop);
-    counter++;
+    flyWheel.runFlywheel(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    index.stopIndexer();
+    flyWheel.runFlywheel(speed);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter>4){
-      return true;
-    }else{
-      return false;
-    }
+    return true;
   }
 }

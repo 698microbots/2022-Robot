@@ -12,7 +12,6 @@ import frc.robot.Constants;
 public class TurretSubsystem extends SubsystemBase {
   /** Creates a new TurretSubsystem. */
   private final TalonFX turretMotor = new TalonFX(Constants.turrentMotorID);
-  private final TalonFX flyWheelMotor = new TalonFX(Constants.flyWheelMotorID);
 
   //turretPID variables
   private double turretError;
@@ -43,11 +42,16 @@ public class TurretSubsystem extends SubsystemBase {
 
     turretError = limelightInput;
     turretP = turretError;
-    turretI += turretError;
+    if(turretError<Constants.turretIActZone){
+      turretI+=turretError;
+    }
+    else{
+      turretI=0;
+    }
     turretD = turretError - turretPrevError;
     turretPrevError = turretError;
 
-    turretOutput = Constants.turretkP*turretP + Constants.turretkI*turretI + Constants.turretkD*turretD;
+    turretOutput = 0.75*(Constants.turretkP*turretP + Constants.turretkI*turretI + Constants.turretkD*turretD);
 
     return turretOutput;
   }
@@ -71,14 +75,21 @@ public class TurretSubsystem extends SubsystemBase {
       }
     }
   }
-  public void runFlywheel(double input) {
-    flyWheelMotor.set(ControlMode.PercentOutput, input);
-  }
-
+  
   public double getTurretAngle(){
     return turretAngle;
   }
 
+  public double getTurretPIDOutput() {
+    return turretOutput;
+  }
+
+  public double getTurretError(){
+    return turretError;
+  }
+
+  //setter
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

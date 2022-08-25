@@ -4,46 +4,57 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import frc.robot.subsystems.BallCounterSubsystem;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsytem;
-public class IndexReverse extends CommandBase {
-  /** Creates a new IndexReverse. */
-  private final IndexerSubsystem index;
-  private int counter;
+import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
-  public IndexReverse(IndexerSubsystem index) {
+public class AutoIntake extends CommandBase {
+  /** Creates a new AutoIntake. */
+  private final BallCounterSubsystem ballCounter;
+  private final IntakeSubsytem intake;
+  private final IndexerSubsystem index;
+  public AutoIntake(BallCounterSubsystem ballCounter, IntakeSubsytem intake, IndexerSubsystem index) {
+    this.ballCounter = ballCounter;
+    this.intake = intake;
     this.index = index;
-    counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(ballCounter);
+    addRequirements(intake);
     addRequirements(index);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    counter = 0;
+    intake.intputBall();
+    index.runLowerIndexer(Constants.indexMotorSpeedBottom);
+    RobotContainer.Xbox.setRumble(RumbleType.kRightRumble, 1.0);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.runLowerIndexer(-Constants.indexMotorSpeedBottom);
-    index.runUpperIndexer(-Constants.indexMotorSpeedTop);
-    counter++;
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intake.stopMotor();
     index.stopIndexer();
+    RobotContainer.Xbox.setRumble(RumbleType.kRightRumble, 0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter>4){
+    if(ballCounter.bottomSensorStatus() == true){
       return true;
     }else{
       return false;

@@ -4,12 +4,18 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.IntakeSubsytem;
 
-public class AutoTrackingBlueBall extends CommandBase {
-  /** Creates a new AutoTrackingBlueBall. */
-  public AutoTrackingBlueBall() {
+public class IntakeReverse extends CommandBase {
+  /** Creates a new ReverseIntake. */
+  private final IntakeSubsytem intake;
+
+  public IntakeReverse(IntakeSubsytem intake) {
+    this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
@@ -18,11 +24,15 @@ public class AutoTrackingBlueBall extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    intake.outputBall();
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    intake.stopMotor();
+  }
 
   // Returns true when the command should end.
   @Override

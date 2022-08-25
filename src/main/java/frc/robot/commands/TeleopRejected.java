@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsytem;
-public class IndexReverse extends CommandBase {
+public class TeleopRejected extends CommandBase {
   /** Creates a new IndexReverse. */
   private final IndexerSubsystem index;
   private int counter;
 
-  public IndexReverse(IndexerSubsystem index) {
+  public TeleopRejected(IndexerSubsystem index) {
     this.index = index;
     counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -43,10 +43,6 @@ public class IndexReverse extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(counter>4){
-      return true;
-    }else{
       return false;
-    }
   }
 }

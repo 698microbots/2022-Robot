@@ -36,6 +36,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private double driveI;
   private double driveD;
   private double driveOutput;
+  private double potDriveOutput;
+  private double prevDriveOutput;
 
 
 //Constructors
@@ -50,6 +52,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
     FrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     BackRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     BackLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    FrontLeft.configReverseSoftLimitEnable(false);
+    FrontLeft.configForwardSoftLimitEnable(false);
+    FrontRight.configReverseSoftLimitEnable(false);
+    FrontRight.configForwardSoftLimitEnable(false);
+    BackLeft.configReverseSoftLimitEnable(false);
+    BackLeft.configForwardSoftLimitEnable(false);
+    BackRight.configReverseSoftLimitEnable(false);
+    BackRight.configForwardSoftLimitEnable(false);
     //turn variables
     turnTarget = 0;
     turnError = 0;
@@ -66,13 +76,15 @@ public class DriveTrainSubsystem extends SubsystemBase {
     driveI = 0;
     driveD = 0;
     driveOutput = 0;
+    potDriveOutput = 0;
+    prevDriveOutput = 0;
   }
 //Methods
 
   //pass in a double input for setting the right side speed.
   public void setRightSpeed(double speed){
-    FrontRight.set(ControlMode.PercentOutput, speed);
-    BackRight.set(ControlMode.PercentOutput, speed);
+    FrontRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
+    BackRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
   }
 
   //pass in a double input for setting the left side speed.
@@ -81,39 +93,71 @@ public class DriveTrainSubsystem extends SubsystemBase {
     BackLeft.set(ControlMode.PercentOutput, speed);
   }
 
+  public void resetDrivePID(){
+    driveTarget = 0;
+    driveError = 0;
+    drivePrevError = 0;
+    driveP = 0;
+    driveI = 0;
+    driveD = 0;
+    driveOutput = 0;
+    potDriveOutput = 0;
+    prevDriveOutput = 0;
+  }
+
+  public void resetTurnPID(){
+    turnTarget = 0;
+    turnError = 0;
+    turnPrevError = 0;
+    turnP = 0;
+    turnI = 0;
+    turnD = 0;
+    turnOutput = 0;
+  }
+
   //takes in sensor input to turn robot into the correct angle
   public void PIDturn(double sensorInput){
     turnError = turnTarget - sensorInput;
     turnP = turnError;
-    turnI += turnError;
+    if(turnError<Constants.IactZone){
+      turnI += turnError;
+    } else{
+      turnI=0;
+    }
+
     turnD = turnError - turnPrevError;
     
-    turnPrevError = turnError;
+
 
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
-    SmartDashboard.putNumber("PID output:", turnOutput);
-    
+    //SmartDashboard.putNumber("PID output:", turnOutput);
+    turnPrevError = turnError;
     // clamp output between -100% and 100%
     // if(output >= 1) output = 1;
     // if(output <= -1) output = -1;
 
   }
 
-    public void PIDdrive(float sensorInput) {
-      
-
+    public void PIDdrive(double sensorInput, double limit) {
       driveError = driveTarget - sensorInput;
       driveP = driveError;
       driveI += driveError;
       driveD = driveError - drivePrevError;
-      drivePrevError = driveError;
+      
       
       driveOutput = Constants.kP*driveP + Constants.kI*driveI + Constants.kD*driveD;
+      if(driveOutput > limit){
+        driveOutput = limit;
+      }
+
+      if(driveOutput < -limit){
+        driveOutput = -limit;
+      }
+
+      drivePrevError = driveError;
+      prevDriveOutput = driveOutput;
       SmartDashboard.putNumber("PID Drive output:", driveOutput);
 
-      setRightSpeed(driveOutput);
-      
-      setLeftSpeed(driveOutput);
     }  
 
   public void resetEncoders(){
@@ -148,6 +192,19 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double getDriveOutput(){
     return driveOutput;
   }
+
+  public double getEncoderPosition(){
+    return (FrontRight.getSelectedSensorPosition()+BackRight.getSelectedSensorPosition()+FrontLeft.getSelectedSensorPosition()+BackLeft.getSelectedSensorPosition())/4;
+  }
+
+  public double getRightVelocity(){
+    return (FrontRight.getSelectedSensorVelocity() + BackRight.getSelectedSensorVelocity())/2;
+  }
+
+  public double getLeftVelocity(){
+    return (FrontLeft.getSelectedSensorVelocity() + BackLeft.getSelectedSensorVelocity())/2;
+  }
+
 //Setters
   public void setTurnTarget(double angle){
     turnTarget = angle;
@@ -156,6 +213,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void setDriveTarget(double encoderUnit){
     driveTarget = encoderUnit;
   }
+
 
   @Override
   public void periodic() {

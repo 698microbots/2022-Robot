@@ -44,33 +44,35 @@ public final class Constants
     public static final int Xbox_Button_RS = 10;
 
     // auton drive PID constants
-    public static final int kTimeoutMs = 20;
+    //public static final int kTimeoutMs = 20;
+    public static final double driveAdjustment = 0.85;
     public static final int kPIDLoopIdx = 0;//run primary loop
     public static final double kF = 0;
-    public static final double kP = 0;
-    public static final double kI = 0;
-    public static final double kD = 0.5;
+    public static final double kP = 0.00005;
+    public static final double kI = 0.0;
+    public static final double kD = 0;
 
     // Index Constants
-    public static final double indexMotorSpeedBottom = 0.5;
+    public static final double indexMotorSpeedBottom = 0.3;
     public static final double indexMotorSpeedTop = 0.5;
 
 
     // Intake Constants
     public static final int deviceIdIntake = 6;
-    public static final double intakeMotorSpeed = 0.42;
+    public static final double intakeMotorSpeed = 0.4;
     public static final int pistonID = 1;   
     public static final double ampSpike = .1;
     public static final double closestY = 100;
     public static final double closestX = 160;
+
     // turn PID constants
-    public static final double turnkP = 0.01;
-    public static final double turnkI = 0;
+    public static final double turnkP = 0.02;
+    public static final double turnkI = 0.00;
     public static final double turnkD = 0;
 
     // Vision constants
     public static final double goalHeight = 107;
-    public static final double limeLightHeight = 10;
+    public static final double limeLightHeight = 32;
 
     //PixyCamera Constants
     public static final int pixyWidth = 316;
@@ -93,8 +95,8 @@ public final class Constants
     public static final int y2Range = 207;
 
     // Photovoltaic Sensor IDs
-    public static final int PhotovoltaicID1 = 8;
-    public static final int PhotovoltaicID2 = 3;
+    public static final int topPhotovalticID = 8;
+    public static final int bottomPhotovalticID = 2;
 
     //Auto ball driving
     public static final int turnAggressiveness = 2;
@@ -102,13 +104,16 @@ public final class Constants
     //Turret Constants
     public static final int turrentMotorID = 6;//need to figure out what this value is
     public static final double turretkP = 0.015;
-    public static final double turretkI = 0.001;
-    public static final double turretkD = 0;
+    public static final double  turretIActZone = 10;
+    public static final double turretkI = 0.00084;
+    public static final double turretkD = 0.008;
     public static final int flyWheelMotorID = 1;
     public static final double turretMotorGearRatio = 98;
-    public static final double flyWheelSpeed = 0.58;
+    public static double flyWheelSpeed = 0.58;
     public static final double turretMaxAngle = 62;//62
     public static final double turretMinAngle = -62; //-62
+    public static final double limeLightInitAngle = 22.5; //22.5
+
 
     //SparkMax Motor IDs
     public static final int lowerIndexerID = 9;
@@ -117,5 +122,12 @@ public final class Constants
     // Ball counter constants
     public static final int PortID1 = 8;
     public static final int PortID2 = 3;
+    public static final double IactZone = 0;
 
+<<<<<<< HEAD
 }
+=======
+    //Wait Constants
+    public static final int HoldTime = 500;
+}
+>>>>>>> 021e87b7e1414b5b45e22940761bb41568766b62
