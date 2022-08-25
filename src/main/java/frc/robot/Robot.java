@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.smartdashboard.*;
-import frc.robot.subsystems.BallCounter;
+//import frc.robot.subsystems.BallCounter;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -71,14 +71,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     //print pixy tracking information
-<<<<<<< HEAD
-    SmartDashboard.putNumber("Angle From Pixy: ", m_robotContainer.pixy2.getBlockXangle(0));//Just testing code for pixy angle
-    SmartDashboard.putNumber("Pixy Block0 X-coor: ", m_robotContainer.pixy2.getBlockXcoordinates(0));
-    SmartDashboard.putNumber("Pixy Block0 Y-coor: ", m_robotContainer.pixy2.getBlockYcoordinates(0));
-    SmartDashboard.putNumber("Block Signature: ", m_robotContainer.pixy2.getBlockSignature(0));
-    SmartDashboard.putNumber("Current Cargo Loaded", BallCounter.getBalls());
-    }
-=======
     SmartDashboard.putNumber("NavX-Yaw: ", m_robotContainer.navX.getYaw());
     SmartDashboard.putNumber("NavX-Roll: ", m_robotContainer.navX.getRoll());
     SmartDashboard.putNumber("NavX-Pitch: ", m_robotContainer.navX.getPitch());
@@ -94,7 +86,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("X-NavX displacement: ", m_robotContainer.navX.getDisplacementX());
     SmartDashboard.putNumber("Y-NavX displacement: ", m_robotContainer.navX.getDisplacementY());
   }
->>>>>>> 021e87b7e1414b5b45e22940761bb41568766b62
 
   @Override
   public void teleopInit() {

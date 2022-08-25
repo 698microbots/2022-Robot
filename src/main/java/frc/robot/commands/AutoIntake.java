@@ -55,7 +55,7 @@ public class AutoIntake extends CommandBase {
   @Override
   public boolean isFinished() {
     if(ballCounter.bottomSensorStatus() == true){
-      return true;
+      return true; //?
     }else{
       return false;
     }

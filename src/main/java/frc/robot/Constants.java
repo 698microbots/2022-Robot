@@ -124,10 +124,6 @@ public final class Constants
     public static final int PortID2 = 3;
     public static final double IactZone = 0;
 
-<<<<<<< HEAD
-}
-=======
     //Wait Constants
     public static final int HoldTime = 500;
 }
->>>>>>> 021e87b7e1414b5b45e22940761bb41568766b62

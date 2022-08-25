@@ -4,22 +4,12 @@
 
 // package frc.robot.subsystems;
 
-<<<<<<< HEAD
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import io.github.pseudoresonance.pixy2api.*;
-import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
-import io.github.pseudoresonance.pixy2api.links.SPILink;
-import java.util.ArrayList;
-import java.util.function.Supplier;
-=======
 // import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import frc.robot.Constants;
 // import io.github.pseudoresonance.pixy2api.*;
 // import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 // import io.github.pseudoresonance.pixy2api.links.SPILink;
 // import java.util.ArrayList;
->>>>>>> 021e87b7e1414b5b45e22940761bb41568766b62
 
 // public class PixyCamSubsystem extends SubsystemBase {
 //   /** Creates a new PixyCam. */
@@ -27,14 +17,6 @@ import java.util.function.Supplier;
 //   private ArrayList<Block> blocks;
 //   private int blockCount;
 
-<<<<<<< HEAD
-  public PixyCamSubsystem() {
-    pixy2 = Pixy2.createInstance(new SPILink());//initialize pixy2 for SPI usage
-    pixy2.init();//actually initialize
-    pixy2.getCCC().getBlocks(true, 3, 5);//starts the initial calculation done
-    blocks = pixy2.getCCC().getBlockCache();//stores all block data into blocks arrayList
-  }
-=======
 //   //Pixy horizontal PID vars
 //   private double hTarget;
 //   private double hError;
@@ -72,7 +54,6 @@ import java.util.function.Supplier;
 
 //     return hOutput;
 //   }
->>>>>>> 021e87b7e1414b5b45e22940761bb41568766b62
 
 //   //getters
 //   public int getBlockCount(){//returns the number of blocks there are in the camera's view
@@ -128,28 +109,6 @@ import java.util.function.Supplier;
 //     return blocks.get(blockNum).getHeight();
 //   }
 
-<<<<<<< HEAD
-  public double getHWratio(int blockNum){
-    return getBallHeight(blockNum)/getBallWidth(blockNum);
-  }
-  
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    pixy2.getCCC().getBlocks(true, 3, 5);
-    blocks = pixy2.getCCC().getBlockCache();
-    blockCount = blocks.size();
-  }
-
-public static int getBlockXCoordinate() {
-    return 0;
-}
-
-public static int getBlockYCoordinate() {
-    return 0;
-}
-}
-=======
 //   public double getHWratio(int blockNum){
 //     return getBallHeight(blockNum)/getBallWidth(blockNum);
 //   }
@@ -175,4 +134,3 @@ public static int getBlockYCoordinate() {
 //     // blockCount = blocks.size();
 //   }
 // }
->>>>>>> 021e87b7e1414b5b45e22940761bb41568766b62
