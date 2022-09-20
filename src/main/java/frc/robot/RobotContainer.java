@@ -65,8 +65,8 @@ public class RobotContainer {
     turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
     //turret.setDefaultCommand(new AutoAim(limeLight, turret));
     // ballCounter.setDefaultCommand(new CountBalls(ballCounter));
-    
-
+    //? explain setDefaultCommand/are the lamda functions just suppliers that get the axis values of
+    //A : default command most important command for the subsystem , yes to second question
     // Configure the button bindings
     configureButtonBindings();
   }

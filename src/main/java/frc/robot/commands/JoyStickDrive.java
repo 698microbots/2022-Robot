@@ -30,7 +30,7 @@ public class JoyStickDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double rightStick = rightStickFunction.get();
+    double rightStick = rightStickFunction.get(); //?? reason to restate double?
     double leftStick = leftStickFunction.get();
     rightStick = Math.pow(rightStick, 3.0);
     leftStick = Math.pow(leftStick, 3.0);

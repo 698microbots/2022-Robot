@@ -45,7 +45,7 @@ public class AutoTurn extends CommandBase {
   public void execute() {
     //calculate turn speed
     double sensorInput = (double) navX.getAngle();
-    driveTrain.PIDturn(sensorInput);
+    driveTrain.PIDturn(sensorInput);  //?? what does the driveTrain do with the PID
 
     //set turn speed
     driveTrain.setRightSpeed(driveTrain.getTurnOutput());

@@ -33,7 +33,7 @@ public class AutoIntake extends CommandBase {
   public void initialize() {
     intake.intputBall();
     index.runLowerIndexer(Constants.indexMotorSpeedBottom);
-    RobotContainer.Xbox.setRumble(RumbleType.kRightRumble, 1.0);
+    RobotContainer.Xbox.setRumble(RumbleType.kRightRumble, 1.0); // ?? any real reason for rumble in controller
     
   }
 
@@ -55,8 +55,8 @@ public class AutoIntake extends CommandBase {
   @Override
   public boolean isFinished() {
     if(ballCounter.bottomSensorStatus() == true){
-      return true; //?
-    }else{
+      return true; //?? explain difference between end and isFinished again
+    }else{ // when this is true, end is run
       return false;
     }
   }

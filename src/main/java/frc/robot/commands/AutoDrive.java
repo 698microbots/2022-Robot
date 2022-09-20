@@ -23,8 +23,8 @@ public class AutoDrive extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     this.distance = distance;
-    offset = 0;
-    this.ltime = ltime;
+    offset = 0; //? any reason that its defined within constructor
+    this.ltime = ltime; // A: All of class needs access to the variable, exists through all of class after passed in as a object in constructor
     this.limit = limit;
     addRequirements(driveTrain);
   }

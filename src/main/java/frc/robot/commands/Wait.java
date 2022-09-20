@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class Wait extends CommandBase {
   /** Creates a new Wait. */
   private int millis;
-  private int counter;
-  public Wait(int millis) {
+  private int counter; 
+  public Wait(int millis) { //?? creating object, out of constructor, passing it through constructor, giving it a "new name/redfine it" so it can be used in methods
     this.millis = millis;
     counter = 0;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -18,7 +18,7 @@ public class Wait extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
+  public void initialize() { 
     counter = 0;
   }
 

@@ -23,7 +23,7 @@ public class IndexerSubsystem extends SubsystemBase {
   }
   
 
-  public void runLowerIndexer(double speed){
+  public void runLowerIndexer(double speed){ //? similar where do values from speed come from
     lowerSparkMax.set(speed);
     if(speed<0){
       reverse = true;

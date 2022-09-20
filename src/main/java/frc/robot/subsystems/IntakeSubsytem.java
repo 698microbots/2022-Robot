@@ -13,7 +13,7 @@ public class IntakeSubsytem extends SubsystemBase {
   /** Creates a new Intake. */
   private final CANSparkMax intakeMotor;  
   
-  public IntakeSubsytem() {
+  public IntakeSubsytem() { //? why instantiate the object in the constructor: A don't pass in objects for subsystems
     intakeMotor = new CANSparkMax(Constants.deviceIdIntake, CANSparkMax.MotorType.kBrushless);
   }
 

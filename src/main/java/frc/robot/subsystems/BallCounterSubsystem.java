@@ -17,7 +17,7 @@ public class BallCounterSubsystem extends SubsystemBase {
   private AnalogInput topPhotovolaticSenor = new AnalogInput(0); // class for port 2
 
   
-  public BallCounterSubsystem() {
+  public BallCounterSubsystem() { //? no need to put anything in constructor here? 
   
   }
 

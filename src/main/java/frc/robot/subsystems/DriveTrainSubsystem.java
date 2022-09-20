@@ -49,7 +49,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     BackRight.setInverted(false);
     BackLeft.setInverted(true);
     FrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-    FrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+    FrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); //? values print out anywhere?
     BackRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     BackLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     FrontLeft.configReverseSoftLimitEnable(false);
@@ -82,7 +82,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 //Methods
 
   //pass in a double input for setting the right side speed.
-  public void setRightSpeed(double speed){
+  public void setRightSpeed(double speed){ //is speed defined anywhere else so that is passed through
     FrontRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
     BackRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
   }
@@ -116,7 +116,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   //takes in sensor input to turn robot into the correct angle
-  public void PIDturn(double sensorInput){
+  public void PIDturn(double sensorInput){ //? where is the sensorinput coming from/passes in values when called in commands?
     turnError = turnTarget - sensorInput;
     turnP = turnError;
     if(turnError<Constants.IactZone){
@@ -127,7 +127,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     turnD = turnError - turnPrevError;
     
-
+    //? PID equation
 
     turnOutput = Constants.turnkP*turnP + Constants.turnkI*turnI + Constants.turnkD*turnD;
     //SmartDashboard.putNumber("PID output:", turnOutput);

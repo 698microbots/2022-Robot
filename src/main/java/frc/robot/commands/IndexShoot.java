@@ -13,7 +13,7 @@ import frc.robot.RobotContainer;
 
 public class IndexShoot extends CommandBase {
   /** Creates a new IndexShoot. */
-  private final IndexerSubsystem index;
+  private final IndexerSubsystem index; //?? what times is the format Class name = new Class(); using the ()
   private final BallCounterSubsystem balls;
   private int counter;
   public IndexShoot(IndexerSubsystem index, BallCounterSubsystem balls) {
@@ -46,7 +46,7 @@ public class IndexShoot extends CommandBase {
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
+  public boolean isFinished() { //?? maybe repeat; difference between end and isFinished
     if(balls.topSensorStatus()){
       return true;
     }
