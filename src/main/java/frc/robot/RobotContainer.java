@@ -62,7 +62,7 @@ public class RobotContainer {
 
     //initializes the driveTrain for command input, there are a few suppliers
     driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
-    turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRawAxis(Constants.Xbox_RT), ()-> Xbox.getRawAxis(Constants.Xbox_LT)));
     //turret.setDefaultCommand(new AutoAim(limeLight, turret));
     // ballCounter.setDefaultCommand(new CountBalls(ballCounter));
     
