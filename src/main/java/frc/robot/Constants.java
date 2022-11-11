@@ -102,7 +102,7 @@ public final class Constants
     public static final int turnAggressiveness = 2;
 
     //Turret Constants
-    public static final int turrentMotorID = 6;//need to figure out what this value is
+    public static final int turrentMotorID = 7;//need to figure out what this value is
     public static final double turretkP = 0.015;
     public static final double  turretIActZone = 10;
     public static final double turretkI = 0.00084;
