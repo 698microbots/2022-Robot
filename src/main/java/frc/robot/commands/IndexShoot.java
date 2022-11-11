@@ -32,9 +32,9 @@ public class IndexShoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      index.runLowerIndexer(Constants.indexMotorSpeedBottom);
-      index.runUpperIndexer(Constants.indexMotorSpeedTop);
-      counter++;
+      index.runLowerIndexer(1);
+      index.runUpperIndexer(1);
+      //  counter++;
     
   }
 
@@ -47,11 +47,11 @@ public class IndexShoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(balls.topSensorStatus()){
-      return true;
-    }
-    else{
+    // if(balls.topSensorStatus()){
+    //   return true;
+    // }
+    // else{
       return false;
-    }
+    // }
   }
 }
