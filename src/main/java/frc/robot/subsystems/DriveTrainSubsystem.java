@@ -81,7 +81,13 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 //Methods
 
-  //pass in a double input for setting the right side speed.
+public void getEncoders(){
+  FrontLeft.getActiveTrajectoryVelocity();
+}  
+
+
+
+//pass in a double input for setting the right side speed.
   public void setRightSpeed(double speed){
     FrontRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
     BackRight.set(ControlMode.PercentOutput, speed*Constants.driveAdjustment);
@@ -197,6 +203,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return (FrontRight.getSelectedSensorPosition()+BackRight.getSelectedSensorPosition()+FrontLeft.getSelectedSensorPosition()+BackLeft.getSelectedSensorPosition())/4;
   }
 
+  public double getLeftEncoders(){
+    return (FrontLeft.getSelectedSensorPosition()+BackLeft.getSelectedSensorPosition())/2;
+  }
+
+  public double getRightEncoders(){
+    return (FrontRight.getSelectedSensorPosition()+BackRight.getSelectedSensorPosition())/2;
+  }
+
   public double getRightVelocity(){
     return (FrontRight.getSelectedSensorVelocity() + BackRight.getSelectedSensorVelocity())/2;
   }
@@ -218,6 +232,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    //getters for encoder positions
+    
     
   }
 }

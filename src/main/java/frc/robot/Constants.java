@@ -40,6 +40,7 @@ public final class Constants
     public static final int Xbox_Button_Y = 4;
     public static final int Xbox_Button_LB = 5;
     public static final int Xbox_Button_RB = 6;
+    public static final int Xbox_Button_Start = 7;
     public static final int Xbox_Button_LS = 9;
     public static final int Xbox_Button_RS = 10;
 
@@ -53,8 +54,8 @@ public final class Constants
     public static final double kD = 0;
 
     // Index Constants
-    public static final double indexMotorSpeedBottom = 0.3;
-    public static final double indexMotorSpeedTop = 0.5;
+    public static final double indexMotorSpeedBottom = 1;
+    public static final double indexMotorSpeedTop = 1;
 
 
     // Intake Constants

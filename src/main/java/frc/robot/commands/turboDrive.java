@@ -11,17 +11,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.Constants;
 
-public class JoyStickDrive extends CommandBase {
+public class turboDrive extends CommandBase {
   /** Creates a new JoyStickDrive. */
   private final DriveTrainSubsystem driveTrain;
   private final Supplier<Double> rightStickFunction, leftStickFunction;
-  private final Supplier<Boolean> startPress;
-  public JoyStickDrive(DriveTrainSubsystem driveTrain, Supplier<Double> rightStick, Supplier <Double> leftStick, Supplier<Boolean> startPress) {
+  public turboDrive(DriveTrainSubsystem driveTrain, Supplier<Double> rightStick, Supplier <Double> leftStick) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
     rightStickFunction = rightStick;
     leftStickFunction = leftStick;
-    this.startPress = startPress;
+    // this.startPressed = startPressed;
     addRequirements(driveTrain);
   }
 
@@ -49,13 +48,9 @@ public class JoyStickDrive extends CommandBase {
 
     //set the motors using driveTrain subsystem to correct speeds
 
-      if (startPress.get() == true){
-      driveTrain.setRightSpeed((rightStick + leftStick/1.9) * .65);
-      driveTrain.setLeftSpeed((rightStick - leftStick/1.9) * .65);
-      } else {
-      driveTrain.setRightSpeed((rightStick + leftStick/1.9) * .01);
-      driveTrain.setLeftSpeed((rightStick - leftStick/1.9) * .01);
-      }
+      driveTrain.setRightSpeed((rightStick + leftStick/1.9));
+      driveTrain.setLeftSpeed((rightStick - leftStick/1.9));
+
 
     
     //reset encoders for 

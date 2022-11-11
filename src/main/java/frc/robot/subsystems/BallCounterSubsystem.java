@@ -30,9 +30,12 @@ public class BallCounterSubsystem extends SubsystemBase {
   {
     if (topPhotovolaticSenor.getVoltage() > 3) 
       return false;
-    else
+    else {
       return true;
+    }
   }
+
+
 
   @Override
   public void periodic() {

@@ -118,6 +118,11 @@ public class Robot extends TimedRobot {
 
     // SmartDashboard.putNumber("total balls", m_robotContainer.ballCounter.getBalls());
     SmartDashboard.putNumber("Turret Angle: ", m_robotContainer.turret.getTurretAngle());
+    SmartDashboard.putNumber("Robot X Position", m_robotContainer.navX.getDisplacementX());
+    SmartDashboard.putNumber("Robot Y Position", m_robotContainer.navX.getDisplacementY());
+
+    
+
   }
 
   @Override

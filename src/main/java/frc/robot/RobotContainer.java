@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import javax.xml.stream.events.StartDocument;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -13,6 +15,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.IntakeSubsytem;
@@ -25,9 +28,13 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+    // public final CommandScheduler commandScheduler;
+  // public final JoyStickDrive joyStickDrive;
+  
   // The robot's subsystems and commands are defined here...
   public static final XboxController Xbox = new XboxController(Constants.XBOX_pin);
   public final AHRS navX = new AHRS(SerialPort.Port.kUSB);
+  public final hangerPneumatics hangerPneumatics = new hangerPneumatics();
   
   //subsystems
   public DriveTrainSubsystem driveTrain = new DriveTrainSubsystem();
@@ -48,9 +55,10 @@ public class RobotContainer {
   private final JoystickButton buttonRB = new JoystickButton(Xbox, Constants.Xbox_Button_RB);
   private final JoystickButton buttonLS = new JoystickButton(Xbox, Constants.Xbox_Button_LS);
   private final JoystickButton buttonRS = new JoystickButton(Xbox, Constants.Xbox_Button_RS);
+  private final JoystickButton startButton = new JoystickButton(Xbox, Constants.Xbox_Button_Start);
   public static BallCounterSubsystem ballCounter = new BallCounterSubsystem();
   public static int ballCount = 0;
-
+  public static boolean startHeld = false;
 
   /**d
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -59,10 +67,13 @@ public class RobotContainer {
     // Configure the button bindings
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-
+    // this.commandScheduler = commandScheduler;
+    // this. joyStickDrive = joyStickDrive;
     //initializes the driveTrain for command input, there are a few suppliers
-    driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
+    driveTrain.setDefaultCommand(new JoyStickDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS), () -> Xbox.getStartButton()));
     turret.setDefaultCommand(new TriggerAim(turret, ()-> Xbox.getRightTriggerAxis(), ()-> Xbox.getLeftTriggerAxis()));
+    hangerPneumatics.setDefaultCommand(new hangerControls(hangerPneumatics, () -> Xbox.getRightBumper(), () -> Xbox.getLeftBumper(), () -> Xbox.getAButton(), () -> Xbox.getBButton()));
+
     //turret.setDefaultCommand(new AutoAim(limeLight, turret));
     // ballCounter.setDefaultCommand(new CountBalls(ballCounter));
     
@@ -90,6 +101,11 @@ public class RobotContainer {
     buttonX.whenHeld(new ParallelCommandGroup(new IntakeReverse(intake), new TeleopRejected(index)));
     buttonY.toggleWhenPressed(new TeleopAutoAim(limeLight, turret));
     buttonRS.whenPressed(new RecenterTurret(turret));
+    // startButton.toggleWhenPressed(new turboDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS)));
+    // startButton.toggleWhenPressed(new turnOffNormalDrive(commandScheduler, joyStickDrive));
+    // startButton.toggleWhenPressed(new ParallelCommandGroup(new turnOffNormalDrive(null, null), new turboDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS))));
+
+    // new turboDrive(driveTrain, () -> Xbox.getRawAxis(Constants.XBOX_L_YAXIS), () -> Xbox.getRawAxis(Constants.XBOX_R_XAXIS));    
 
     //Command Groups
     buttonLB.toggleWhenPressed(new SequentialCommandGroup(
