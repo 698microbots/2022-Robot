@@ -18,10 +18,10 @@ package frc.robot;
 public final class Constants 
 {
 //Motor Constants
-    public static final int FrontRightID = 0;
+    public static final int FrontRightID = 2;
     public static final int FrontLeftID = 3;
     public static final int BackRightID = 5;
-    public static final int BackLeftID = 2;
+    public static final int BackLeftID = 3;
 
 //Controller Stick Constants
     public static final int XBOX_R_XAXIS = 4;
